@@ -28,21 +28,21 @@
   nav{ position:fixed; top:0; left:0; right:0; z-index:200; transition:background .3s var(--ease), border-color .3s var(--ease), backdrop-filter .3s; border-bottom:1px solid transparent; }
   nav.scrolled{ background:rgba(255,255,255,.8); backdrop-filter:saturate(180%) blur(14px); border-color:var(--line); }
   /* shared geometry: logo box + right box widths used by both top bar and mega */
-  .nav-inner{ max-width:var(--maxw); margin:0 auto; padding:16px 24px; display:flex; align-items:center; gap:20px; }
-  .logo{ width:120px; flex-shrink:0; font-weight:800; font-size:22px; letter-spacing:-.04em; display:flex; align-items:center; gap:9px; color:#fff; transition:color .3s; }
+  .nav-inner{ max-width:var(--maxw); margin:0 auto; padding:16px 24px; display:grid; grid-template-columns:120px repeat(4,minmax(0,1fr)) 230px; column-gap:20px; align-items:center; }
+  .logo{ grid-column:1; font-weight:800; font-size:22px; letter-spacing:-.04em; display:flex; align-items:center; gap:9px; color:#fff; transition:color .3s; }
   nav.scrolled .logo, nav.open .logo{ color:var(--ink); }
   .logo .dot{ width:11px; height:11px; border-radius:50%; background:linear-gradient(135deg,var(--brand),var(--brand-2)); box-shadow:0 0 14px rgba(47,107,255,.8); }
 
   /* top-bar menu: 4 equal columns that line up with the mega columns below */
-  .menu{ flex:1; display:grid; grid-template-columns:repeat(4,1fr); }
-  .menu .top{ display:flex; flex-direction:column; align-items:center; gap:1px; padding:8px 4px; text-decoration:none; }
+  .menu{ grid-column:2/6; display:grid; grid-template-columns:subgrid; }
+  .menu .top{ display:flex; flex-direction:column; align-items:flex-start; gap:1px; padding:8px 0; text-decoration:none; }
   .menu .top .en{ font-size:16px; font-weight:700; letter-spacing:-.01em; color:rgba(255,255,255,.92); transition:color .2s; }
   .menu .top .ko{ font-size:11px; font-weight:500; color:rgba(255,255,255,.5); transition:color .2s; }
   nav.scrolled .menu .top .en, nav.open .menu .top .en{ color:var(--ink); }
   nav.scrolled .menu .top .ko, nav.open .menu .top .ko{ color:var(--ink-faint); }
   .menu .top:hover .en{ color:var(--brand); }
 
-  .nav-right{ width:230px; flex-shrink:0; display:flex; align-items:center; justify-content:flex-end; gap:12px; }
+  .nav-right{ grid-column:6; display:flex; align-items:center; justify-content:flex-end; gap:12px; justify-self:end; }
   .lang{ display:flex; background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.2); border-radius:999px; padding:3px; transition:background .3s, border-color .3s; }
   nav.scrolled .lang, nav.open .lang{ background:var(--bg-soft); border-color:var(--line); }
   .lang button{ border:none; background:transparent; cursor:pointer; font-size:13px; font-weight:700; padding:6px 12px; border-radius:999px; color:rgba(255,255,255,.6); transition:.2s; }
@@ -56,10 +56,10 @@
   .mega{ position:absolute; left:0; right:0; top:100%; background:#fff; border-top:1px solid var(--line); box-shadow:0 28px 44px -28px rgba(10,16,32,.22); opacity:0; visibility:hidden; transform:translateY(-10px); transition:opacity .25s var(--ease), transform .25s var(--ease), visibility .25s; }
   nav.open{ background:rgba(255,255,255,.96); backdrop-filter:saturate(180%) blur(14px); border-color:var(--line); }
   nav.open .mega{ opacity:1; visibility:visible; transform:none; }
-  .mega-inner{ max-width:var(--maxw); margin:0 auto; padding:30px 24px 40px; display:flex; gap:20px; }
-  .mega-spacer{ width:120px; flex-shrink:0; }
-  .mega-rspacer{ width:230px; flex-shrink:0; }
-  .mega-cols{ flex:1; display:grid; grid-template-columns:repeat(4,1fr); }
+  .mega-inner{ max-width:var(--maxw); margin:0 auto; padding:30px 24px 40px; display:grid; grid-template-columns:120px repeat(4,minmax(0,1fr)) 230px; column-gap:20px; }
+  .mega-spacer{ grid-column:1; }
+  .mega-rspacer{ grid-column:6; }
+  .mega-cols{ grid-column:2/6; display:grid; grid-template-columns:subgrid; }
   .mega-col a{ display:block; color:var(--ink-soft); font-size:15px; font-weight:500; padding:10px 0; text-decoration:none; transition:color .2s, padding-left .2s; }
   .mega-col a:hover{ color:var(--brand); padding-left:6px; }
   @media(max-width:860px){ .menu, .mega{ display:none; } .logo{ width:auto; } .nav-right{ width:auto; } }
