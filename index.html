@@ -28,10 +28,14 @@
   nav{ position:fixed; top:0; left:0; right:0; z-index:200; transition:background .3s var(--ease), border-color .3s var(--ease), backdrop-filter .3s; border-bottom:1px solid transparent; }
   nav.scrolled{ background:rgba(255,255,255,.8); backdrop-filter:saturate(180%) blur(14px); border-color:var(--line); }
   /* shared geometry: logo box + right box widths used by both top bar and mega */
-  .nav-inner{ max-width:var(--maxw); margin:0 auto; padding:16px 24px; display:grid; grid-template-columns:120px repeat(4,minmax(0,1fr)) 230px; column-gap:20px; align-items:center; }
-  .logo{ grid-column:1; font-weight:800; font-size:22px; letter-spacing:-.04em; display:flex; align-items:center; gap:9px; color:#fff; transition:color .3s; }
+  .nav-inner{ max-width:var(--maxw); margin:0 auto; padding:16px 24px; display:grid; grid-template-columns:140px repeat(4,minmax(0,1fr)) 230px; column-gap:20px; align-items:center; }
+  .logo{ grid-column:1; display:flex; align-items:center; gap:10px; color:#fff; transition:color .3s; }
   nav.scrolled .logo, nav.open .logo{ color:var(--ink); }
-  .logo .dot{ width:11px; height:11px; border-radius:50%; background:linear-gradient(135deg,var(--brand),var(--brand-2)); box-shadow:0 0 14px rgba(47,107,255,.8); }
+  .logo-mark{ width:32px; height:24px; flex-shrink:0; display:block; }
+  .logo-type{ display:inline-flex; align-items:flex-end; gap:4px; font-size:15px; font-weight:500; letter-spacing:.14em; line-height:1; }
+  .logo-type .logo-a{ width:11px; height:13px; flex-shrink:0; display:block; }
+  .logo-type .logo-i{ font-weight:400; transform:translateY(-1px); }
+  .logo-type .logo-n{ font-weight:500; }
 
   /* top-bar menu: 4 equal columns that line up with the mega columns below */
   .menu{ grid-column:2/6; display:grid; grid-template-columns:subgrid; }
@@ -56,7 +60,7 @@
   .mega{ position:absolute; left:0; right:0; top:100%; background:#fff; border-top:1px solid var(--line); box-shadow:0 28px 44px -28px rgba(10,16,32,.22); opacity:0; visibility:hidden; transform:translateY(-10px); transition:opacity .25s var(--ease), transform .25s var(--ease), visibility .25s; }
   nav.open{ background:rgba(255,255,255,.96); backdrop-filter:saturate(180%) blur(14px); border-color:var(--line); }
   nav.open .mega{ opacity:1; visibility:visible; transform:none; }
-  .mega-inner{ max-width:var(--maxw); margin:0 auto; padding:30px 24px 40px; display:grid; grid-template-columns:120px repeat(4,minmax(0,1fr)) 230px; column-gap:20px; }
+  .mega-inner{ max-width:var(--maxw); margin:0 auto; padding:30px 24px 40px; display:grid; grid-template-columns:140px repeat(4,minmax(0,1fr)) 230px; column-gap:20px; }
   .mega-spacer{ grid-column:1; }
   .mega-rspacer{ grid-column:6; }
   .mega-cols{ grid-column:2/6; display:grid; grid-template-columns:subgrid; }
@@ -253,7 +257,15 @@
 <!-- NAV -->
 <nav id="nav">
   <div class="nav-inner">
-    <div class="logo"><span class="dot"></span>AIAN</div>
+    <div class="logo" aria-label="AIAN">
+      <svg class="logo-mark" viewBox="0 0 44 30" aria-hidden="true" focusable="false"><path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M4 27 16 3 28 27ZM16 27 28 3 40 27ZM22 8.5 24.6 12.5 22 16.5 19.4 12.5Z"/></svg>
+      <span class="logo-type" aria-hidden="true">
+        <svg class="logo-a" viewBox="0 0 11 13" aria-hidden="true"><path fill="currentColor" d="M1 12 5.5 1.5 10 12Z"/></svg>
+        <span class="logo-i">I</span>
+        <svg class="logo-a" viewBox="0 0 11 13" aria-hidden="true"><path fill="currentColor" d="M1 12 5.5 1.5 10 12Z"/></svg>
+        <span class="logo-n">N</span>
+      </span>
+    </div>
     <div class="menu">
       <a class="top" href="#how"><span class="en">Solutions</span><span class="ko">솔루션</span></a>
       <a class="top" href="#feature"><span class="en">Industry</span><span class="ko">산업분야</span></a>
@@ -592,7 +604,15 @@
   <div class="wrap">
     <div class="foot-grid">
       <div>
-        <div class="logo"><span class="dot"></span>AIAN</div>
+        <div class="logo" aria-label="AIAN">
+      <svg class="logo-mark" viewBox="0 0 44 30" aria-hidden="true" focusable="false"><path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M4 27 16 3 28 27ZM16 27 28 3 40 27ZM22 8.5 24.6 12.5 22 16.5 19.4 12.5Z"/></svg>
+      <span class="logo-type" aria-hidden="true">
+        <svg class="logo-a" viewBox="0 0 11 13" aria-hidden="true"><path fill="currentColor" d="M1 12 5.5 1.5 10 12Z"/></svg>
+        <span class="logo-i">I</span>
+        <svg class="logo-a" viewBox="0 0 11 13" aria-hidden="true"><path fill="currentColor" d="M1 12 5.5 1.5 10 12Z"/></svg>
+        <span class="logo-n">N</span>
+      </span>
+    </div>
         <p><span data-ko>IT와 제조를 잇는 소프트웨어 파트너. 복잡한 현장을 누구나 쓸 수 있게 만듭니다.</span><span data-en>The software partner connecting IT and manufacturing. Making complex factories usable by everyone.</span></p>
       </div>
       <div class="foot-col"><h5><span data-ko>솔루션</span><span data-en>Solutions</span></h5><a href="#feature"><span data-ko>실시간 모니터링</span><span data-en>Live Monitoring</span></a><a href="#feature"><span data-ko>품질 관리</span><span data-en>Quality</span></a><a href="#feature"><span data-ko>생산 계획</span><span data-en>Planning</span></a><a href="#feature"><span data-ko>예지보전</span><span data-en>Predictive Care</span></a></div>
