@@ -24,8 +24,8 @@
   display:flex; align-items:center; gap:10px;
   text-decoration:none; flex-shrink:0;
 }
-#nav .logo-mark{ height:24px; width:auto; display:block; }
-#nav .logo-wordmark{ height:16px; width:auto; display:block; }
+#nav .logo-mark{ height:28px; width:auto; display:block; flex-shrink:0; }
+#nav .logo-wordmark{ height:18px; width:auto; display:block; flex-shrink:0; }
 
 #nav:not(.scrolled):not(.open):not(.nav-light) .logo-mark,
 #nav:not(.scrolled):not(.open):not(.nav-light) .logo-wordmark{

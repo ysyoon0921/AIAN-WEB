@@ -342,7 +342,7 @@ def footer_html():
             f'      <div class="foot-col"><h5>{span(sec["side_ko"], sec["side_en"])}</h5>{links}</div>'
         )
     return f'''<footer><div class="wrap"><div class="foot-grid">
-      <div><a class="logo" href="../index.html"><img class="logo-mark" src="../assets/aian-mark.svg" alt="" /><img class="logo-wordmark" src="../assets/aian-wordmark.svg" alt="AIAN" /></a>
+      <div><a class="logo" href="../index.html"><img class="logo-mark" src="../assets/aian-mark.png" alt="" /><img class="logo-wordmark" src="../assets/aian-wordmark.png" alt="AIAN" /></a>
       <p><span data-ko>IT와 제조를 잇는 소프트웨어 파트너.</span><span data-en>The software partner connecting IT and manufacturing.</span></p></div>
 {chr(10).join(cols)}
       <div class="foot-col"><h5><span data-ko>문의</span><span data-en>Contact</span></h5><a href="../index.html#contact"><span data-ko>상담 신청</span><span data-en>Get in touch</span></a><a href="mailto:hello@aian.kr">hello@aian.kr</a></div>
@@ -379,8 +379,8 @@ def render(rel_path, page):
 <nav id="nav" data-theme="light">
   <div class="nav-inner">
     <a class="logo" href="../index.html" aria-label="AIAN">
-      <img class="logo-mark" src="../assets/aian-mark.svg" alt="" />
-      <img class="logo-wordmark" src="../assets/aian-wordmark.svg" alt="AIAN" />
+      <img class="logo-mark" src="../assets/aian-mark.png" alt="" />
+      <img class="logo-wordmark" src="../assets/aian-wordmark.png" alt="AIAN" />
     </a>
 {nav_html(section)}
     <div class="nav-right">
