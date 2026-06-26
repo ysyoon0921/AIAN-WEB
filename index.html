@@ -7,6 +7,7 @@
 <meta name="description" content="복잡한 제조 현장을, 누구나 쓸 수 있는 소프트웨어로. IT와 제조를 연결하는 맞춤형 솔루션." />
 <link rel="preconnect" href="https://cdn.jsdelivr.net" />
 <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+<link rel="stylesheet" href="assets/nav.css" />
 <style>
   :root{
     --bg:#ffffff; --bg-soft:#f5f7fa; --bg-blue:#eef4ff;
@@ -24,61 +25,8 @@
   .grad-text{ background:linear-gradient(100deg,var(--brand),var(--brand-2)); -webkit-background-clip:text; background-clip:text; color:transparent; }
   [data-en]{ display:none; }
 
-  /* NAV */
-  nav{ position:fixed; top:0; left:0; right:0; z-index:200; transition:background .3s var(--ease), border-color .3s var(--ease), backdrop-filter .3s; border-bottom:1px solid transparent; }
-  nav.scrolled{ background:rgba(255,255,255,.8); backdrop-filter:saturate(180%) blur(14px); border-color:var(--line); }
-  /* shared geometry: logo box + right box widths used by both top bar and mega */
-  .nav-inner{ max-width:var(--maxw); margin:0 auto; padding:16px 24px; display:grid; grid-template-columns:140px repeat(4,minmax(0,1fr)) 230px; column-gap:20px; align-items:center; }
-  .logo{ grid-column:1; display:flex; align-items:center; gap:10px; }
-  .logo-mark{ height:24px; width:auto; flex-shrink:0; display:block; }
-  .logo-wordmark{ height:16px; width:auto; flex-shrink:0; display:block; }
-  nav:not(.scrolled):not(.open) .logo-mark,
-  nav:not(.scrolled):not(.open) .logo-wordmark{ filter:brightness(0) invert(1); }
   .foot-grid .logo-mark,
   .foot-grid .logo-wordmark{ filter:brightness(0) invert(1); }
-
-  /* top-bar menu: 4 equal columns that line up with the mega columns below */
-  .menu{ grid-column:2/6; display:grid; grid-template-columns:subgrid; }
-  .menu .top{ display:flex; flex-direction:column; align-items:flex-start; gap:1px; padding:8px 0; text-decoration:none; }
-  .menu .top .en{ font-size:16px; font-weight:700; letter-spacing:-.01em; color:rgba(255,255,255,.92); transition:color .2s; }
-  .menu .top .ko{ font-size:11px; font-weight:500; color:rgba(255,255,255,.5); transition:color .2s; }
-  nav.scrolled .menu .top .en, nav.open .menu .top .en{ color:var(--ink); }
-  nav.scrolled .menu .top .ko, nav.open .menu .top .ko{ color:var(--ink-faint); }
-  .menu .top:hover .en{ color:var(--brand); }
-
-  .nav-right{ grid-column:6; display:flex; align-items:center; justify-content:flex-end; gap:12px; justify-self:end; }
-  .lang{ display:flex; background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.2); border-radius:999px; padding:3px; transition:background .3s, border-color .3s; }
-  nav.scrolled .lang, nav.open .lang{ background:var(--bg-soft); border-color:var(--line); }
-  .lang button{ border:none; background:transparent; cursor:pointer; font-size:13px; font-weight:700; padding:6px 12px; border-radius:999px; color:rgba(255,255,255,.6); transition:.2s; }
-  nav.scrolled .lang button, nav.open .lang button{ color:var(--ink-faint); }
-  .lang button.on{ background:#fff; color:var(--ink); }
-  nav.scrolled .lang button.on, nav.open .lang button.on{ background:var(--ink); color:#fff; }
-  .nav-cta{
-    font-weight:600; font-size:14px; letter-spacing:-.01em;
-    color:#0a1020; background:#fff;
-    padding:11px 22px; border-radius:999px; border:1px solid rgba(255,255,255,.9);
-    cursor:pointer; white-space:nowrap;
-    transition:transform .2s var(--ease), background .2s, box-shadow .2s;
-    box-shadow:0 4px 18px -6px rgba(0,0,0,.25);
-  }
-  .nav-cta:hover{ transform:translateY(-1px); background:#f7f8fa; box-shadow:0 8px 24px -8px rgba(0,0,0,.3); }
-  nav.scrolled .nav-cta, nav.open .nav-cta{
-    color:#fff; background:#0a1020; border-color:#0a1020;
-    box-shadow:0 4px 16px -6px rgba(10,16,32,.35);
-  }
-  nav.scrolled .nav-cta:hover, nav.open .nav-cta:hover{ background:#151d30; }
-
-  /* MEGA PANEL */
-  .mega{ position:absolute; left:0; right:0; top:100%; background:#fff; border-top:1px solid var(--line); box-shadow:0 28px 44px -28px rgba(10,16,32,.22); opacity:0; visibility:hidden; transform:translateY(-10px); transition:opacity .25s var(--ease), transform .25s var(--ease), visibility .25s; }
-  nav.open{ background:rgba(255,255,255,.96); backdrop-filter:saturate(180%) blur(14px); border-color:var(--line); }
-  nav.open .mega{ opacity:1; visibility:visible; transform:none; }
-  .mega-inner{ max-width:var(--maxw); margin:0 auto; padding:30px 24px 40px; display:grid; grid-template-columns:140px repeat(4,minmax(0,1fr)) 230px; column-gap:20px; }
-  .mega-spacer{ grid-column:1; }
-  .mega-rspacer{ grid-column:6; }
-  .mega-cols{ grid-column:2/6; display:grid; grid-template-columns:subgrid; }
-  .mega-col a{ display:block; color:var(--ink-soft); font-size:15px; font-weight:500; padding:10px 0; text-decoration:none; transition:color .2s, padding-left .2s; }
-  .mega-col a:hover{ color:var(--brand); padding-left:6px; }
-  @media(max-width:860px){ .menu, .mega{ display:none; } .logo{ width:auto; } .nav-right{ width:auto; } }
 
   /* REVEAL */
   .reveal{ opacity:0; transform:translateY(30px); transition:opacity 1s var(--ease), transform 1s var(--ease); }
@@ -274,56 +222,48 @@
       <img class="logo-mark" src="assets/aian-mark.svg" alt="" />
       <img class="logo-wordmark" src="assets/aian-wordmark.svg" alt="AIAN" />
     </a>
-    <div class="menu">
-      <a class="top" href="#how"><span class="en">Solutions</span><span class="ko">솔루션</span></a>
-      <a class="top" href="#feature"><span class="en">Industry</span><span class="ko">산업분야</span></a>
-      <a class="top" href="#customers"><span class="en">Customers</span><span class="ko">고객사례</span></a>
-      <a class="top" href="about/ceo.html"><span class="en">About</span><span class="ko">회사소개</span></a>
-    </div>
-    <div class="nav-right">
-      <div class="lang">
-        <button id="lang-ko" class="on" onclick="setLang('ko')">KO</button>
-        <button id="lang-en" onclick="setLang('en')">EN</button>
-      </div>
-      <button class="nav-cta" onclick="go('contact')"><span data-ko>상담 신청</span><span data-en>CONTACT US</span></button>
-    </div>
-  </div>
-
-  <!-- MEGA DROPDOWN -->
-  <div class="mega">
-    <div class="mega-inner">
-      <div class="mega-spacer"></div>
-      <div class="mega-cols">
-        <div class="mega-col">
+    <ul class="menu">
+      <li class="nav-item">
+        <a class="top" href="#how"><span class="en">Solutions</span><span class="ko">솔루션</span></a>
+        <div class="drop">
           <a href="#feature"><span data-ko>실시간 모니터링</span><span data-en>Live Monitoring</span></a>
           <a href="#feature"><span data-ko>품질 관리 (QMS)</span><span data-en>Quality (QMS)</span></a>
           <a href="#feature"><span data-ko>생산 계획 (MES)</span><span data-en>Production (MES)</span></a>
           <a href="#how"><span data-ko>설비 예지보전</span><span data-en>Predictive Care</span></a>
-          <a href="#how"><span data-ko>컨설팅 · 교육</span><span data-en>Consulting</span></a>
         </div>
-        <div class="mega-col">
+      </li>
+      <li class="nav-item">
+        <a class="top" href="#feature"><span class="en">Industry</span><span class="ko">산업분야</span></a>
+        <div class="drop">
           <a href="#feature"><span data-ko>전기 · 전자</span><span data-en>Electric · Electronic</span></a>
           <a href="#feature"><span data-ko>반도체</span><span data-en>Semiconductor</span></a>
-          <a href="#feature"><span data-ko>기계 · 부품</span><span data-en>Machinery</span></a>
           <a href="#feature"><span data-ko>자동차</span><span data-en>Automotive</span></a>
-          <a href="#feature"><span data-ko>2차전지</span><span data-en>Battery</span></a>
-          <a href="#feature"><span data-ko>식음료 (F&B)</span><span data-en>F&amp;B</span></a>
         </div>
-        <div class="mega-col">
+      </li>
+      <li class="nav-item">
+        <a class="top" href="#customers"><span class="en">Customers</span><span class="ko">고객사례</span></a>
+        <div class="drop">
           <a href="#customers"><span data-ko>고객사</span><span data-en>Clients</span></a>
           <a href="#customers"><span data-ko>도입 사례</span><span data-en>Case Studies</span></a>
-          <a href="#customers"><span data-ko>파트너</span><span data-en>Partners</span></a>
-          <a href="#contact"><span data-ko>성과 지표</span><span data-en>Results</span></a>
         </div>
-        <div class="mega-col">
+      </li>
+      <li class="nav-item">
+        <a class="top" href="about/ceo.html"><span class="en">About</span><span class="ko">회사소개</span></a>
+        <div class="drop">
           <a href="about/ceo.html">CEO</a>
           <a href="about/vision.html"><span data-ko>비전</span><span data-en>Vision</span></a>
           <a href="about/history.html"><span data-ko>회사 연혁</span><span data-en>History</span></a>
           <a href="about/partners.html"><span data-ko>협력사</span><span data-en>Partners</span></a>
           <a href="about/news.html">News</a>
         </div>
+      </li>
+    </ul>
+    <div class="nav-right">
+      <div class="lang">
+        <button id="lang-ko" class="on" onclick="setLang('ko')">KO</button>
+        <button id="lang-en" onclick="setLang('en')">EN</button>
       </div>
-      <div class="mega-rspacer"></div>
+      <button class="nav-cta" onclick="go('contact')"><span data-ko>상담 신청</span><span data-en>CONTACT US</span></button>
     </div>
   </div>
 </nav>
@@ -623,12 +563,9 @@
     e.target.reset();
   }
 
-  // ---- nav scroll + mega dropdown ----
+  // ---- nav scroll ----
   const nav = document.getElementById('nav');
   addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 40));
-  nav.addEventListener('mouseenter', () => nav.classList.add('open'));
-  nav.addEventListener('mouseleave', () => nav.classList.remove('open'));
-  nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => nav.classList.remove('open')));
 
   const heroVideo = document.querySelector('.hero-video');
   const hero = document.querySelector('.hero');
@@ -661,5 +598,6 @@
   }, { threshold:.5 });
   document.querySelectorAll('[data-count]').forEach(c => cio.observe(c));
 </script>
+<script src="assets/nav.js"></script>
 </body>
 </html>

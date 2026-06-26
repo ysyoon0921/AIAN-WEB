@@ -160,16 +160,24 @@ nav.open .lang button.on,
 nav.nav-light .lang button.on{ background:var(--ink, #0a1020); color:#fff; }
 
 .nav-cta{
-  font-weight:700; font-size:14px; color:#fff;
-  background:linear-gradient(100deg,var(--brand, #2f6bff),var(--brand-2, #18c5ff));
-  padding:11px 20px; border-radius:999px; border:none; cursor:pointer;
-  text-decoration:none; white-space:nowrap;
-  transition:transform .2s var(--ease, cubic-bezier(.16,.84,.27,1));
+  font-weight:600; font-size:14px; letter-spacing:-.01em;
+  color:#0a1020; background:#fff;
+  padding:11px 22px; border-radius:999px; border:1px solid rgba(255,255,255,.9);
+  cursor:pointer; text-decoration:none; white-space:nowrap;
+  transition:transform .2s var(--ease, cubic-bezier(.16,.84,.27,1)), background .2s, box-shadow .2s;
+  box-shadow:0 4px 18px -6px rgba(0,0,0,.25);
 }
-.nav-cta:hover{ transform:translateY(-1px); }
+.nav-cta:hover{ transform:translateY(-1px); background:#f7f8fa; box-shadow:0 8px 24px -8px rgba(0,0,0,.3); }
+nav.scrolled .nav-cta, nav.open .nav-cta{
+  color:#fff; background:#0a1020; border-color:#0a1020;
+  box-shadow:0 4px 16px -6px rgba(10,16,32,.35);
+}
+nav.scrolled .nav-cta:hover, nav.open .nav-cta:hover{ background:#151d30; }
 
 nav.nav-light .nav-cta{
   color:#0a1020; background:#fff; border:1px solid var(--line, #ebedf1);
   box-shadow:0 2px 12px -4px rgba(10,16,32,.12);
 }
 nav.nav-light .nav-cta:hover{ background:#f7f8fa; }
+
+@media(max-width:860px){ .menu{ display:none; } }
