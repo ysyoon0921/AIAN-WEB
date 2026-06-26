@@ -66,6 +66,12 @@
   .mega-cols{ grid-column:2/6; display:grid; grid-template-columns:subgrid; }
   .mega-col a{ display:block; color:var(--ink-soft); font-size:15px; font-weight:500; padding:10px 0; text-decoration:none; transition:color .2s, padding-left .2s; }
   .mega-col a:hover{ color:var(--brand); padding-left:6px; }
+  /* About column: sidebar style under 회사소개 */
+  .mega-col.mega-about{ border:1px solid var(--line); border-radius:12px; overflow:hidden; align-self:start; }
+  .mega-col.mega-about .mega-about-head{ background:#2b3038; color:#d8dee9; font-size:16px; font-weight:700; text-align:center; padding:16px 12px; }
+  .mega-col.mega-about a{ padding:16px 24px; border-bottom:1px solid var(--line); margin:0; }
+  .mega-col.mega-about a:last-child{ border-bottom:none; }
+  .mega-col.mega-about a:hover{ padding-left:30px; background:var(--bg-soft); }
   @media(max-width:860px){ .menu, .mega{ display:none; } .logo{ width:auto; } .nav-right{ width:auto; } }
 
   /* REVEAL */
@@ -216,7 +222,7 @@
   .tl-item p{ color:var(--ink-soft); font-size:15px; margin:0; }
 
   /* ABOUT (회사소개) */
-  .about-page{ background:#fff; border-top:1px solid var(--line); }
+  .about-page{ background:#fff; border-top:1px solid var(--line); scroll-margin-top:80px; }
   .about-shell{ display:grid; grid-template-columns:280px 1fr; min-height:640px; }
   .about-side{ background:#fff; border-right:1px solid var(--line); }
   .about-side-head{ background:#2b3038; color:#d8dee9; font-size:18px; font-weight:700; text-align:center; padding:22px 20px; }
@@ -305,7 +311,7 @@
       <a class="top" href="#how"><span class="en">Solutions</span><span class="ko">솔루션</span></a>
       <a class="top" href="#feature"><span class="en">Industry</span><span class="ko">산업분야</span></a>
       <a class="top" href="#customers"><span class="en">Customers</span><span class="ko">고객사례</span></a>
-      <a class="top" href="#about-ceo"><span class="en">About</span><span class="ko">회사소개</span></a>
+      <a class="top" href="#about" onclick="goAbout('about-ceo',event)"><span class="en">About</span><span class="ko">회사소개</span></a>
     </div>
     <div class="nav-right">
       <div class="lang">
@@ -342,12 +348,13 @@
           <a href="#customers"><span data-ko>파트너</span><span data-en>Partners</span></a>
           <a href="#contact"><span data-ko>성과 지표</span><span data-en>Results</span></a>
         </div>
-        <div class="mega-col">
-          <a href="#about-ceo">CEO</a>
-          <a href="#about-vision"><span data-ko>비전</span><span data-en>Vision</span></a>
-          <a href="#about-history"><span data-ko>회사 연혁</span><span data-en>History</span></a>
-          <a href="#about-partners"><span data-ko>협력사</span><span data-en>Partners</span></a>
-          <a href="#about-news">News</a>
+        <div class="mega-col mega-about">
+          <div class="mega-about-head"><span data-ko>회사소개</span><span data-en>About</span></div>
+          <a href="#about-ceo" onclick="goAbout('about-ceo',event)">CEO</a>
+          <a href="#about-vision" onclick="goAbout('about-vision',event)"><span data-ko>비전</span><span data-en>Vision</span></a>
+          <a href="#about-history" onclick="goAbout('about-history',event)"><span data-ko>회사 연혁</span><span data-en>History</span></a>
+          <a href="#about-partners" onclick="goAbout('about-partners',event)"><span data-ko>협력사</span><span data-en>Partners</span></a>
+          <a href="#about-news" onclick="goAbout('about-news',event)">News</a>
         </div>
       </div>
       <div class="mega-rspacer"></div>
@@ -572,11 +579,11 @@
     <aside class="about-side">
       <div class="about-side-head"><span data-ko>회사소개</span><span data-en>About</span></div>
       <nav class="about-side-nav">
-        <a href="#about-ceo" data-panel="about-ceo" class="on">CEO</a>
-        <a href="#about-vision" data-panel="about-vision"><span data-ko>비전</span><span data-en>Vision</span></a>
-        <a href="#about-history" data-panel="about-history"><span data-ko>회사 연혁</span><span data-en>History</span></a>
-        <a href="#about-partners" data-panel="about-partners"><span data-ko>협력사</span><span data-en>Partners</span></a>
-        <a href="#about-news" data-panel="about-news">News</a>
+        <a href="#about-ceo" data-panel="about-ceo" class="on" onclick="goAbout('about-ceo',event)">CEO</a>
+        <a href="#about-vision" data-panel="about-vision" onclick="goAbout('about-vision',event)"><span data-ko>비전</span><span data-en>Vision</span></a>
+        <a href="#about-history" data-panel="about-history" onclick="goAbout('about-history',event)"><span data-ko>회사 연혁</span><span data-en>History</span></a>
+        <a href="#about-partners" data-panel="about-partners" onclick="goAbout('about-partners',event)"><span data-ko>협력사</span><span data-en>Partners</span></a>
+        <a href="#about-news" data-panel="about-news" onclick="goAbout('about-news',event)">News</a>
       </nav>
     </aside>
     <main class="about-main">
@@ -712,7 +719,7 @@
         <p><span data-ko>IT와 제조를 잇는 소프트웨어 파트너. 복잡한 현장을 누구나 쓸 수 있게 만듭니다.</span><span data-en>The software partner connecting IT and manufacturing. Making complex factories usable by everyone.</span></p>
       </div>
       <div class="foot-col"><h5><span data-ko>솔루션</span><span data-en>Solutions</span></h5><a href="#feature"><span data-ko>실시간 모니터링</span><span data-en>Live Monitoring</span></a><a href="#feature"><span data-ko>품질 관리</span><span data-en>Quality</span></a><a href="#feature"><span data-ko>생산 계획</span><span data-en>Planning</span></a><a href="#feature"><span data-ko>예지보전</span><span data-en>Predictive Care</span></a></div>
-      <div class="foot-col"><h5><span data-ko>회사</span><span data-en>Company</span></h5><a href="#about-ceo">CEO</a><a href="#about-vision"><span data-ko>비전</span><span data-en>Vision</span></a><a href="#about-history"><span data-ko>회사 연혁</span><span data-en>History</span></a><a href="#about-partners"><span data-ko>협력사</span><span data-en>Partners</span></a><a href="#about-news">News</a></div>
+      <div class="foot-col"><h5><span data-ko>회사</span><span data-en>Company</span></h5><a href="#about-ceo" onclick="goAbout('about-ceo',event)">CEO</a><a href="#about-vision" onclick="goAbout('about-vision',event)"><span data-ko>비전</span><span data-en>Vision</span></a><a href="#about-history" onclick="goAbout('about-history',event)"><span data-ko>회사 연혁</span><span data-en>History</span></a><a href="#about-partners" onclick="goAbout('about-partners',event)"><span data-ko>협력사</span><span data-en>Partners</span></a><a href="#about-news" onclick="goAbout('about-news',event)">News</a></div>
       <div class="foot-col"><h5><span data-ko>문의</span><span data-en>Contact</span></h5><a href="#contact"><span data-ko>상담 신청</span><span data-en>Get in touch</span></a><a href="mailto:hello@aian.kr">hello@aian.kr</a><a href="tel:0212345678">02-1234-5678</a></div>
     </div>
     <div class="foot-bottom">
@@ -736,16 +743,24 @@
       a.classList.toggle('on', a.dataset.panel === id);
     });
   }
+  function goAbout(id, e){
+    if(e) e.preventDefault();
+    showAboutPanel(id);
+    history.pushState(null, '', '#' + id);
+    document.getElementById('about').scrollIntoView({behavior:'smooth'});
+    document.getElementById('nav').classList.remove('open');
+  }
   function routeAbout(){
     const hash = location.hash.replace('#','');
-    const id = aboutIds.includes(hash) ? hash : 'about-ceo';
-    showAboutPanel(id);
     if(aboutIds.includes(hash)){
-      document.getElementById('about').scrollIntoView({behavior:'smooth'});
+      showAboutPanel(hash);
+      requestAnimationFrame(() => {
+        document.getElementById('about').scrollIntoView({behavior:'smooth'});
+      });
     }
   }
   addEventListener('hashchange', routeAbout);
-  routeAbout();
+  addEventListener('DOMContentLoaded', routeAbout);
 
   // ---- language toggle ----
   function setLang(lang){
