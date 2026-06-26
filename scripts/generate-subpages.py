@@ -218,13 +218,13 @@ PAGES = {
     "about/ceo.html": {
         "section": "about",
         "title": "CEO",
-        "label": "CEO MESSAGE",
+        "label": '<span data-ko>CEO 메세지</span><span data-en>CEO Message</span>',
         "h1_ko": "현장에서 시작한<br>기술의 힘",
         "h1_en": "Technology born<br>on the factory floor",
         "lead_ko": "제조 현장의 언어로 소프트웨어를 만듭니다.",
         "lead_en": "We build software in the language of the factory floor.",
-        "extra": '''<div class="ceo-grid"><div class="ceo-photo"><span data-ko>CEO 사진</span><span data-en>CEO Photo</span></div><div>
-          <div class="ceo-name"><span data-ko>윤영석</span><span data-en>Youngseok Yoon</span></div>
+        "extra": '''<div class="ceo-grid"><div class="ceo-photo"><img src="../assets/ceo-kim.jpg" alt="김순태 CEO" /></div><div>
+          <div class="ceo-name"><span data-ko>김순태</span><span data-en>Soon-tae Kim</span></div>
           <div class="ceo-role"><span data-ko>대표이사 / CEO</span><span data-en>Chief Executive Officer</span></div>
           <p><span data-ko>AIAN은 현장에서 일해본 사람들이 만든 회사입니다. 복잡한 기술을 현장 누구나 쓸 수 있는 형태로 바꾸는 것이 우리의 목표입니다.</span><span data-en>AIAN was founded by people from the factory floor. Our goal is to make complex technology usable by everyone on site.</span></p>
           <p><span data-ko>120개 이상의 제조 현장과 함께하며, IT와 제조를 잇는 가장 쉬운 방법을 만들어가고 있습니다.</span><span data-en>Working with 120+ manufacturing sites, we build the easiest way to connect IT and manufacturing.</span></p>
