@@ -7,7 +7,3 @@ function setLang(lang){
   document.getElementById('lang-en').classList.toggle('on', !showKo);
 }
 setLang('ko');
-
-const nav = document.getElementById('nav');
-nav.addEventListener('mouseenter', () => nav.classList.add('open'));
-nav.addEventListener('mouseleave', () => nav.classList.remove('open'));
