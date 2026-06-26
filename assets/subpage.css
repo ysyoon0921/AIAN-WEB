@@ -77,7 +77,7 @@ body{ font-family:"Pretendard",-apple-system,BlinkMacSystemFont,system-ui,sans-s
 .news-item p{ margin:0; font-size:14px; }
 
 footer{ background:var(--night-2); color:#7d8aa0; padding:48px 0 40px; margin-top:40px; }
-.foot-grid{ display:grid; grid-template-columns:1.6fr 1fr 1fr 1fr; gap:40px; }
+.foot-grid{ display:grid; grid-template-columns:1.5fr repeat(5, 1fr); gap:32px; }
 .foot-grid .logo-mark, .foot-grid .logo-wordmark{ filter:brightness(0) invert(1); }
 .foot-grid p{ font-size:14px; line-height:1.6; max-width:260px; margin-top:12px; }
 .foot-col h5{ color:#cdd8ea; font-size:14px; font-weight:700; margin-bottom:14px; }
