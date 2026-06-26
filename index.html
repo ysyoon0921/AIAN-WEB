@@ -208,13 +208,53 @@
 
   /* TIMELINE */
   .timeline{ background:var(--bg-soft); }
-  .tl{ position:relative; margin-top:64px; padding-left:34px; }
-  .tl::before{ content:""; position:absolute; left:9px; top:6px; bottom:6px; width:2px; background:linear-gradient(180deg,var(--brand),var(--brand-2),transparent); }
-  .tl-item{ position:relative; padding-bottom:42px; } .tl-item:last-child{ padding-bottom:0; }
-  .tl-item::before{ content:""; position:absolute; left:-34px; top:5px; width:20px; height:20px; border-radius:50%; background:#fff; border:4px solid var(--brand); box-shadow:0 0 0 5px var(--bg-soft); }
-  .tl-item .yr{ font-size:15px; font-weight:800; color:var(--brand); }
-  .tl-item h4{ font-size:21px; font-weight:700; margin:5px 0 6px; letter-spacing:-.03em; }
-  .tl-item p{ color:var(--ink-soft); font-size:16px; }
+  .tl{ position:relative; margin-top:20px; padding-left:28px; border-left:2px solid var(--line); }
+  .tl-item{ position:relative; padding-bottom:36px; } .tl-item:last-child{ padding-bottom:0; }
+  .tl-item::before{ content:""; position:absolute; left:-35px; top:6px; width:12px; height:12px; border-radius:50%; background:var(--brand); box-shadow:0 0 0 4px var(--bg-blue); }
+  .tl-item .yr{ font-size:14px; font-weight:800; color:var(--brand); margin-bottom:6px; }
+  .tl-item h4{ font-size:18px; font-weight:700; margin-bottom:6px; }
+  .tl-item p{ color:var(--ink-soft); font-size:15px; margin:0; }
+
+  /* ABOUT (회사소개) */
+  .about-page{ background:#fff; border-top:1px solid var(--line); }
+  .about-shell{ display:grid; grid-template-columns:280px 1fr; min-height:640px; }
+  .about-side{ background:#fff; border-right:1px solid var(--line); }
+  .about-side-head{ background:#2b3038; color:#d8dee9; font-size:18px; font-weight:700; text-align:center; padding:22px 20px; }
+  .about-side-nav{ display:flex; flex-direction:column; }
+  .about-side-nav a{ display:block; padding:20px 32px; font-size:16px; font-weight:500; color:var(--ink-soft); text-decoration:none; border-bottom:1px solid var(--line); transition:background .2s, color .2s; }
+  .about-side-nav a:hover{ background:var(--bg-soft); color:var(--ink); }
+  .about-side-nav a.on{ background:var(--bg-blue); color:var(--brand); font-weight:700; }
+  .about-main{ padding:56px 64px 80px; }
+  .about-panel[hidden]{ display:none; }
+  .about-panel .label{ display:inline-block; font-size:13px; font-weight:800; color:var(--brand); background:var(--bg-blue); padding:7px 14px; border-radius:999px; margin-bottom:18px; }
+  .about-panel h2{ font-size:clamp(32px,4vw,44px); font-weight:800; letter-spacing:-.04em; line-height:1.15; margin-bottom:20px; }
+  .about-panel .lead{ font-size:18px; color:var(--ink-soft); line-height:1.65; max-width:640px; margin-bottom:40px; }
+  .about-panel p{ color:var(--ink-soft); font-size:16px; line-height:1.7; margin-bottom:16px; }
+  .ceo-grid{ display:grid; grid-template-columns:280px 1fr; gap:48px; align-items:start; }
+  .ceo-photo{ aspect-ratio:3/4; border-radius:18px; background:linear-gradient(160deg,var(--bg-soft),var(--bg-blue)); border:1px solid var(--line); display:flex; align-items:center; justify-content:center; color:var(--ink-faint); font-size:14px; font-weight:600; }
+  .ceo-name{ font-size:24px; font-weight:800; color:var(--ink); margin-bottom:6px; }
+  .ceo-role{ font-size:15px; color:var(--brand); font-weight:700; margin-bottom:24px; }
+  .vision-cards{ display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+  .vision-card{ border:1px solid var(--line); border-radius:18px; padding:28px; background:var(--bg-soft); }
+  .vision-card h3{ font-size:20px; font-weight:800; margin-bottom:10px; }
+  .vision-card p{ margin:0; }
+  .partner-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+  .partner-card{ border:1px solid var(--line); border-radius:16px; padding:28px 20px; text-align:center; background:#fff; }
+  .partner-card b{ display:block; font-size:17px; font-weight:800; margin-bottom:6px; }
+  .partner-card span{ font-size:14px; color:var(--ink-faint); }
+  .news-list{ border-top:1px solid var(--line); }
+  .news-item{ display:grid; grid-template-columns:120px 1fr; gap:24px; padding:24px 0; border-bottom:1px solid var(--line); text-decoration:none; color:inherit; }
+  .news-item .date{ font-size:14px; font-weight:700; color:var(--ink-faint); }
+  .news-item h3{ font-size:17px; font-weight:700; margin-bottom:6px; }
+  .news-item p{ font-size:14px; color:var(--ink-soft); margin:0; }
+  @media(max-width:960px){
+    .about-shell{ grid-template-columns:1fr; }
+    .about-side-nav{ flex-direction:row; overflow-x:auto; }
+    .about-side-nav a{ border-bottom:none; border-right:1px solid var(--line); white-space:nowrap; padding:16px 20px; }
+    .about-main{ padding:40px 24px 64px; }
+    .ceo-grid, .vision-cards, .partner-grid{ grid-template-columns:1fr; }
+    .news-item{ grid-template-columns:1fr; gap:8px; }
+  }
 
   /* CONTACT */
   .contact{ background:var(--night); color:#fff; overflow:hidden; }
@@ -265,7 +305,7 @@
       <a class="top" href="#how"><span class="en">Solutions</span><span class="ko">솔루션</span></a>
       <a class="top" href="#feature"><span class="en">Industry</span><span class="ko">산업분야</span></a>
       <a class="top" href="#customers"><span class="en">Customers</span><span class="ko">고객사례</span></a>
-      <a class="top" href="about/ceo.html"><span class="en">About</span><span class="ko">회사소개</span></a>
+      <a class="top" href="#about-ceo"><span class="en">About</span><span class="ko">회사소개</span></a>
     </div>
     <div class="nav-right">
       <div class="lang">
@@ -303,11 +343,11 @@
           <a href="#contact"><span data-ko>성과 지표</span><span data-en>Results</span></a>
         </div>
         <div class="mega-col">
-          <a href="about/ceo.html">CEO</a>
-          <a href="about/vision.html"><span data-ko>비전</span><span data-en>Vision</span></a>
-          <a href="about/history.html"><span data-ko>회사 연혁</span><span data-en>History</span></a>
-          <a href="about/partners.html"><span data-ko>협력사</span><span data-en>Partners</span></a>
-          <a href="about/news.html">News</a>
+          <a href="#about-ceo">CEO</a>
+          <a href="#about-vision"><span data-ko>비전</span><span data-en>Vision</span></a>
+          <a href="#about-history"><span data-ko>회사 연혁</span><span data-en>History</span></a>
+          <a href="#about-partners"><span data-ko>협력사</span><span data-en>Partners</span></a>
+          <a href="#about-news">News</a>
         </div>
       </div>
       <div class="mega-rspacer"></div>
@@ -526,20 +566,86 @@
   </div>
 </section>
 
-<!-- TIMELINE -->
-<section class="block timeline" id="story">
-  <div class="wrap">
-    <div style="max-width:600px;">
-      <div class="label reveal">OUR STORY</div>
-      <h2 class="h2 reveal d1"><span data-ko>제조 현장과<br>함께 걸어왔습니다</span><span data-en>Walking alongside<br>the factory floor</span></h2>
-      <p class="lead reveal d2"><span data-ko>기술이 아니라 현장에서 출발했습니다.</span><span data-en>We started from the floor, not from the tech.</span></p>
-    </div>
-    <div class="tl">
-      <div class="tl-item reveal"><div class="yr">2019</div><h4><span data-ko>AIAN 설립</span><span data-en>AIAN founded</span></h4><p><span data-ko>제조 현장 출신 엔지니어들이 모여 시작했습니다.</span><span data-en>Started by engineers from the factory floor.</span></p></div>
-      <div class="tl-item reveal d1"><div class="yr">2021</div><h4><span data-ko>첫 스마트팩토리 구축</span><span data-en>First smart factory</span></h4><p><span data-ko>중소 제조사 10곳에 실시간 모니터링을 도입했습니다.</span><span data-en>Deployed live monitoring to 10 SMB factories.</span></p></div>
-      <div class="tl-item reveal d2"><div class="yr">2023</div><h4><span data-ko>AI 품질 분석 출시</span><span data-en>AI quality analytics</span></h4><p><span data-ko>불량 원인을 자동으로 찾아내는 솔루션을 선보였습니다.</span><span data-en>Launched automatic defect root-cause analysis.</span></p></div>
-      <div class="tl-item reveal d3"><div class="yr">2025</div><h4><span data-ko>120+ 현장 돌파</span><span data-en>120+ factories</span></h4><p><span data-ko>전국 제조 현장과 함께 성장하고 있습니다.</span><span data-en>Growing with factories nationwide.</span></p></div>
-    </div>
+<!-- ABOUT (회사소개) -->
+<section class="about-page" id="about">
+  <div class="about-shell">
+    <aside class="about-side">
+      <div class="about-side-head"><span data-ko>회사소개</span><span data-en>About</span></div>
+      <nav class="about-side-nav">
+        <a href="#about-ceo" data-panel="about-ceo" class="on">CEO</a>
+        <a href="#about-vision" data-panel="about-vision"><span data-ko>비전</span><span data-en>Vision</span></a>
+        <a href="#about-history" data-panel="about-history"><span data-ko>회사 연혁</span><span data-en>History</span></a>
+        <a href="#about-partners" data-panel="about-partners"><span data-ko>협력사</span><span data-en>Partners</span></a>
+        <a href="#about-news" data-panel="about-news">News</a>
+      </nav>
+    </aside>
+    <main class="about-main">
+
+      <article id="about-ceo" class="about-panel">
+        <div class="label">CEO MESSAGE</div>
+        <h2><span data-ko>현장에서 시작한<br>기술의 힘</span><span data-en>Technology born<br>on the factory floor</span></h2>
+        <p class="lead"><span data-ko>제조 현장의 언어로 소프트웨어를 만듭니다.</span><span data-en>We build software in the language of the factory floor.</span></p>
+        <div class="ceo-grid">
+          <div class="ceo-photo"><span data-ko>CEO 사진</span><span data-en>CEO Photo</span></div>
+          <div>
+            <div class="ceo-name"><span data-ko>윤영석</span><span data-en>Youngseok Yoon</span></div>
+            <div class="ceo-role"><span data-ko>대표이사 / CEO</span><span data-en>Chief Executive Officer</span></div>
+            <p><span data-ko>AIAN은 현장에서 일해본 사람들이 만든 회사입니다. MES, QMS, 설비 모니터링 — 이름은 어렵지만, 현장에서는 매일 쓰는 도구여야 합니다. 우리는 복잡한 기술을 현장 누구나 이해하고 쓸 수 있는 형태로 바꾸는 것을 목표로 합니다.</span><span data-en>AIAN was founded by people who have worked on the factory floor. MES, QMS, equipment monitoring — the names may be complex, but on site they must be tools used every day. Our goal is to turn complex technology into something anyone on the floor can understand and use.</span></p>
+            <p><span data-ko>120개 이상의 제조 현장과 함께하며, 기술이 아니라 현장의 문제에서 출발한다는 원칙을 지켜왔습니다. 앞으로도 IT와 제조를 잇는 가장 쉬운 방법을 만들어가겠습니다.</span><span data-en>Working with over 120 manufacturing sites, we have kept our principle of starting from floor problems, not technology. We will continue to build the easiest way to connect IT and manufacturing.</span></p>
+          </div>
+        </div>
+      </article>
+
+      <article id="about-vision" class="about-panel" hidden>
+        <div class="label">VISION</div>
+        <h2><span data-ko>제조 현장을 잇는<br>가장 쉬운 방법</span><span data-en>The easiest way to<br>connect the factory floor</span></h2>
+        <p class="lead"><span data-ko>IT와 제조를 연결해, 누구나 쓸 수 있는 소프트웨어를 만듭니다.</span><span data-en>Connecting IT and manufacturing with software anyone can use.</span></p>
+        <div class="vision-cards">
+          <div class="vision-card"><h3><span data-ko>미션</span><span data-en>Mission</span></h3><p><span data-ko>복잡한 제조 현장을, 누구나 쓸 수 있는 소프트웨어로 바꿉니다.</span><span data-en>We turn complex factory floors into software anyone can use.</span></p></div>
+          <div class="vision-card"><h3><span data-ko>비전</span><span data-en>Vision</span></h3><p><span data-ko>모든 제조 현장이 데이터로 스스로 개선되는 세상.</span><span data-en>A world where every factory improves itself with data.</span></p></div>
+          <div class="vision-card"><h3><span data-ko>핵심 가치</span><span data-en>Core Values</span></h3><p><span data-ko>현장 우선 · 단순함 · 함께 성장.</span><span data-en>Floor first · Simplicity · Grow together.</span></p></div>
+          <div class="vision-card"><h3><span data-ko>2030 목표</span><span data-en>2030 Goal</span></h3><p><span data-ko>국내 중소·중견 제조사 500곳 이상에 AIAN 솔루션을 도입.</span><span data-en>Deploy AIAN solutions to 500+ SMB manufacturers.</span></p></div>
+        </div>
+      </article>
+
+      <article id="about-history" class="about-panel" hidden>
+        <div class="label">HISTORY</div>
+        <h2><span data-ko>제조 현장과<br>함께 걸어왔습니다</span><span data-en>Walking alongside<br>the factory floor</span></h2>
+        <p class="lead"><span data-ko>기술이 아니라 현장에서 출발했습니다.</span><span data-en>We started from the floor, not from the tech.</span></p>
+        <div class="tl">
+          <div class="tl-item"><div class="yr">2019</div><h4><span data-ko>AIAN 설립</span><span data-en>AIAN founded</span></h4><p><span data-ko>제조 현장 출신 엔지니어들이 모여 시작했습니다.</span><span data-en>Started by engineers from the factory floor.</span></p></div>
+          <div class="tl-item"><div class="yr">2021</div><h4><span data-ko>첫 스마트팩토리 구축</span><span data-en>First smart factory</span></h4><p><span data-ko>중소 제조사 10곳에 실시간 모니터링을 도입했습니다.</span><span data-en>Deployed live monitoring to 10 SMB factories.</span></p></div>
+          <div class="tl-item"><div class="yr">2023</div><h4><span data-ko>AI 품질 분석 출시</span><span data-en>AI quality analytics</span></h4><p><span data-ko>불량 원인을 자동으로 찾아내는 솔루션을 선보였습니다.</span><span data-en>Launched automatic defect root-cause analysis.</span></p></div>
+          <div class="tl-item"><div class="yr">2025</div><h4><span data-ko>120+ 현장 돌파</span><span data-en>120+ factories</span></h4><p><span data-ko>전국 제조 현장과 함께 성장하고 있습니다.</span><span data-en>Growing with factories nationwide.</span></p></div>
+        </div>
+      </article>
+
+      <article id="about-partners" class="about-panel" hidden>
+        <div class="label">PARTNERS</div>
+        <h2><span data-ko>함께 성장하는<br>파트너십</span><span data-en>Partnerships<br>that grow together</span></h2>
+        <p class="lead"><span data-ko>플랫폼, SI, 클라우드 파트너와 함께 제조 현장의 디지털 전환을 가속합니다.</span><span data-en>We accelerate shop-floor digital transformation with platform, SI, and cloud partners.</span></p>
+        <div class="partner-grid">
+          <div class="partner-card"><b>AWS</b><span><span data-ko>클라우드 인프라</span><span data-en>Cloud Infrastructure</span></span></div>
+          <div class="partner-card"><b>Microsoft Azure</b><span><span data-ko>엔터프라이즈 플랫폼</span><span data-en>Enterprise Platform</span></span></div>
+          <div class="partner-card"><b>Oracle</b><span><span data-ko>데이터베이스 · ERP</span><span data-en>Database · ERP</span></span></div>
+          <div class="partner-card"><b>Siemens</b><span><span data-ko>산업 자동화</span><span data-en>Industrial Automation</span></span></div>
+          <div class="partner-card"><b>LS Electric</b><span><span data-ko>설비 · PLC 연동</span><span data-en>Equipment · PLC</span></span></div>
+          <div class="partner-card"><b><span data-ko>한국생산기술연구원</span><span data-en>KITECH</span></b><span><span data-ko>스마트팩토리 R&D</span><span data-en>Smart Factory R&D</span></span></div>
+        </div>
+      </article>
+
+      <article id="about-news" class="about-panel" hidden>
+        <div class="label">NEWS</div>
+        <h2><span data-ko>AIAN 소식</span><span data-en>AIAN News</span></h2>
+        <p class="lead"><span data-ko>제품 출시, 파트너십, 현장 도입 소식을 전합니다.</span><span data-en>Product launches, partnerships, and deployment updates.</span></p>
+        <div class="news-list">
+          <div class="news-item"><div class="date">2026.03.12</div><div><h3><span data-ko>AIAN, 120번째 제조 현장 도입 달성</span><span data-en>AIAN reaches 120th factory deployment</span></h3><p><span data-ko>전국 중소·중견 제조사 대상 실시간 모니터링 솔루션 도입이 120곳을 돌파했습니다.</span><span data-en>Live monitoring deployments surpassed 120 sites nationwide.</span></p></div></div>
+          <div class="news-item"><div class="date">2026.01.28</div><div><h3><span data-ko>AWS와 스마트팩토리 클라우드 파트너십 체결</span><span data-en>Smart factory cloud partnership with AWS</span></h3><p><span data-ko>AIAN MES·QMS 솔루션의 AWS 마켓플레이스 등재 및 공동 GTM을 시작합니다.</span><span data-en>AIAN MES and QMS launch on AWS Marketplace with joint GTM.</span></p></div></div>
+          <div class="news-item"><div class="date">2025.11.05</div><div><h3><span data-ko>AI 품질 분석 모듈 v2.0 출시</span><span data-en>AI quality analytics module v2.0 released</span></h3><p><span data-ko>불량 원인 자동 분석 정확도 40% 향상.</span><span data-en>40% improvement in defect root-cause accuracy.</span></p></div></div>
+        </div>
+      </article>
+
+    </main>
   </div>
 </section>
 
@@ -606,7 +712,7 @@
         <p><span data-ko>IT와 제조를 잇는 소프트웨어 파트너. 복잡한 현장을 누구나 쓸 수 있게 만듭니다.</span><span data-en>The software partner connecting IT and manufacturing. Making complex factories usable by everyone.</span></p>
       </div>
       <div class="foot-col"><h5><span data-ko>솔루션</span><span data-en>Solutions</span></h5><a href="#feature"><span data-ko>실시간 모니터링</span><span data-en>Live Monitoring</span></a><a href="#feature"><span data-ko>품질 관리</span><span data-en>Quality</span></a><a href="#feature"><span data-ko>생산 계획</span><span data-en>Planning</span></a><a href="#feature"><span data-ko>예지보전</span><span data-en>Predictive Care</span></a></div>
-      <div class="foot-col"><h5><span data-ko>회사</span><span data-en>Company</span></h5><a href="about/ceo.html">CEO</a><a href="about/vision.html"><span data-ko>비전</span><span data-en>Vision</span></a><a href="about/history.html"><span data-ko>회사 연혁</span><span data-en>History</span></a><a href="about/partners.html"><span data-ko>협력사</span><span data-en>Partners</span></a><a href="about/news.html">News</a></div>
+      <div class="foot-col"><h5><span data-ko>회사</span><span data-en>Company</span></h5><a href="#about-ceo">CEO</a><a href="#about-vision"><span data-ko>비전</span><span data-en>Vision</span></a><a href="#about-history"><span data-ko>회사 연혁</span><span data-en>History</span></a><a href="#about-partners"><span data-ko>협력사</span><span data-en>Partners</span></a><a href="#about-news">News</a></div>
       <div class="foot-col"><h5><span data-ko>문의</span><span data-en>Contact</span></h5><a href="#contact"><span data-ko>상담 신청</span><span data-en>Get in touch</span></a><a href="mailto:hello@aian.kr">hello@aian.kr</a><a href="tel:0212345678">02-1234-5678</a></div>
     </div>
     <div class="foot-bottom">
@@ -618,6 +724,28 @@
 
 <script>
   function go(id){ document.getElementById(id).scrollIntoView({behavior:'smooth'}); }
+
+  // ---- about panels (회사소개) ----
+  const aboutIds = ['about-ceo','about-vision','about-history','about-partners','about-news'];
+  function showAboutPanel(id){
+    aboutIds.forEach(pid => {
+      const panel = document.getElementById(pid);
+      if(panel) panel.hidden = pid !== id;
+    });
+    document.querySelectorAll('.about-side-nav a').forEach(a => {
+      a.classList.toggle('on', a.dataset.panel === id);
+    });
+  }
+  function routeAbout(){
+    const hash = location.hash.replace('#','');
+    const id = aboutIds.includes(hash) ? hash : 'about-ceo';
+    showAboutPanel(id);
+    if(aboutIds.includes(hash)){
+      document.getElementById('about').scrollIntoView({behavior:'smooth'});
+    }
+  }
+  addEventListener('hashchange', routeAbout);
+  routeAbout();
 
   // ---- language toggle ----
   function setLang(lang){
