@@ -222,19 +222,21 @@
   .tl-item p{ color:var(--ink-soft); font-size:15px; margin:0; }
 
   /* ABOUT (회사소개) */
-  .about-page{ background:#fff; border-top:1px solid var(--line); scroll-margin-top:80px; }
-  .about-shell{ display:grid; grid-template-columns:280px 1fr; min-height:640px; }
-  .about-side{ background:#fff; border-right:1px solid var(--line); }
-  .about-side-head{ background:#2b3038; color:#d8dee9; font-size:18px; font-weight:700; text-align:center; padding:22px 20px; }
+  .about-page{ background:#fff; border-top:1px solid var(--line); scroll-margin-top:88px; position:relative; z-index:5; min-height:calc(100vh - 72px); isolation:isolate; }
+  .about-shell{ max-width:var(--maxw); margin:0 auto; padding:48px 24px 80px; display:grid; grid-template-columns:240px 1fr; gap:0; min-height:calc(100vh - 160px); align-items:start; }
+  .about-side{ background:#fff; border:1px solid var(--line); border-radius:12px; overflow:hidden; position:sticky; top:96px; align-self:start; }
+  .about-side-head{ background:#2b3038; color:#d8dee9; font-size:17px; font-weight:700; text-align:center; padding:18px 16px; }
   .about-side-nav{ display:flex; flex-direction:column; }
-  .about-side-nav a{ display:block; padding:20px 32px; font-size:16px; font-weight:500; color:var(--ink-soft); text-decoration:none; border-bottom:1px solid var(--line); transition:background .2s, color .2s; }
+  .about-side-nav a{ display:block; padding:16px 24px; font-size:15px; font-weight:500; color:var(--ink-soft); text-decoration:none; border-bottom:1px solid var(--line); transition:background .2s, color .2s; }
+  .about-side-nav a:last-child{ border-bottom:none; }
   .about-side-nav a:hover{ background:var(--bg-soft); color:var(--ink); }
   .about-side-nav a.on{ background:var(--bg-blue); color:var(--brand); font-weight:700; }
-  .about-main{ padding:56px 64px 80px; }
-  .about-panel[hidden]{ display:none; }
+  .about-main{ padding:8px 0 8px 48px; min-height:520px; background:#fff; position:relative; }
+  .about-panel{ display:none; }
+  .about-panel.is-active{ display:block; }
   .about-panel .label{ display:inline-block; font-size:13px; font-weight:800; color:var(--brand); background:var(--bg-blue); padding:7px 14px; border-radius:999px; margin-bottom:18px; }
-  .about-panel h2{ font-size:clamp(32px,4vw,44px); font-weight:800; letter-spacing:-.04em; line-height:1.15; margin-bottom:20px; }
-  .about-panel .lead{ font-size:18px; color:var(--ink-soft); line-height:1.65; max-width:640px; margin-bottom:40px; }
+  .about-panel h2{ font-size:clamp(28px,3.5vw,40px); font-weight:800; letter-spacing:-.04em; line-height:1.15; margin-bottom:20px; }
+  .about-panel .lead{ font-size:17px; color:var(--ink-soft); line-height:1.65; max-width:640px; margin-bottom:32px; }
   .about-panel p{ color:var(--ink-soft); font-size:16px; line-height:1.7; margin-bottom:16px; }
   .ceo-grid{ display:grid; grid-template-columns:280px 1fr; gap:48px; align-items:start; }
   .ceo-photo{ aspect-ratio:3/4; border-radius:18px; background:linear-gradient(160deg,var(--bg-soft),var(--bg-blue)); border:1px solid var(--line); display:flex; align-items:center; justify-content:center; color:var(--ink-faint); font-size:14px; font-weight:600; }
@@ -254,16 +256,17 @@
   .news-item h3{ font-size:17px; font-weight:700; margin-bottom:6px; }
   .news-item p{ font-size:14px; color:var(--ink-soft); margin:0; }
   @media(max-width:960px){
-    .about-shell{ grid-template-columns:1fr; }
-    .about-side-nav{ flex-direction:row; overflow-x:auto; }
-    .about-side-nav a{ border-bottom:none; border-right:1px solid var(--line); white-space:nowrap; padding:16px 20px; }
-    .about-main{ padding:40px 24px 64px; }
+    .about-shell{ grid-template-columns:1fr; padding:32px 20px 64px; gap:24px; min-height:auto; }
+    .about-side{ position:static; border-radius:12px; }
+    .about-side-nav{ flex-direction:column; }
+    .about-side-nav a{ border-bottom:1px solid var(--line); border-right:none; white-space:normal; padding:14px 20px; }
+    .about-main{ padding:0; min-height:auto; }
     .ceo-grid, .vision-cards, .partner-grid{ grid-template-columns:1fr; }
     .news-item{ grid-template-columns:1fr; gap:8px; }
   }
 
   /* CONTACT */
-  .contact{ background:var(--night); color:#fff; overflow:hidden; }
+  .contact{ background:var(--night); color:#fff; overflow:hidden; position:relative; z-index:1; }
   .contact .orb.a{ width:420px; height:420px; top:-120px; right:-60px; opacity:.4; }
   .contact .orb.b{ width:380px; height:380px; bottom:-160px; left:-80px; opacity:.32; }
   .contact-grid{ position:relative; z-index:2; display:grid; grid-template-columns:1fr 1.1fr; gap:56px; align-items:start; }
@@ -588,7 +591,7 @@
     </aside>
     <main class="about-main">
 
-      <article id="about-ceo" class="about-panel">
+      <article id="panel-ceo" class="about-panel is-active">
         <div class="label">CEO MESSAGE</div>
         <h2><span data-ko>현장에서 시작한<br>기술의 힘</span><span data-en>Technology born<br>on the factory floor</span></h2>
         <p class="lead"><span data-ko>제조 현장의 언어로 소프트웨어를 만듭니다.</span><span data-en>We build software in the language of the factory floor.</span></p>
@@ -603,7 +606,7 @@
         </div>
       </article>
 
-      <article id="about-vision" class="about-panel" hidden>
+      <article id="panel-vision" class="about-panel">
         <div class="label">VISION</div>
         <h2><span data-ko>제조 현장을 잇는<br>가장 쉬운 방법</span><span data-en>The easiest way to<br>connect the factory floor</span></h2>
         <p class="lead"><span data-ko>IT와 제조를 연결해, 누구나 쓸 수 있는 소프트웨어를 만듭니다.</span><span data-en>Connecting IT and manufacturing with software anyone can use.</span></p>
@@ -615,7 +618,7 @@
         </div>
       </article>
 
-      <article id="about-history" class="about-panel" hidden>
+      <article id="panel-history" class="about-panel">
         <div class="label">HISTORY</div>
         <h2><span data-ko>제조 현장과<br>함께 걸어왔습니다</span><span data-en>Walking alongside<br>the factory floor</span></h2>
         <p class="lead"><span data-ko>기술이 아니라 현장에서 출발했습니다.</span><span data-en>We started from the floor, not from the tech.</span></p>
@@ -627,7 +630,7 @@
         </div>
       </article>
 
-      <article id="about-partners" class="about-panel" hidden>
+      <article id="panel-partners" class="about-panel">
         <div class="label">PARTNERS</div>
         <h2><span data-ko>함께 성장하는<br>파트너십</span><span data-en>Partnerships<br>that grow together</span></h2>
         <p class="lead"><span data-ko>플랫폼, SI, 클라우드 파트너와 함께 제조 현장의 디지털 전환을 가속합니다.</span><span data-en>We accelerate shop-floor digital transformation with platform, SI, and cloud partners.</span></p>
@@ -641,7 +644,7 @@
         </div>
       </article>
 
-      <article id="about-news" class="about-panel" hidden>
+      <article id="panel-news" class="about-panel">
         <div class="label">NEWS</div>
         <h2><span data-ko>AIAN 소식</span><span data-en>AIAN News</span></h2>
         <p class="lead"><span data-ko>제품 출시, 파트너십, 현장 도입 소식을 전합니다.</span><span data-en>Product launches, partnerships, and deployment updates.</span></p>
@@ -734,33 +737,49 @@
 
   // ---- about panels (회사소개) ----
   const aboutIds = ['about-ceo','about-vision','about-history','about-partners','about-news'];
-  function showAboutPanel(id){
-    aboutIds.forEach(pid => {
-      const panel = document.getElementById(pid);
-      if(panel) panel.hidden = pid !== id;
-    });
+  const aboutPanelMap = {
+    'about-ceo': 'panel-ceo',
+    'about-vision': 'panel-vision',
+    'about-history': 'panel-history',
+    'about-partners': 'panel-partners',
+    'about-news': 'panel-news'
+  };
+  function showAboutPanel(hashId){
+    const panelId = aboutPanelMap[hashId];
+    document.querySelectorAll('.about-panel').forEach(p => p.classList.remove('is-active'));
+    const panel = document.getElementById(panelId);
+    if(panel) panel.classList.add('is-active');
     document.querySelectorAll('.about-side-nav a').forEach(a => {
-      a.classList.toggle('on', a.dataset.panel === id);
+      a.classList.toggle('on', a.dataset.panel === hashId);
     });
+  }
+  function scrollToAbout(){
+    const el = document.getElementById('about');
+    const top = el.getBoundingClientRect().top + window.scrollY - 88;
+    window.scrollTo({ top, behavior: 'smooth' });
   }
   function goAbout(id, e){
     if(e) e.preventDefault();
     showAboutPanel(id);
     history.pushState(null, '', '#' + id);
-    document.getElementById('about').scrollIntoView({behavior:'smooth'});
+    scrollToAbout();
     document.getElementById('nav').classList.remove('open');
   }
   function routeAbout(){
     const hash = location.hash.replace('#','');
     if(aboutIds.includes(hash)){
       showAboutPanel(hash);
-      requestAnimationFrame(() => {
-        document.getElementById('about').scrollIntoView({behavior:'smooth'});
-      });
+      requestAnimationFrame(scrollToAbout);
     }
   }
   addEventListener('hashchange', routeAbout);
-  addEventListener('DOMContentLoaded', routeAbout);
+  addEventListener('DOMContentLoaded', () => {
+    if(aboutIds.includes(location.hash.replace('#',''))){
+      routeAbout();
+    } else {
+      showAboutPanel('about-ceo');
+    }
+  });
 
   // ---- language toggle ----
   function setLang(lang){
