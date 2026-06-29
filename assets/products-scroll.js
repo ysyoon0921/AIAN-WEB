@@ -66,8 +66,8 @@
     panel.style.opacity = '0';
     panel.style.visibility = 'hidden';
     panel.style.transform = offRight
-      ? 'translate3d(32%, 0, 0) scale(0.98)'
-      : 'translate3d(-12%, 0, 0) scale(0.98)';
+      ? 'translate3d(' + OFF_RIGHT + '%, 0, 0) scale(0.97)'
+      : 'translate3d(' + OFF_LEFT + '%, 0, 0) scale(0.97)';
     panel.style.zIndex = '1';
   }
 
@@ -123,9 +123,9 @@
       if (i === base) {
         if (frac <= HOLD_END || base === count - 1) {
           showPanel(panel, 0, 1, 1, 10);
-        } else if (frac <= EXIT_END) {
+        } else if (frac < EXIT_END) {
           var t = (frac - HOLD_END) / (EXIT_END - HOLD_END);
-          showPanel(panel, -t * 14, 1 - t, 1 - t * 0.02, 10);
+          showPanel(panel, -t * EXIT_SHIFT, 1 - t, 1 - t * 0.02, 10);
         } else {
           hidePanel(panel, false);
         }
@@ -133,16 +133,16 @@
       }
 
       if (i === base + 1) {
-        if (frac <= EXIT_END) {
+        if (frac < ENTER_START) {
           hidePanel(panel, true);
         } else {
-          var t2 = (frac - EXIT_END) / (1 - EXIT_END);
-          showPanel(panel, (1 - t2) * 36, t2, 0.98 + t2 * 0.02, 11);
+          var t2 = (frac - ENTER_START) / (1 - ENTER_START);
+          showPanel(panel, (1 - t2) * OFF_RIGHT, t2, 0.97 + t2 * 0.03, 11);
         }
       }
     });
 
-    var activeIndex = frac >= EXIT_END && base < count - 1 ? base + 1 : base;
+    var activeIndex = frac >= ENTER_START && base < count - 1 ? base + 1 : base;
     setActive(activeIndex);
     section.classList.toggle('is-done', progress >= 0.995);
   }
