@@ -96,7 +96,7 @@
     var stageW = right.clientWidth;
     var cardW = cards[0].offsetWidth || stageW;
     /* distance to push a card fully off the right edge */
-    var offRight = stageW + cardW + 40;
+    var offRight = stageW / 2 + cardW / 2 + 48;
 
     var base = Math.min(count - 1, Math.floor(pos));
     var frac = pos - base;
@@ -119,7 +119,7 @@
       }
 
       card.style.transform =
-        'translate3d(' + x.toFixed(1) + 'px, 0, 0) scale(' + scale.toFixed(4) + ')';
+        'translate3d(calc(-50% + ' + x.toFixed(1) + 'px), 0, 0) scale(' + scale.toFixed(4) + ')';
       card.style.zIndex = String(i + 1);
     });
 
