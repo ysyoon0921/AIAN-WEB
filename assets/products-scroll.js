@@ -1,6 +1,6 @@
 /**
  * PRODUCTS — Axiom Observed Systems style
- * Continuous vertical scroll → horizontal translate, card centered in viewport
+ * Vertical scroll → horizontal translate, overlapping cards, no fade
  */
 (function () {
   var section = document.getElementById('products');
@@ -42,17 +42,13 @@
     return Math.min(max, Math.max(min, v));
   }
 
-  function smoothstep(t) {
-    t = clamp(t, 0, 1);
-    return t * t * (3 - 2 * t);
-  }
-
   function resetCards() {
     track.style.transform = '';
     cards.forEach(function (card) {
       card.style.transform = '';
       card.style.opacity = '';
       card.style.filter = '';
+      card.style.zIndex = '';
       card.classList.remove('is-active');
     });
     section.style.height = '';
@@ -76,13 +72,6 @@
     return rect.left + rect.width * 0.5;
   }
 
-  function cardStep() {
-    if (count < 2) return cards[0].offsetWidth;
-    var gap = cards[1].offsetLeft - cards[0].offsetLeft - cards[0].offsetWidth;
-    return cards[0].offsetWidth + gap;
-  }
-
-  /* Translate track so card center aligns with viewport center */
   function focusXForIndex(index) {
     var card = cards[index];
     var cardCenter = card.offsetLeft + card.offsetWidth * 0.5;
@@ -102,33 +91,24 @@
     return scrollRange;
   }
 
-  function applyCardFx() {
+  /* Z-index only — center card on top, no fade/blur/scale */
+  function updateStacking() {
     var center = viewCenterX();
-    var step = cardStep() || right.clientWidth;
     var activeIndex = 0;
-    var bestFocus = -1;
+    var minDist = Infinity;
 
     cards.forEach(function (card, i) {
       var rect = card.getBoundingClientRect();
       var cardCenter = rect.left + rect.width * 0.5;
-      var offset = cardCenter - center;
-      var distNorm = offset / step;
+      var dist = Math.abs(cardCenter - center);
 
-      var focus = Math.exp(-(distNorm * distNorm) * 0.72);
-      focus = smoothstep(focus);
+      card.style.transform = '';
+      card.style.opacity = '';
+      card.style.filter = '';
+      card.style.zIndex = String(100 - Math.round(dist));
 
-      var scale = 0.965 + focus * 0.035;
-      var opacity = 0.72 + focus * 0.28;
-      var rotate = distNorm * -1.1 * (1 - focus);
-      var blur = (1 - focus) * 0.55;
-
-      card.style.transform =
-        'scale(' + scale.toFixed(4) + ') rotate(' + rotate.toFixed(3) + 'deg)';
-      card.style.opacity = opacity.toFixed(3);
-      card.style.filter = blur > 0.08 ? 'blur(' + blur.toFixed(2) + 'px)' : '';
-
-      if (focus > bestFocus) {
-        bestFocus = focus;
+      if (dist < minDist) {
+        minDist = dist;
         activeIndex = i;
       }
     });
@@ -155,7 +135,7 @@
     var x = startX + progress * (endX - startX);
 
     track.style.transform = 'translate3d(-' + x.toFixed(2) + 'px, 0, 0)';
-    applyCardFx();
+    updateStacking();
     section.classList.toggle('is-done', progress >= 0.995);
   }
 
