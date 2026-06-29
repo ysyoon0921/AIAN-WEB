@@ -1,6 +1,7 @@
 /**
- * PRODUCTS — Axiom Observed Systems style
- * Vertical scroll → horizontal translate, overlapping cards, no fade
+ * PRODUCTS — Axiom Observed Systems stack
+ * Start: card 1 left + card 2 overlapping on top from right
+ * Scroll: deck slides left, each next card stacks over the previous
  */
 (function () {
   var section = document.getElementById('products');
@@ -16,7 +17,8 @@
 
   if (!pin || !right || !track || count < 2) return;
 
-  var SCROLL_RATIO = 2.1;
+  var SCROLL_RATIO = 2.0;
+  var FOCUS_PAD = 28;
 
   if (counterWrap) {
     counterWrap.innerHTML = '<span class="cur">01</span> / ' + String(count).padStart(2, '0');
@@ -46,9 +48,6 @@
     track.style.transform = '';
     cards.forEach(function (card) {
       card.style.transform = '';
-      card.style.opacity = '';
-      card.style.filter = '';
-      card.style.zIndex = '';
       card.classList.remove('is-active');
     });
     section.style.height = '';
@@ -67,16 +66,8 @@
     });
   }
 
-  function viewCenterX() {
-    var rect = right.getBoundingClientRect();
-    return rect.left + rect.width * 0.5;
-  }
-
   function focusXForIndex(index) {
-    var card = cards[index];
-    var cardCenter = card.offsetLeft + card.offsetWidth * 0.5;
-    var panelCenter = right.clientWidth * 0.5;
-    return cardCenter - panelCenter;
+    return cards[index].offsetLeft - FOCUS_PAD;
   }
 
   function getScrollRange() {
@@ -91,22 +82,13 @@
     return scrollRange;
   }
 
-  /* Z-index only — center card on top, no fade/blur/scale */
-  function updateStacking() {
-    var center = viewCenterX();
+  function updateActive() {
+    var focusLine = right.getBoundingClientRect().left + FOCUS_PAD;
     var activeIndex = 0;
     var minDist = Infinity;
 
     cards.forEach(function (card, i) {
-      var rect = card.getBoundingClientRect();
-      var cardCenter = rect.left + rect.width * 0.5;
-      var dist = Math.abs(cardCenter - center);
-
-      card.style.transform = '';
-      card.style.opacity = '';
-      card.style.filter = '';
-      card.style.zIndex = String(100 - Math.round(dist));
-
+      var dist = Math.abs(card.getBoundingClientRect().left - focusLine);
       if (dist < minDist) {
         minDist = dist;
         activeIndex = i;
@@ -135,7 +117,7 @@
     var x = startX + progress * (endX - startX);
 
     track.style.transform = 'translate3d(-' + x.toFixed(2) + 'px, 0, 0)';
-    updateStacking();
+    updateActive();
     section.classList.toggle('is-done', progress >= 0.995);
   }
 

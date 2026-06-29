@@ -1,8 +1,8 @@
 /* PRODUCTS — Axiom Observed Systems style horizontal scroll */
 .products-scroll{
   --nav-h: 80px;
-  --card-w: clamp(640px, 83vw, 960px);
-  --card-overlap: 0.42;
+  --card-w: clamp(520px, 72vw, 780px);
+  --card-overlap: 0.4;
   position: relative;
   background: var(--bg-soft, #f5f7fa);
 }
@@ -87,7 +87,8 @@
   display: flex;
   align-items: stretch;
   gap: 0;
-  padding: clamp(12px, 2vh, 24px) calc(50% - var(--card-w) / 2);
+  padding: clamp(12px, 2vh, 24px) calc(100% - var(--card-w) * (1 - var(--card-overlap)));
+  padding-left: clamp(20px, 2.5vw, 36px);
   will-change: transform;
 }
 
@@ -106,6 +107,11 @@
   position: relative;
   margin-right: calc(var(--card-w) * var(--card-overlap) * -1);
 }
+.product-card:nth-child(1){ z-index: 1; }
+.product-card:nth-child(2){ z-index: 2; }
+.product-card:nth-child(3){ z-index: 3; }
+.product-card:nth-child(4){ z-index: 4; }
+.product-card:nth-child(5){ z-index: 5; }
 .product-card:last-child{
   margin-right: 0;
 }
