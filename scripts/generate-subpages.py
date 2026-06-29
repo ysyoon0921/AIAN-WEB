@@ -48,15 +48,14 @@ NAV = [
         "id": "about",
         "en": "About",
         "ko": "회사소개",
-        "home": "about/ceo.html",
+        "home": "about/intro.html",
         "side_en": "About",
         "side_ko": "회사소개",
         "items": [
+            ("intro.html", "AIAN 소개", "About AIAN"),
             ("ceo.html", "CEO", "CEO", True),
-            ("vision.html", "비전", "Vision"),
             ("history.html", "회사 연혁", "History"),
-            ("partners.html", "협력사", "Partners"),
-            ("news.html", "News", "News", True),
+            ("location.html", "Location", "Location", True),
         ],
     },
 ]
@@ -215,6 +214,21 @@ PAGES = {
             "We share the rollout process and on-site feedback.",
         ],
     },
+    "about/intro.html": {
+        "section": "about",
+        "title": "AIAN 소개",
+        "label": '<span data-ko>AIAN 소개</span><span data-en>About AIAN</span>',
+        "h1_ko": "제조 현장을 잇는<br>가장 쉬운 방법",
+        "h1_en": "The easiest way to<br>connect the factory floor",
+        "lead_ko": "IT와 제조를 연결해, 누구나 쓸 수 있는 소프트웨어를 만듭니다.",
+        "lead_en": "Connecting IT and manufacturing with software anyone can use.",
+        "extra": '''<div class="intro-cards">
+          <div class="intro-card"><h3><span data-ko>우리가 하는 일</span><span data-en>What we do</span></h3><p><span data-ko>복잡한 제조 현장을, 누구나 쓸 수 있는 소프트웨어로 바꿉니다. 모니터링·품질·생산계획까지 하나의 흐름으로 연결합니다.</span><span data-en>We turn complex factory floors into software anyone can use — connecting monitoring, quality, and planning in one flow.</span></p></div>
+          <div class="intro-card"><h3><span data-ko>미션</span><span data-en>Mission</span></h3><p><span data-ko>현장의 언어로 소프트웨어를 만들고, 데이터로 제조 현장이 스스로 개선되게 합니다.</span><span data-en>Build software in the language of the floor, so factories improve themselves with data.</span></p></div>
+          <div class="intro-card"><h3><span data-ko>핵심 가치</span><span data-en>Core Values</span></h3><p><span data-ko>현장 우선 · 단순함 · 함께 성장. 기술보다 현장의 변화를 먼저 생각합니다.</span><span data-en>Floor first · Simplicity · Grow together. We measure success by change on the floor.</span></p></div>
+          <div class="intro-card"><h3><span data-ko>함께하는 현장</span><span data-en>On the floor</span></h3><p><span data-ko>120개 이상의 제조 현장과 함께하며, 중소·중견 제조사의 디지털 전환을 돕고 있습니다.</span><span data-en>Working with 120+ manufacturing sites to help SMB manufacturers go digital.</span></p></div>
+        </div>''',
+    },
     "about/ceo.html": {
         "section": "about",
         "title": "CEO",
@@ -230,21 +244,6 @@ PAGES = {
           <p><span data-ko>120개 이상의 제조 현장과 함께하며, IT와 제조를 잇는 가장 쉬운 방법을 만들어가고 있습니다.</span><span data-en>Working with 120+ manufacturing sites, we build the easiest way to connect IT and manufacturing.</span></p>
         </div></div>''',
     },
-    "about/vision.html": {
-        "section": "about",
-        "title": "비전",
-        "label": "VISION",
-        "h1_ko": "제조 현장을 잇는<br>가장 쉬운 방법",
-        "h1_en": "The easiest way to<br>connect the factory floor",
-        "lead_ko": "IT와 제조를 연결해, 누구나 쓸 수 있는 소프트웨어를 만듭니다.",
-        "lead_en": "Connecting IT and manufacturing with software anyone can use.",
-        "extra": '''<div class="vision-cards">
-          <div class="vision-card"><h3><span data-ko>미션</span><span data-en>Mission</span></h3><p><span data-ko>복잡한 제조 현장을, 누구나 쓸 수 있는 소프트웨어로 바꿉니다.</span><span data-en>We turn complex factory floors into software anyone can use.</span></p></div>
-          <div class="vision-card"><h3><span data-ko>비전</span><span data-en>Vision</span></h3><p><span data-ko>모든 제조 현장이 데이터로 스스로 개선되는 세상.</span><span data-en>A world where every factory improves itself with data.</span></p></div>
-          <div class="vision-card"><h3><span data-ko>핵심 가치</span><span data-en>Core Values</span></h3><p><span data-ko>현장 우선 · 단순함 · 함께 성장.</span><span data-en>Floor first · Simplicity · Grow together.</span></p></div>
-          <div class="vision-card"><h3><span data-ko>2030 목표</span><span data-en>2030 Goal</span></h3><p><span data-ko>국내 중소·중견 제조사 500곳 이상에 AIAN 솔루션을 도입.</span><span data-en>Deploy AIAN solutions to 500+ SMB manufacturers.</span></p></div>
-        </div>''',
-    },
     "about/history.html": {
         "section": "about",
         "title": "회사 연혁",
@@ -259,35 +258,24 @@ PAGES = {
           <div class="tl-item"><div class="yr">2020</div><h4><span data-ko>AIAN 설립</span><span data-en>Founded</span></h4><p><span data-ko>제조 현장 IT 연결을 목표로 회사를 설립했습니다.</span><span data-en>Founded to connect IT with the factory floor.</span></p></div>
         </div>''',
     },
-    "about/partners.html": {
+    "about/location.html": {
         "section": "about",
-        "title": "협력사",
-        "label": "PARTNERS",
-        "h1_ko": "함께 성장하는<br>파트너",
-        "h1_en": "Partners who<br>grow with us",
-        "lead_ko": "기술·유통·컨설팅 파트너와 함께 고객 가치를 만듭니다.",
-        "lead_en": "We create customer value with technology, channel, and consulting partners.",
-        "extra": '''<div class="partner-grid">
-          <div class="partner-card"><b>CloudTech</b><span>Cloud Infrastructure</span></div>
-          <div class="partner-card"><b>SmartFactory Lab</b><span>Consulting</span></div>
-          <div class="partner-card"><b>DataWorks</b><span>Analytics</span></div>
-          <div class="partner-card"><b>IoT Systems</b><span>Hardware</span></div>
-          <div class="partner-card"><b>MES Global</b><span>Integration</span></div>
-          <div class="partner-card"><b>Factory AI</b><span>AI/ML</span></div>
-        </div>''',
-    },
-    "about/news.html": {
-        "section": "about",
-        "title": "News",
-        "label": "NEWS",
-        "h1_ko": "AIAN<br>소식",
-        "h1_en": "AIAN<br>news",
-        "lead_ko": "회사 소식과 업데이트를 전합니다.",
-        "lead_en": "Company news and updates.",
-        "extra": '''<div class="news-list">
-          <div class="news-item"><div class="date">2026.03</div><div><h3><span data-ko>120+ 제조 현장 돌파</span><span data-en>120+ manufacturing sites</span></h3><p><span data-ko>AIAN 솔루션을 도입한 제조 현장이 120곳을 넘었습니다.</span><span data-en>AIAN solutions are now deployed at 120+ sites.</span></p></div></div>
-          <div class="news-item"><div class="date">2026.01</div><div><h3><span data-ko>신규 MES 모듈 출시</span><span data-en>New MES module</span></h3><p><span data-ko>생산 계획·실적 연동 MES 모듈을 업데이트했습니다.</span><span data-en>Updated MES module linking plans and output.</span></p></div></div>
-          <div class="news-item"><div class="date">2025.11</div><div><h3><span data-ko>Series A 투자 유치</span><span data-en>Series A funding</span></h3><p><span data-ko>제조 SaaS 성장을 위한 투자를 유치했습니다.</span><span data-en>Raised funding to scale manufacturing SaaS.</span></p></div></div>
+        "title": "Location",
+        "label": "LOCATION",
+        "h1_ko": "오시는<br>길",
+        "h1_en": "Visit<br>AIAN",
+        "lead_ko": "AIAN 본사로 방문·미팅을 원하시면 아래 정보를 참고해 주세요.",
+        "lead_en": "Use the details below to visit or meet with us at AIAN headquarters.",
+        "extra": '''<div class="location-grid">
+          <div class="location-info">
+            <div class="loc-row"><span class="loc-label"><span data-ko>주소</span><span data-en>Address</span></span><p><span data-ko>서울특별시 강남구 테헤란로 123, AIAN 빌딩 8층</span><span data-en>8F AIAN Building, 123 Teheran-ro, Gangnam-gu, Seoul</span></p></div>
+            <div class="loc-row"><span class="loc-label"><span data-ko>대표전화</span><span data-en>Phone</span></span><p><a href="tel:0212345678">02-1234-5678</a></p></div>
+            <div class="loc-row"><span class="loc-label"><span data-ko>이메일</span><span data-en>Email</span></span><p><a href="mailto:hello@aian.kr">hello@aian.kr</a></p></div>
+            <div class="loc-row"><span class="loc-label"><span data-ko>교통</span><span data-en>Transit</span></span><p><span data-ko>2호선 강남역 3번 출구 도보 5분 · 지하 주차 가능</span><span data-en>5 min walk from Gangnam Stn. Exit 3 · Underground parking available</span></p></div>
+          </div>
+          <div class="location-map" aria-hidden="true">
+            <div class="map-placeholder"><span data-ko>지도 영역</span><span data-en>Map area</span></div>
+          </div>
         </div>''',
     },
 }
