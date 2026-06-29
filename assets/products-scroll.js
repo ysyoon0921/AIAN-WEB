@@ -1,6 +1,7 @@
 /**
- * PRODUCTS — Axiom Observed Systems
- * Cards spaced with gaps (no overlap), horizontal slide on scroll
+ * PRODUCTS — Stacked cover (Axiom-style deck)
+ * Card 1 stays centered; next card slides in from the right and covers it
+ * while the covered card shrinks behind. Repeats for each product.
  */
 (function () {
   var section = document.getElementById('products');
@@ -16,8 +17,11 @@
 
   if (!pin || !right || !track || count < 2) return;
 
-  var SCROLL_RATIO = 2.0;
-  var FOCUS_PAD = 28;
+  /* Scroll length per card step — higher = slower */
+  var STEP_RATIO = 0.9;
+  /* How much a card shrinks per cover level */
+  var SHRINK = 0.07;
+  var MAX_DEPTH = 3;
 
   if (counterWrap) {
     counterWrap.innerHTML = '<span class="cur">01</span> / ' + String(count).padStart(2, '0');
@@ -33,7 +37,7 @@
 
   var counter = counterWrap && counterWrap.querySelector('.cur');
   var dots = section.querySelectorAll('.products-dots i');
-  var lastActive = 0;
+  var lastActive = -1;
 
   function mobile() {
     return window.matchMedia('(max-width: 900px)').matches;
@@ -46,6 +50,9 @@
   function resetCards() {
     track.style.transform = '';
     cards.forEach(function (card) {
+      card.style.transform = '';
+      card.style.opacity = '';
+      card.style.zIndex = '';
       card.classList.remove('is-active');
     });
     section.style.height = '';
@@ -64,36 +71,11 @@
     });
   }
 
-  function focusXForIndex(index) {
-    return cards[index].offsetLeft - FOCUS_PAD;
-  }
-
-  function getScrollRange() {
-    if (count < 2) return 0;
-    return (focusXForIndex(count - 1) - focusXForIndex(0)) * SCROLL_RATIO;
-  }
-
   function setSectionHeight() {
     var pinH = pin.offsetHeight;
-    var scrollRange = getScrollRange();
+    var scrollRange = pinH * STEP_RATIO * (count - 1);
     section.style.height = Math.round(pinH + scrollRange) + 'px';
     return scrollRange;
-  }
-
-  function updateActive() {
-    var focusLine = right.getBoundingClientRect().left + FOCUS_PAD;
-    var activeIndex = 0;
-    var minDist = Infinity;
-
-    cards.forEach(function (card, i) {
-      var dist = Math.abs(card.getBoundingClientRect().left - focusLine);
-      if (dist < minDist) {
-        minDist = dist;
-        activeIndex = i;
-      }
-    });
-
-    setActive(activeIndex);
   }
 
   function update() {
@@ -109,13 +91,40 @@
 
     var rect = section.getBoundingClientRect();
     var progress = clamp(-rect.top / scrollRange, 0, 1);
+    var pos = progress * (count - 1);
 
-    var startX = focusXForIndex(0);
-    var endX = focusXForIndex(count - 1);
-    var x = startX + progress * (endX - startX);
+    var stageW = right.clientWidth;
+    var cardW = cards[0].offsetWidth || stageW;
+    /* distance to push a card fully off the right edge */
+    var offRight = stageW / 2 + cardW / 2 + 60;
 
-    track.style.transform = 'translate3d(-' + x.toFixed(2) + 'px, 0, 0)';
-    updateActive();
+    var base = Math.min(count - 1, Math.floor(pos));
+    var frac = pos - base;
+
+    cards.forEach(function (card, i) {
+      var d = pos - i; // >0 covered/active, in (-1,0) entering, <=-1 waiting
+      var x, scale = 1;
+
+      if (d <= -1) {
+        /* waiting off-screen to the right */
+        x = offRight;
+      } else if (d < 0) {
+        /* entering from the right toward center */
+        var enterT = d + 1; // 0 → 1
+        x = offRight * (1 - enterT);
+      } else {
+        /* at center, being covered → shrink by depth */
+        x = 0;
+        scale = 1 - clamp(d, 0, MAX_DEPTH) * SHRINK;
+      }
+
+      card.style.transform =
+        'translate3d(calc(-50% + ' + x.toFixed(1) + 'px), 0, 0) scale(' + scale.toFixed(4) + ')';
+      card.style.zIndex = String(i + 1);
+    });
+
+    var activeIndex = frac > 0.5 ? Math.min(count - 1, base + 1) : base;
+    setActive(activeIndex);
     section.classList.toggle('is-done', progress >= 0.995);
   }
 

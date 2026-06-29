@@ -12,8 +12,7 @@
   top: var(--nav-h);
   height: calc(100svh - var(--nav-h));
   display: flex;
-  align-items: flex-start;
-  padding-top: clamp(40px, 9vh, 110px);
+  align-items: stretch;
   overflow: hidden;
 }
 
@@ -22,7 +21,7 @@
   flex: 0 0 clamp(200px, 22vw, 300px);
   display: flex;
   align-items: flex-start;
-  padding: 0 clamp(20px, 3vw, 36px);
+  padding: clamp(36px, 9vh, 96px) clamp(20px, 3vw, 36px) 0;
   background: var(--bg-soft, #f5f7fa);
   z-index: 10;
 }
@@ -74,26 +73,25 @@
 }
 .products-dots i.on{ background: var(--ink, #0a1020); transform: scale(1.2); }
 
-/* Right — horizontal track */
+/* Right — stacked cover stage */
 .products-right{
   flex: 1;
   min-width: 0;
+  height: 100%;
   overflow: hidden;
   position: relative;
-  display: flex;
-  align-items: flex-start;
 }
 .products-track{
-  display: flex;
-  align-items: flex-start;
-  gap: var(--card-gap);
-  padding: 0 clamp(20px, 3vw, 48px) 0 clamp(8px, 1vw, 16px);
+  position: absolute;
+  inset: 0;
   will-change: transform;
 }
 
-/* Cards — fixed height, top-aligned (Axiom Observed Systems) */
+/* Cards — stacked, centered; next card slides in from right and covers */
 .product-card{
-  flex: 0 0 var(--card-w);
+  position: absolute;
+  top: clamp(36px, 9vh, 96px);
+  left: 50%;
   width: var(--card-w);
   height: min(62svh, 580px);
   display: flex;
@@ -104,8 +102,11 @@
   overflow: hidden;
   box-shadow: 0 32px 64px -40px rgba(10, 16, 32, .22);
   will-change: transform;
-  position: relative;
-  flex-shrink: 0;
+  transform-origin: center center;
+  transform: translate3d(-50%, 0, 0);
+}
+.product-card.is-active{
+  box-shadow: 0 50px 90px -34px rgba(10, 16, 32, .34);
 }
 .product-card.is-active{
   box-shadow: 0 40px 80px -36px rgba(10, 16, 32, .28);
@@ -245,15 +246,22 @@
     display: block;
   }
   .products-track{
+    position: static;
+    inset: auto;
+    display: flex;
     flex-direction: column;
+    gap: 24px;
     padding: 0 20px 48px;
     transform: none !important;
   }
   .product-card{
-    flex: none;
+    position: static;
+    left: auto;
+    top: auto;
     width: 100%;
     height: auto;
     transform: none !important;
+    opacity: 1 !important;
   }
   .p-media{ flex: none; aspect-ratio: 16/10; }
   .p-desc{ columns: 1; }
