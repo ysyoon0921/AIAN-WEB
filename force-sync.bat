@@ -28,9 +28,9 @@ if exist about\news.html del /f about\news.html
 powershell -NoProfile -Command ^
   "$idx = Get-Content index.html -Raw -Encoding UTF8; " ^
   "$hist = Get-Content about\history.html -Raw -Encoding UTF8; " ^
-  "if ($idx -notmatch '20250629-menu-v2') { Write-Host '[FAIL] index.html build marker missing — pull again'; exit 1 }; " ^
-  "if ($hist -match '비전|협력사|news\.html|vision\.html|partners\.html') { Write-Host '[FAIL] about/history.html OLD menu'; exit 2 }; " ^
-  "if ($hist -notmatch 'AIAN 소개') { Write-Host '[FAIL] about/history.html missing AIAN 소개'; exit 3 }; " ^
+  "if ($idx -notmatch '20250629-menu-v2') { Write-Host '[FAIL] index.html build marker missing'; exit 1 }; " ^
+  "if ($hist -notmatch 'aian-about-menu-v2') { Write-Host '[FAIL] about/history.html old About menu'; exit 2 }; " ^
+  "if ($hist -match 'vision\.html|partners\.html|news\.html') { Write-Host '[FAIL] old menu links in history.html'; exit 3 }; " ^
   "Write-Host '[OK] All files synced to origin/main.'; exit 0"
 
 if errorlevel 1 (

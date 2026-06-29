@@ -303,6 +303,8 @@ def sidebar_html(section_id, current_file):
         f'      <div class="side-head"><span data-ko>{sec["side_ko"]}</span><span data-en>{sec["side_en"]}</span></div>',
         '      <div class="side-nav">',
     ]
+    if section_id == "about":
+        lines.append('        <!-- aian-about-menu-v2 -->')
     for item in sec["items"]:
         fname, ko, en, *rest = item
         plain = rest[0] if rest else False

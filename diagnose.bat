@@ -9,56 +9,54 @@ echo.
 
 echo [1] Files on disk
 findstr /C:"20250629-menu-v2" about\history.html >nul && (
-  echo   OK  history.html has build marker 20250629-menu-v2
+  echo   OK  history.html build marker
 ) || (
-  echo   FAIL  history.html missing build marker — run force-sync.bat
+  echo   FAIL  missing build marker — run force-sync.bat
 )
 
-findstr /C:"AIAN 소개" about\history.html >nul && (
-  echo   OK  history.html has AIAN 소개 menu
+findstr /C:"aian-about-menu-v2" about\history.html >nul && (
+  echo   OK  history.html new About menu (intro/ceo/history/location)
 ) || (
-  echo   FAIL  history.html missing AIAN 소개
+  echo   FAIL  old About menu — run force-sync.bat
 )
 
-findstr /C:"비전" about\history.html >nul && (
-  echo   FAIL  history.html still has OLD menu (비전)
+findstr /C:"vision.html" about\history.html >nul && (
+  echo   FAIL  history.html links to old vision.html
 ) || (
-  echo   OK  no 비전 in history.html
+  echo   OK  no vision.html link
 )
 
-if exist about\vision.html echo   FAIL  about\vision.html exists — delete it
-if exist about\partners.html echo   FAIL  about\partners.html exists — delete it
-if exist about\news.html echo   FAIL  about\news.html exists — delete it
+if exist about\vision.html echo   FAIL  delete about\vision.html
+if exist about\partners.html echo   FAIL  delete about\partners.html
+if exist about\news.html echo   FAIL  delete about\news.html
 
 echo.
 echo [2] Server on port 8080
 netstat -ano | findstr ":8080" | findstr "LISTENING" >nul
 if errorlevel 1 (
-  echo   WARN  No server on 8080 — run serve.bat first, then run diagnose.bat again
-  goto end
+  echo   WARN  No server — run serve.bat first
+  goto browser
 )
 
-echo   OK  Something is listening on 8080
+echo   OK  port 8080 open
 
 echo.
-echo [3] Live response from http://127.0.0.1:8080/about/history.html
+echo [3] Live server response
 powershell -NoProfile -Command ^
   "try { " ^
   "$r = Invoke-WebRequest -Uri 'http://127.0.0.1:8080/about/history.html' -UseBasicParsing; " ^
   "$c = $r.Content; " ^
-  "if ($c -match '20250629-menu-v2') { Write-Host '   OK  Server returns NEW build marker' } else { Write-Host '   FAIL  Server returns OLD page (wrong folder or cache server?)' }; " ^
-  "if ($c -match 'AIAN 소개') { Write-Host '   OK  Server returns AIAN 소개 menu' } else { Write-Host '   FAIL  Server missing AIAN 소개' }; " ^
-  "if ($c -match '비전') { Write-Host '   FAIL  Server still returns OLD 비전 menu' } else { Write-Host '   OK  No 비전 in server response' }; " ^
-  "if ($r.Headers['Cache-Control'] -match 'no-store') { Write-Host '   OK  no-store cache header' } else { Write-Host '   WARN  Server may be python -m http.server — use serve.bat!' } " ^
-  "} catch { Write-Host '   FAIL  Cannot reach server:' $_.Exception.Message }"
+  "if ($c -match '20250629-menu-v2') { '   OK  new build marker' } else { '   FAIL  old page from server' }; " ^
+  "if ($c -match 'aian-about-menu-v2') { '   OK  new About menu' } else { '   FAIL  old About menu from server' }; " ^
+  "if ($c -match 'vision\.html|partners\.html|news\.html') { '   FAIL  old menu links on server' } else { '   OK  no old menu links' }; " ^
+  "if ($r.Headers['Cache-Control'] -match 'no-store') { '   OK  no-store header (serve.bat)' } else { '   WARN  use serve.bat not python -m http.server' } " ^
+  "} catch { '   FAIL  server not reachable — run serve.bat' }"
 
+:browser
 echo.
-echo [4] If browser still looks OLD but [3] is OK:
-echo   - Close ALL tabs for 127.0.0.1 and localhost
-echo   - Open InPrivate/Incognito window
-echo   - Go to: http://127.0.0.1:8080/about/history.html
-echo   - Bottom-right must show: ABOUT 20250629-menu-v2
-
-:end
+echo [4] Browser check (InPrivate window)
+echo   http://127.0.0.1:8080/about/history.html
+echo   Badge: ABOUT 20250629-menu-v2
+echo   Sidebar: AIAN 소개 / CEO / 회사 연혁 / Location
 echo.
 pause
