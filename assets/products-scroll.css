@@ -12,17 +12,17 @@
   top: var(--nav-h);
   height: calc(100svh - var(--nav-h));
   display: flex;
-  align-items: stretch;
+  align-items: flex-start;
+  padding-top: clamp(40px, 9vh, 110px);
   overflow: hidden;
 }
 
 /* Left — fixed label + intro (Axiom "OBSERVED SYSTEMS") */
 .products-left{
-  flex: 0 0 clamp(200px, 22vw, 280px);
+  flex: 0 0 clamp(200px, 22vw, 300px);
   display: flex;
-  align-items: stretch;
-  padding: clamp(28px, 4vh, 48px) clamp(20px, 3vw, 36px);
-  border-right: 1px solid var(--line, #ebedf1);
+  align-items: flex-start;
+  padding: 0 clamp(20px, 3vw, 36px);
   background: var(--bg-soft, #f5f7fa);
   z-index: 10;
 }
@@ -41,7 +41,7 @@
 .products-left-inner{
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   min-width: 0;
 }
 .products-left-inner .h2{
@@ -81,21 +81,21 @@
   overflow: hidden;
   position: relative;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
 }
 .products-track{
   display: flex;
-  align-items: stretch;
+  align-items: flex-start;
   gap: var(--card-gap);
-  padding: clamp(12px, 2vh, 24px) clamp(20px, 3vw, 48px);
-  padding-left: clamp(20px, 2.5vw, 36px);
+  padding: 0 clamp(20px, 3vw, 48px) 0 clamp(8px, 1vw, 16px);
   will-change: transform;
 }
 
-/* Cards */
+/* Cards — fixed height, top-aligned (Axiom Observed Systems) */
 .product-card{
   flex: 0 0 var(--card-w);
   width: var(--card-w);
+  height: min(62svh, 580px);
   display: flex;
   flex-direction: column;
   background: #fff;
@@ -128,9 +128,8 @@
 .p-media{
   position: relative;
   width: 100%;
-  aspect-ratio: 16/9;
-  max-height: min(36svh, 460px);
-  flex-shrink: 0;
+  flex: 0 0 50%;
+  min-height: 0;
   overflow: hidden;
   border-bottom: 1px solid var(--line, #ebedf1);
   background: linear-gradient(150deg, #141820, #1e2430);
@@ -159,24 +158,27 @@
 
 .p-card-body{
   flex: 1;
-  padding: clamp(24px, 3vw, 38px);
+  min-height: 0;
+  padding: clamp(20px, 2.4vw, 32px);
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 .p-card-body h3{
-  font-size: clamp(28px, 3.4vw, 42px);
+  font-size: clamp(24px, 2.8vw, 34px);
   font-weight: 800;
   letter-spacing: -.04em;
-  line-height: 1.18;
-  margin-top: 4px;
+  line-height: 1.16;
+  margin-top: 2px;
 }
 .p-name{ color: var(--ink, #0a1020); }
 .p-desc{
   color: var(--ink-soft, #4b5565);
-  font-size: clamp(15px, 1.5vw, 17px);
-  line-height: 1.65;
-  margin-top: 14px;
-  flex: 1;
+  font-size: clamp(13px, 1.3vw, 15px);
+  line-height: 1.55;
+  margin-top: 10px;
+  columns: 2;
+  column-gap: 22px;
 }
 .p-badge{
   display: inline-flex; align-items: center;
@@ -188,15 +190,15 @@
   padding: 6px 12px; border-radius: 999px;
   align-self: flex-start;
 }
-.p-tags{ display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; }
+.p-tags{ display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; padding-top: 16px; }
 .p-tags span{
   font-size: 13px; font-weight: 600; color: var(--ink-soft, #4b5565);
   background: var(--bg-soft, #f5f7fa); border: 1px solid var(--line, #ebedf1);
   padding: 5px 11px; border-radius: 999px;
 }
 .p-link{
-  display: inline-flex; align-items: center; gap: 8px; margin-top: 22px;
-  font-size: 15px; font-weight: 700; color: var(--ink, #0a1020);
+  display: inline-flex; align-items: center; gap: 8px; margin-top: 14px;
+  font-size: 14px; font-weight: 700; color: var(--ink, #0a1020);
   text-decoration: none; transition: gap .2s, opacity .2s;
 }
 .p-link:hover{ gap: 12px; opacity: .65; }
@@ -224,6 +226,7 @@
     position: static;
     height: auto;
     flex-direction: column;
+    padding-top: 0;
   }
   .products-left{
     flex: none;
@@ -249,7 +252,10 @@
   .product-card{
     flex: none;
     width: 100%;
+    height: auto;
     transform: none !important;
   }
+  .p-media{ flex: none; aspect-ratio: 16/10; }
+  .p-desc{ columns: 1; }
   .products-hint{ display: none; }
 }
