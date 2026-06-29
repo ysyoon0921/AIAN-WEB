@@ -5,6 +5,7 @@ cd /d "%~dp0"
 echo.
 echo === AIAN server (no browser cache) ===
 echo Folder: %CD%
+echo Build: 20250629-menu-v2  ^|  Use serve.bat ONLY (not python -m http.server)
 echo.
 
 for /f "tokens=5" %%a in ('netstat -ano ^| findstr ":8080" ^| findstr "LISTENING"') do (
