@@ -1,32 +1,23 @@
 /**
- * PRODUCTS — Axiom-style stacked reveal
- * Hold each product fully visible, then swap (no overlapping text).
+ * PRODUCTS — Axiom Observed Systems style
+ * Vertical scroll → horizontal translate + per-card depth FX
  */
 (function () {
   var section = document.getElementById('products');
   if (!section) return;
 
   var pin = section.querySelector('.products-pin');
+  var right = section.querySelector('.products-right');
   var track = section.querySelector('.products-track');
-  var panels = section.querySelectorAll('.product-panel');
+  var cards = section.querySelectorAll('.product-card');
   var counterWrap = section.querySelector('.products-counter');
   var dotsWrap = section.querySelector('.products-dots');
-  var count = panels.length;
+  var count = cards.length;
 
-  if (!pin || !track || count < 2) return;
+  if (!pin || !right || !track || count < 2) return;
 
-  /* Scroll length per product step — higher = slower */
-  var STEP_RATIO = 1.0;
-
-  /* hold → exit (완료) → 90%에서 다음 제품 enter */
-  var HOLD_END = 0.82;
-  var EXIT_END = 0.89;
-  var ENTER_START = 0.9;
-
-  /* 패널 간격 — 클수록 화면 밖에서 더 멀리 대기 */
-  var OFF_RIGHT = 58;
-  var OFF_LEFT = -24;
-  var EXIT_SHIFT = 22;
+  /* Extra scroll distance multiplier (higher = slower horizontal move) */
+  var SCROLL_RATIO = 1.35;
 
   if (counterWrap) {
     counterWrap.innerHTML = '<span class="cur">01</span> / ' + String(count).padStart(2, '0');
@@ -51,31 +42,16 @@
     return Math.min(max, Math.max(min, v));
   }
 
-  function setSectionHeight() {
-    if (mobile()) {
-      section.style.height = '';
-      return 0;
-    }
-    var pinH = pin.offsetHeight;
-    var scrollRange = pinH * STEP_RATIO * (count - 1);
-    section.style.height = Math.round(pinH + scrollRange) + 'px';
-    return scrollRange;
-  }
-
-  function hidePanel(panel, offRight) {
-    panel.style.opacity = '0';
-    panel.style.visibility = 'hidden';
-    panel.style.transform = offRight
-      ? 'translate3d(' + OFF_RIGHT + '%, 0, 0) scale(0.97)'
-      : 'translate3d(' + OFF_LEFT + '%, 0, 0) scale(0.97)';
-    panel.style.zIndex = '1';
-  }
-
-  function showPanel(panel, x, opacity, scale, z) {
-    panel.style.opacity = String(opacity);
-    panel.style.visibility = opacity > 0.01 ? 'visible' : 'hidden';
-    panel.style.transform = 'translate3d(' + x + '%, 0, 0) scale(' + scale + ')';
-    panel.style.zIndex = String(z);
+  function resetCards() {
+    track.style.transform = '';
+    cards.forEach(function (card) {
+      card.style.transform = '';
+      card.style.opacity = '';
+      card.style.filter = '';
+      card.classList.remove('is-active');
+    });
+    section.style.height = '';
+    section.classList.remove('is-done');
   }
 
   function setActive(index) {
@@ -83,67 +59,72 @@
     dots.forEach(function (dot, i) {
       dot.classList.toggle('on', i === index);
     });
-    panels.forEach(function (p, i) {
-      p.classList.toggle('is-active', i === index);
+    cards.forEach(function (card, i) {
+      card.classList.toggle('is-active', i === index);
     });
+  }
+
+  function getMaxMove() {
+    return Math.max(0, track.scrollWidth - right.clientWidth);
+  }
+
+  function setSectionHeight(maxMove) {
+    var pinH = pin.offsetHeight;
+    var scrollRange = maxMove * SCROLL_RATIO;
+    section.style.height = Math.round(pinH + scrollRange) + 'px';
+    return scrollRange;
+  }
+
+  function applyCardFx() {
+    var viewRect = right.getBoundingClientRect();
+    var viewCenter = viewRect.left + viewRect.width * 0.5;
+    var viewW = viewRect.width;
+    var activeIndex = 0;
+    var minDist = Infinity;
+
+    cards.forEach(function (card, i) {
+      var rect = card.getBoundingClientRect();
+      var cardCenter = rect.left + rect.width * 0.5;
+      var offset = cardCenter - viewCenter;
+      var norm = clamp(offset / (viewW * 0.55), -1.2, 1.2);
+      var abs = Math.abs(norm);
+
+      var scale = 1 - abs * 0.05;
+      var opacity = 1 - abs * 0.42;
+      var rotate = norm * -2;
+      var blur = abs * 1.8;
+
+      card.style.transform = 'scale(' + scale.toFixed(3) + ') rotate(' + rotate.toFixed(2) + 'deg)';
+      card.style.opacity = String(clamp(opacity, 0.35, 1));
+      card.style.filter = blur > 0.15 ? 'blur(' + blur.toFixed(2) + 'px)' : '';
+
+      var dist = Math.abs(offset);
+      if (dist < minDist) {
+        minDist = dist;
+        activeIndex = i;
+      }
+    });
+
+    setActive(activeIndex);
   }
 
   function update() {
     if (mobile()) {
-      panels.forEach(function (p) {
-        p.style.transform = '';
-        p.style.opacity = '';
-        p.style.visibility = '';
-        p.style.zIndex = '';
-      });
-      section.classList.remove('is-done');
+      resetCards();
+      setActive(0);
       return;
     }
 
-    var scrollRange = setSectionHeight();
+    var maxMove = getMaxMove();
+    var scrollRange = setSectionHeight(maxMove);
     if (scrollRange <= 0) return;
 
     var rect = section.getBoundingClientRect();
     var progress = clamp(-rect.top / scrollRange, 0, 1);
-    var pos = progress * (count - 1);
-    var base = Math.min(count - 1, Math.floor(pos));
-    var frac = pos - base;
+    var x = progress * maxMove;
 
-    panels.forEach(function (panel, i) {
-      if (i < base) {
-        hidePanel(panel, false);
-        return;
-      }
-
-      if (i > base + 1) {
-        hidePanel(panel, true);
-        return;
-      }
-
-      if (i === base) {
-        if (frac <= HOLD_END || base === count - 1) {
-          showPanel(panel, 0, 1, 1, 10);
-        } else if (frac < EXIT_END) {
-          var t = (frac - HOLD_END) / (EXIT_END - HOLD_END);
-          showPanel(panel, -t * EXIT_SHIFT, 1 - t, 1 - t * 0.02, 10);
-        } else {
-          hidePanel(panel, false);
-        }
-        return;
-      }
-
-      if (i === base + 1) {
-        if (frac < ENTER_START) {
-          hidePanel(panel, true);
-        } else {
-          var t2 = (frac - ENTER_START) / (1 - ENTER_START);
-          showPanel(panel, (1 - t2) * OFF_RIGHT, t2, 0.97 + t2 * 0.03, 11);
-        }
-      }
-    });
-
-    var activeIndex = frac >= ENTER_START && base < count - 1 ? base + 1 : base;
-    setActive(activeIndex);
+    track.style.transform = 'translate3d(-' + x.toFixed(2) + 'px, 0, 0)';
+    applyCardFx();
     section.classList.toggle('is-done', progress >= 0.995);
   }
 
