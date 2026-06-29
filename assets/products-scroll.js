@@ -1,6 +1,6 @@
 /**
  * PRODUCTS — Axiom Observed Systems style
- * Vertical scroll → horizontal translate + per-card depth FX
+ * Continuous vertical scroll → horizontal translate + soft depth FX
  */
 (function () {
   var section = document.getElementById('products');
@@ -16,8 +16,9 @@
 
   if (!pin || !right || !track || count < 2) return;
 
-  /* Extra scroll distance multiplier (higher = slower horizontal move) */
-  var SCROLL_RATIO = 1.35;
+  /* Higher = more scroll distance per card (smoother, slower) */
+  var SCROLL_RATIO = 2.1;
+  var FOCUS_INSET = 20;
 
   if (counterWrap) {
     counterWrap.innerHTML = '<span class="cur">01</span> / ' + String(count).padStart(2, '0');
@@ -33,6 +34,7 @@
 
   var counter = counterWrap && counterWrap.querySelector('.cur');
   var dots = section.querySelectorAll('.products-dots i');
+  var lastActive = 0;
 
   function mobile() {
     return window.matchMedia('(max-width: 900px)').matches;
@@ -40,6 +42,11 @@
 
   function clamp(v, min, max) {
     return Math.min(max, Math.max(min, v));
+  }
+
+  function smoothstep(t) {
+    t = clamp(t, 0, 1);
+    return t * t * (3 - 2 * t);
   }
 
   function resetCards() {
@@ -55,6 +62,8 @@
   }
 
   function setActive(index) {
+    if (index === lastActive) return;
+    lastActive = index;
     if (counter) counter.textContent = String(index + 1).padStart(2, '0');
     dots.forEach(function (dot, i) {
       dot.classList.toggle('on', i === index);
@@ -64,43 +73,56 @@
     });
   }
 
-  function getMaxMove() {
-    return Math.max(0, track.scrollWidth - right.clientWidth);
+  function cardStep() {
+    if (count < 2) return 0;
+    var gap = cards[1].offsetLeft - cards[0].offsetLeft - cards[0].offsetWidth;
+    return cards[0].offsetWidth + gap;
   }
 
-  function setSectionHeight(maxMove) {
+  function focusXForIndex(index) {
+    return cards[index].offsetLeft - FOCUS_INSET;
+  }
+
+  function getScrollRange() {
+    if (count < 2) return 0;
+    return (focusXForIndex(count - 1) - focusXForIndex(0)) * SCROLL_RATIO;
+  }
+
+  function setSectionHeight() {
     var pinH = pin.offsetHeight;
-    var scrollRange = maxMove * SCROLL_RATIO;
+    var scrollRange = getScrollRange();
     section.style.height = Math.round(pinH + scrollRange) + 'px';
     return scrollRange;
   }
 
   function applyCardFx() {
     var viewRect = right.getBoundingClientRect();
-    var viewCenter = viewRect.left + viewRect.width * 0.5;
-    var viewW = viewRect.width;
+    var focusPoint = viewRect.left + FOCUS_INSET;
+    var step = cardStep() || viewRect.width;
     var activeIndex = 0;
-    var minDist = Infinity;
+    var bestFocus = -1;
 
     cards.forEach(function (card, i) {
       var rect = card.getBoundingClientRect();
-      var cardCenter = rect.left + rect.width * 0.5;
-      var offset = cardCenter - viewCenter;
-      var norm = clamp(offset / (viewW * 0.55), -1.2, 1.2);
-      var abs = Math.abs(norm);
+      var edgeOffset = rect.left - focusPoint;
+      var distNorm = edgeOffset / step;
 
-      var scale = 1 - abs * 0.05;
-      var opacity = 1 - abs * 0.42;
-      var rotate = norm * -2;
-      var blur = abs * 1.8;
+      /* Gaussian-like focus — wide, soft falloff (no binary on/off) */
+      var focus = Math.exp(-(distNorm * distNorm) * 0.72);
+      focus = smoothstep(focus);
 
-      card.style.transform = 'scale(' + scale.toFixed(3) + ') rotate(' + rotate.toFixed(2) + 'deg)';
-      card.style.opacity = String(clamp(opacity, 0.35, 1));
-      card.style.filter = blur > 0.15 ? 'blur(' + blur.toFixed(2) + 'px)' : '';
+      var scale = 0.965 + focus * 0.035;
+      var opacity = 0.72 + focus * 0.28;
+      var rotate = distNorm * -1.1 * (1 - focus);
+      var blur = (1 - focus) * 0.55;
 
-      var dist = Math.abs(offset);
-      if (dist < minDist) {
-        minDist = dist;
+      card.style.transform =
+        'scale(' + scale.toFixed(4) + ') rotate(' + rotate.toFixed(3) + 'deg)';
+      card.style.opacity = opacity.toFixed(3);
+      card.style.filter = blur > 0.08 ? 'blur(' + blur.toFixed(2) + 'px)' : '';
+
+      if (focus > bestFocus) {
+        bestFocus = focus;
         activeIndex = i;
       }
     });
@@ -111,17 +133,20 @@
   function update() {
     if (mobile()) {
       resetCards();
+      lastActive = -1;
       setActive(0);
       return;
     }
 
-    var maxMove = getMaxMove();
-    var scrollRange = setSectionHeight(maxMove);
+    var scrollRange = setSectionHeight();
     if (scrollRange <= 0) return;
 
     var rect = section.getBoundingClientRect();
     var progress = clamp(-rect.top / scrollRange, 0, 1);
-    var x = progress * maxMove;
+
+    var startX = focusXForIndex(0);
+    var endX = focusXForIndex(count - 1);
+    var x = startX + progress * (endX - startX);
 
     track.style.transform = 'translate3d(-' + x.toFixed(2) + 'px, 0, 0)';
     applyCardFx();
