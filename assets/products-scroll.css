@@ -1,8 +1,8 @@
 /* PRODUCTS — Axiom Observed Systems style horizontal scroll */
 .products-scroll{
   --nav-h: 80px;
-  --card-gap: clamp(48px, 6vw, 88px);
-  --card-w: clamp(480px, 62vw, 720px);
+  --card-gap: clamp(64px, 8vw, 120px);
+  --card-w: clamp(960px, 124vw, 1440px);
   position: relative;
   background: var(--bg-soft, #f5f7fa);
 }
@@ -87,7 +87,7 @@
   display: flex;
   align-items: stretch;
   gap: var(--card-gap);
-  padding: clamp(16px, 3vh, 32px) clamp(16vw, 22vw, 28vw) clamp(16px, 3vh, 32px) clamp(12px, 2vw, 24px);
+  padding: clamp(12px, 2vh, 24px) calc(50% - var(--card-w) / 2);
   will-change: transform;
 }
 
@@ -127,7 +127,8 @@
 .p-media{
   position: relative;
   width: 100%;
-  aspect-ratio: 16/10;
+  aspect-ratio: 16/9;
+  max-height: min(36svh, 460px);
   flex-shrink: 0;
   overflow: hidden;
   border-bottom: 1px solid var(--line, #ebedf1);

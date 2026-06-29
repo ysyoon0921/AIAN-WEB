@@ -1,6 +1,6 @@
 /**
  * PRODUCTS — Axiom Observed Systems style
- * Continuous vertical scroll → horizontal translate + soft depth FX
+ * Continuous vertical scroll → horizontal translate, card centered in viewport
  */
 (function () {
   var section = document.getElementById('products');
@@ -16,9 +16,7 @@
 
   if (!pin || !right || !track || count < 2) return;
 
-  /* Higher = more scroll distance per card (smoother, slower) */
   var SCROLL_RATIO = 2.1;
-  var FOCUS_INSET = 20;
 
   if (counterWrap) {
     counterWrap.innerHTML = '<span class="cur">01</span> / ' + String(count).padStart(2, '0');
@@ -73,14 +71,23 @@
     });
   }
 
+  function viewCenterX() {
+    var rect = right.getBoundingClientRect();
+    return rect.left + rect.width * 0.5;
+  }
+
   function cardStep() {
-    if (count < 2) return 0;
+    if (count < 2) return cards[0].offsetWidth;
     var gap = cards[1].offsetLeft - cards[0].offsetLeft - cards[0].offsetWidth;
     return cards[0].offsetWidth + gap;
   }
 
+  /* Translate track so card center aligns with viewport center */
   function focusXForIndex(index) {
-    return cards[index].offsetLeft - FOCUS_INSET;
+    var card = cards[index];
+    var cardCenter = card.offsetLeft + card.offsetWidth * 0.5;
+    var panelCenter = right.clientWidth * 0.5;
+    return cardCenter - panelCenter;
   }
 
   function getScrollRange() {
@@ -96,18 +103,17 @@
   }
 
   function applyCardFx() {
-    var viewRect = right.getBoundingClientRect();
-    var focusPoint = viewRect.left + FOCUS_INSET;
-    var step = cardStep() || viewRect.width;
+    var center = viewCenterX();
+    var step = cardStep() || right.clientWidth;
     var activeIndex = 0;
     var bestFocus = -1;
 
     cards.forEach(function (card, i) {
       var rect = card.getBoundingClientRect();
-      var edgeOffset = rect.left - focusPoint;
-      var distNorm = edgeOffset / step;
+      var cardCenter = rect.left + rect.width * 0.5;
+      var offset = cardCenter - center;
+      var distNorm = offset / step;
 
-      /* Gaussian-like focus — wide, soft falloff (no binary on/off) */
       var focus = Math.exp(-(distNorm * distNorm) * 0.72);
       focus = smoothstep(focus);
 
