@@ -142,13 +142,96 @@
   .ps-tag{ display:inline-block; font-size:11px; font-weight:700; color:#bcd2ff; background:rgba(47,107,255,.25); padding:5px 10px; border-radius:999px; margin:4px 4px 0 0; }
   @media(max-width:860px){ .product{ grid-template-columns:1fr; gap:32px; padding:48px 0; } .product.reverse .p-media{ order:0; } }
 
-  /* STATS */
-  .stats{ background:var(--night); color:#fff; overflow:hidden; }
-  .stats .h2,.stats .stat .big{ color:#fff; } .stats .lead{ color:#aeb8c9; }
-  .stat-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-top:60px; }
-  .stat .big{ font-size:clamp(48px,7vw,80px); font-weight:800; line-height:1; letter-spacing:-.05em; background:linear-gradient(160deg,#fff,#7fb0ff); -webkit-background-clip:text; background-clip:text; color:transparent; }
-  .stat .desc{ color:#aeb8c9; font-size:17px; margin-top:14px; font-weight:500; }
-  @media(max-width:860px){ .stat-grid{ grid-template-columns:1fr; gap:46px; text-align:center; } }
+  /* SHOWCASE (Saltlux-style case studies) */
+  .showcase{ background:#fff; padding:100px 0 110px; }
+  .showcase-title{
+    text-align:center; font-size:clamp(26px,3.2vw,36px); font-weight:800;
+    letter-spacing:-.04em; line-height:1.35; max-width:720px; margin:0 auto 48px;
+  }
+  .case-tabs{
+    display:grid; grid-template-columns:repeat(4,1fr);
+    max-width:960px; margin:0 auto 40px;
+  }
+  .case-tab{
+    border:none; background:#eef3f8; color:#6b7684;
+    font-family:inherit; font-size:15px; font-weight:600;
+    padding:18px 12px; cursor:pointer; transition:background .2s,color .2s;
+    border-right:1px solid #e3e9f0;
+  }
+  .case-tab:nth-child(4n){ border-right:none; }
+  .case-tab:nth-child(n+5){ border-top:1px solid #e3e9f0; }
+  .case-tab:hover{ background:#e4ebf3; color:var(--ink); }
+  .case-tab.on{ background:var(--ink); color:#fff; }
+  .case-panels{ position:relative; min-height:420px; }
+  .case-panel{
+    display:none; grid-template-columns:1fr 1fr; gap:56px; align-items:start;
+    padding:48px 0 0; animation:caseIn .35s var(--ease);
+  }
+  .case-panel.on{ display:grid; }
+  @keyframes caseIn{ from{ opacity:0; transform:translateY(12px); } to{ opacity:1; transform:none; } }
+  .case-cat{
+    display:inline-block; font-size:13px; font-weight:800; color:#0d9ea8;
+    letter-spacing:.06em; margin-bottom:14px;
+  }
+  .case-panel h3{
+    font-size:clamp(22px,2.6vw,30px); font-weight:800; letter-spacing:-.04em;
+    line-height:1.35; margin-bottom:18px;
+  }
+  .case-panel .case-desc{ color:var(--ink-soft); font-size:16px; line-height:1.7; margin-bottom:28px; max-width:520px; }
+  .case-links{ display:grid; grid-template-columns:1fr 1fr; gap:12px; max-width:480px; }
+  .case-link{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px 18px; border:1px solid var(--line); border-radius:4px;
+    background:#fff; color:var(--ink); text-decoration:none;
+    font-size:14px; font-weight:700; transition:border-color .2s, box-shadow .2s;
+  }
+  .case-link:hover{ border-color:#b8c4d4; box-shadow:0 4px 16px rgba(10,16,32,.06); }
+  .case-link svg{ flex-shrink:0; opacity:.45; }
+  .case-visual-wrap{ display:flex; flex-direction:column; align-items:center; }
+  .case-visual{
+    width:min(100%,340px); aspect-ratio:1; border-radius:50%;
+    background:radial-gradient(circle at 40% 35%, #dff6f8 0%, #eef8fa 45%, #f5fbfc 100%);
+    display:flex; align-items:center; justify-content:center;
+    padding:36px; margin-bottom:28px;
+  }
+  .case-mock{
+    width:100%; max-width:200px; background:#fff; border-radius:20px;
+    box-shadow:0 20px 50px rgba(10,16,32,.12); overflow:hidden;
+    border:1px solid rgba(10,16,32,.06);
+  }
+  .case-mock-head{
+    background:var(--ink); color:#fff; font-size:11px; font-weight:700;
+    padding:10px 14px; text-align:center;
+  }
+  .case-mock-body{ padding:14px; }
+  .case-mock-row{ height:8px; border-radius:4px; background:#e8eef5; margin-bottom:8px; }
+  .case-mock-row.s{ width:55%; } .case-mock-row.m{ width:78%; }
+  .case-mock-stat{ display:grid; grid-template-columns:1fr 1fr; gap:8px; margin:10px 0; }
+  .case-mock-stat div{ background:#f0f6ff; border-radius:8px; padding:8px; text-align:center; }
+  .case-mock-stat b{ display:block; font-size:16px; font-weight:800; color:var(--ink); }
+  .case-mock-stat small{ font-size:9px; color:var(--ink-faint); }
+  .case-bullets{ list-style:none; width:100%; max-width:340px; }
+  .case-bullets li{
+    position:relative; padding-left:18px; margin-bottom:14px;
+    font-size:15px; font-weight:600; line-height:1.55; color:var(--ink);
+  }
+  .case-bullets li::before{
+    content:''; position:absolute; left:0; top:8px;
+    width:7px; height:7px; border-radius:50%; background:#2f6bff;
+  }
+  @media(max-width:960px){
+    .case-tabs{ grid-template-columns:repeat(2,1fr); }
+    .case-tab:nth-child(4n){ border-right:1px solid #e3e9f0; }
+    .case-tab:nth-child(2n){ border-right:none; }
+    .case-tab:nth-child(n+3){ border-top:1px solid #e3e9f0; }
+    .case-panel{ grid-template-columns:1fr; gap:36px; }
+    .case-visual-wrap{ order:-1; }
+  }
+  @media(max-width:560px){
+    .case-tabs{ grid-template-columns:1fr 1fr; }
+    .case-links{ grid-template-columns:1fr; }
+    .showcase{ padding:72px 0 80px; }
+  }
 
   /* FEATURE */
   .feature-row{ display:grid; grid-template-columns:1fr 1fr; gap:70px; align-items:center; padding:90px 0; border-top:1px solid var(--line); }
@@ -406,19 +489,265 @@
   </div>
 </section>
 
-<!-- STATS -->
-<section class="block stats">
-  <div class="orb b" style="position:absolute; opacity:.25; filter:blur(90px); top:-100px; right:-80px; width:400px; height:400px; background:radial-gradient(circle,#2f6bff,transparent 70%);"></div>
-  <div class="wrap center" style="max-width:680px; position:relative;">
-    <div class="label reveal" style="background:rgba(47,107,255,.18); color:#7fb0ff;">RESULTS</div>
-    <h2 class="h2 reveal d1"><span data-ko>숫자로 증명합니다</span><span data-en>Proven by numbers</span></h2>
-    <p class="lead reveal d2"><span data-ko>말보다 결과로 신뢰를 드립니다.</span><span data-en>We earn trust with results, not words.</span></p>
-  </div>
-  <div class="wrap" style="position:relative;">
-    <div class="stat-grid">
-      <div class="stat reveal d1"><div class="big" data-count="42" data-suffix="%">0%</div><div class="desc"><span data-ko>불량률 평균 감소</span><span data-en>Avg. defect reduction</span></div></div>
-      <div class="stat reveal d2"><div class="big" data-count="3.5" data-suffix="x">0x</div><div class="desc"><span data-ko>데이터 집계 속도 향상</span><span data-en>Faster data aggregation</span></div></div>
-      <div class="stat reveal d3"><div class="big" data-count="120" data-suffix="+">0+</div><div class="desc"><span data-ko>함께한 제조 현장</span><span data-en>Factories onboarded</span></div></div>
+<!-- SHOWCASE -->
+<section class="showcase" id="results">
+  <div class="wrap">
+    <h2 class="showcase-title reveal">
+      <span data-ko>AIAN의 솔루션으로 이뤄낸<br>성과를 보여드립니다</span>
+      <span data-en>Results achieved with<br>AIAN solutions</span>
+    </h2>
+
+    <div class="case-tabs reveal d1" role="tablist">
+      <button type="button" class="case-tab on" role="tab" aria-selected="true" data-case="0"><span data-ko>한성전자</span><span data-en>Hansung</span></button>
+      <button type="button" class="case-tab" role="tab" aria-selected="false" data-case="1"><span data-ko>대양정밀</span><span data-en>Daeyang</span></button>
+      <button type="button" class="case-tab" role="tab" aria-selected="false" data-case="2"><span data-ko>진우테크</span><span data-en>Jinwoo</span></button>
+      <button type="button" class="case-tab" role="tab" aria-selected="false" data-case="3"><span data-ko>K-METAL</span><span data-en>K-METAL</span></button>
+      <button type="button" class="case-tab" role="tab" aria-selected="false" data-case="4"><span data-ko>서진산업</span><span data-en>Seojin</span></button>
+      <button type="button" class="case-tab" role="tab" aria-selected="false" data-case="5"><span data-ko>넥슨-M</span><span data-en>Nexon-M</span></button>
+      <button type="button" class="case-tab" role="tab" aria-selected="false" data-case="6"><span data-ko>삼화기계</span><span data-en>Samhwa</span></button>
+      <button type="button" class="case-tab" role="tab" aria-selected="false" data-case="7"><span data-ko>한국부품</span><span data-en>K-Parts</span></button>
+    </div>
+
+    <div class="case-panels">
+      <!-- 0 한성전자 -->
+      <article class="case-panel on" data-case="0">
+        <div>
+          <span class="case-cat">MES</span>
+          <h3><span data-ko>생산 계획과 실적을<br>하나의 흐름으로 연결</span><span data-en>Production plans and results<br>in one connected flow</span></h3>
+          <p class="case-desc"><span data-ko>다품종 조립 라인의 작업 지시·실적·재고를 디지털로 통합했습니다. 엑셀 기반 수기 관리를 줄이고 납기 준수율을 높였습니다.</span><span data-en>Digitally integrated work orders, output, and inventory on a high-mix assembly line — reducing spreadsheets and improving on-time delivery.</span></p>
+          <div class="case-links">
+            <a class="case-link" href="solutions/mes.html"><span data-ko>생산 계획 (MES)</span><span data-en>Production (MES)</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg></a>
+            <a class="case-link" href="solutions/monitoring.html"><span data-ko>실시간 모니터링</span><span data-en>Live Monitoring</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg></a>
+            <a class="case-link" href="customers/cases.html"><span data-ko>도입 사례 더보기</span><span data-en>More case studies</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg></a>
+            <a class="case-link" href="#contact"><span data-ko>상담 신청</span><span data-en>Contact us</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg></a>
+          </div>
+        </div>
+        <div class="case-visual-wrap">
+          <div class="case-visual">
+            <div class="case-mock">
+              <div class="case-mock-head"><span data-ko>생산 현황</span><span data-en>Production</span></div>
+              <div class="case-mock-body">
+                <div class="case-mock-stat"><div><b>94%</b><small><span data-ko>가동률</span><span data-en>Uptime</span></small></div><div><b>1,284</b><small><span data-ko>생산량</span><span data-en>Output</span></small></div></div>
+                <div class="case-mock-row m"></div><div class="case-mock-row"></div><div class="case-mock-row s"></div>
+              </div>
+            </div>
+          </div>
+          <ul class="case-bullets">
+            <li><span data-ko>납기 준수율 18%p 향상</span><span data-en>On-time delivery up 18 points</span></li>
+            <li><span data-ko>실적 집계 시간 70% 단축</span><span data-en>70% faster output reporting</span></li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- 1 대양정밀 -->
+      <article class="case-panel" data-case="1">
+        <div>
+          <span class="case-cat">QMS</span>
+          <h3><span data-ko>불량 데이터를<br>추적 가능한 품질 관리로</span><span data-en>Traceable quality management<br>for every defect</span></h3>
+          <p class="case-desc"><span data-ko>검사·불량·시정조치 이력을 공정별로 연결했습니다. 반복 불량 패턴을 분석해 근본 원인을 빠르게 찾습니다.</span><span data-en>Linked inspection, defect, and corrective action history by process — analyzing recurring patterns to find root causes faster.</span></p>
+          <div class="case-links">
+            <a class="case-link" href="solutions/qms.html"><span data-ko>품질 관리 (QMS)</span><span data-en>Quality (QMS)</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg></a>
+            <a class="case-link" href="industry/electric.html"><span data-ko>전기 · 전자</span><span data-en>Electric</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg></a>
+            <a class="case-link" href="customers/cases.html"><span data-ko>도입 사례 더보기</span><span data-en>More case studies</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg></a>
+            <a class="case-link" href="#contact"><span data-ko>상담 신청</span><span data-en>Contact us</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg></a>
+          </div>
+        </div>
+        <div class="case-visual-wrap">
+          <div class="case-visual">
+            <div class="case-mock">
+              <div class="case-mock-head"><span data-ko>품질 분석</span><span data-en>Quality</span></div>
+              <div class="case-mock-body">
+                <div class="case-mock-stat"><div><b>0.8%</b><small><span data-ko>불량률</span><span data-en>Defects</span></small></div><div><b>78%</b><small><span data-ko>수율</span><span data-en>Yield</span></small></div></div>
+                <div class="case-mock-row"></div><div class="case-mock-row m"></div><div class="case-mock-row s"></div>
+              </div>
+            </div>
+          </div>
+          <ul class="case-bullets">
+            <li><span data-ko>불량률 42% 감소</span><span data-en>42% defect reduction</span></li>
+            <li><span data-ko>품질 리포트 작성 시간 80% 단축</span><span data-en>80% faster quality reporting</span></li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- 2 진우테크 -->
+      <article class="case-panel" data-case="2">
+        <div>
+          <span class="case-cat">MONITORING</span>
+          <h3><span data-ko>설비 상태를<br>실시간으로 한 화면에</span><span data-en>Every machine status<br>on one live screen</span></h3>
+          <p class="case-desc"><span data-ko>흩어진 PLC·센서 데이터를 통합 대시보드로 모았습니다. 이상 발생 전 알람으로 다운타임을 줄였습니다.</span><span data-en>Unified scattered PLC and sensor data into one dashboard — reducing downtime with pre-failure alerts.</span></p>
+          <div class="case-links">
+            <a class="case-link" href="solutions/monitoring.html"><span data-ko>실시간 모니터링</span><span data-en>Live Monitoring</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg></a>
+            <a class="case-link" href="solutions/predictive.html"><span data-ko>설비 예지보전</span><span data-en>Predictive Care</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg></a>
+            <a class="case-link" href="customers/cases.html"><span data-ko>도입 사례 더보기</span><span data-en>More case studies</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg></a>
+            <a class="case-link" href="#contact"><span data-ko>상담 신청</span><span data-en>Contact us</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg></a>
+          </div>
+        </div>
+        <div class="case-visual-wrap">
+          <div class="case-visual">
+            <div class="case-mock">
+              <div class="case-mock-head"><span data-ko>설비 모니터링</span><span data-en>Monitoring</span></div>
+              <div class="case-mock-body">
+                <div class="case-mock-stat"><div><b>LIVE</b><small><span data-ko>실시간</span><span data-en>Live</span></small></div><div><b>12</b><small><span data-ko>라인</span><span data-en>Lines</span></small></div></div>
+                <div class="case-mock-row m"></div><div class="case-mock-row"></div><div class="case-mock-row s"></div>
+              </div>
+            </div>
+          </div>
+          <ul class="case-bullets">
+            <li><span data-ko>비계획 정지 35% 감소</span><span data-en>35% fewer unplanned stops</span></li>
+            <li><span data-ko>현장·사무실 동일 화면 제공</span><span data-en>Same view on floor and office</span></li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- 3 K-METAL -->
+      <article class="case-panel" data-case="3">
+        <div>
+          <span class="case-cat">PREDICTIVE</span>
+          <h3><span data-ko>고장 전에<br>미리 대응하는 예지보전</span><span data-en>Predictive maintenance<br>before breakdowns</span></h3>
+          <p class="case-desc"><span data-ko>진동·온도·전류 패턴을 분석해 설비 이상을 조기에 탐지합니다. 긴급 수리와 계획 정비 비용을 동시에 줄였습니다.</span><span data-en>Early anomaly detection from vibration, temperature, and current patterns — cutting both emergency and planned maintenance costs.</span></p>
+          <div class="case-links">
+            <a class="case-link" href="solutions/predictive.html"><span data-ko>설비 예지보전</span><span data-en>Predictive Care</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg></a>
+            <a class="case-link" href="industry/automotive.html"><span data-ko>자동차</span><span data-en>Automotive</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg></a>
+            <a class="case-link" href="customers/cases.html"><span data-ko>도입 사례 더보기</span><span data-en>More case studies</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg></a>
+            <a class="case-link" href="#contact"><span data-ko>상담 신청</span><span data-en>Contact us</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg></a>
+          </div>
+        </div>
+        <div class="case-visual-wrap">
+          <div class="case-visual">
+            <div class="case-mock">
+              <div class="case-mock-head"><span data-ko>예지보전</span><span data-en>Predictive</span></div>
+              <div class="case-mock-body">
+                <div class="case-mock-stat"><div><b>3</b><small><span data-ko>경보</span><span data-en>Alerts</span></small></div><div><b>96%</b><small><span data-ko>정확도</span><span data-en>Accuracy</span></small></div></div>
+                <div class="case-mock-row"></div><div class="case-mock-row m"></div><div class="case-mock-row s"></div>
+              </div>
+            </div>
+          </div>
+          <ul class="case-bullets">
+            <li><span data-ko>긴급 수리 건수 50% 감소</span><span data-en>50% fewer emergency repairs</span></li>
+            <li><span data-ko>설비 가동률 12%p 향상</span><span data-en>Uptime up 12 points</span></li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- 4 서진산업 -->
+      <article class="case-panel" data-case="4">
+        <div>
+          <span class="case-cat">SEMICONDUCTOR</span>
+          <h3><span data-ko>정밀 공정의<br>추적성과 품질 관리</span><span data-en>Traceability and quality<br>for precision processes</span></h3>
+          <p class="case-desc"><span data-ko>Lot·장비·공정 이력을 완전하게 추적하고 수율 분석을 자동화했습니다. 이상 공정 탐지 시간을 크게 줄였습니다.</span><span data-en>Full lot, equipment, and process traceability with automated yield analysis — dramatically faster anomaly detection.</span></p>
+          <div class="case-links">
+            <a class="case-link" href="industry/semiconductor.html"><span data-ko>반도체</span><span data-en>Semiconductor</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg></a>
+            <a class="case-link" href="solutions/qms.html"><span data-ko>품질 관리 (QMS)</span><span data-en>Quality (QMS)</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg></a>
+            <a class="case-link" href="customers/cases.html"><span data-ko>도입 사례 더보기</span><span data-en>More case studies</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg></a>
+            <a class="case-link" href="#contact"><span data-ko>상담 신청</span><span data-en>Contact us</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg></a>
+          </div>
+        </div>
+        <div class="case-visual-wrap">
+          <div class="case-visual">
+            <div class="case-mock">
+              <div class="case-mock-head"><span data-ko>Lot 추적</span><span data-en>Traceability</span></div>
+              <div class="case-mock-body">
+                <div class="case-mock-stat"><div><b>100%</b><small><span data-ko>추적</span><span data-en>Track</span></small></div><div><b>92%</b><small><span data-ko>수율</span><span data-en>Yield</span></small></div></div>
+                <div class="case-mock-row m"></div><div class="case-mock-row"></div><div class="case-mock-row s"></div>
+              </div>
+            </div>
+          </div>
+          <ul class="case-bullets">
+            <li><span data-ko>이상 공정 탐지 3.5배 빨라짐</span><span data-en>3.5x faster anomaly detection</span></li>
+            <li><span data-ko>감사 대응 문서 자동 생성</span><span data-en>Automated audit documentation</span></li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- 5 넥슨-M -->
+      <article class="case-panel" data-case="5">
+        <div>
+          <span class="case-cat">INTEGRATION</span>
+          <h3><span data-ko>기존 ERP와<br>현장 데이터 연결</span><span data-en>Connecting legacy ERP<br>with shop-floor data</span></h3>
+          <p class="case-desc"><span data-ko>ERP·MES·설비 데이터를 API로 연결해 이중 입력을 없앴습니다. 경영진과 현장이 같은 숫자를 봅니다.</span><span data-en>Connected ERP, MES, and machine data via API — eliminating double entry so management and the floor see the same numbers.</span></p>
+          <div class="case-links">
+            <a class="case-link" href="solutions/mes.html"><span data-ko>생산 계획 (MES)</span><span data-en>Production (MES)</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg></a>
+            <a class="case-link" href="solutions/monitoring.html"><span data-ko>실시간 모니터링</span><span data-en>Live Monitoring</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg></a>
+            <a class="case-link" href="customers/cases.html"><span data-ko>도입 사례 더보기</span><span data-en>More case studies</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg></a>
+            <a class="case-link" href="#contact"><span data-ko>상담 신청</span><span data-en>Contact us</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg></a>
+          </div>
+        </div>
+        <div class="case-visual-wrap">
+          <div class="case-visual">
+            <div class="case-mock">
+              <div class="case-mock-head"><span data-ko>데이터 통합</span><span data-en>Integration</span></div>
+              <div class="case-mock-body">
+                <div class="case-mock-stat"><div><b>ERP</b><small><span data-ko>연동</span><span data-en>Sync</span></small></div><div><b>MES</b><small><span data-ko>연동</span><span data-en>Sync</span></small></div></div>
+                <div class="case-mock-row"></div><div class="case-mock-row m"></div><div class="case-mock-row s"></div>
+              </div>
+            </div>
+          </div>
+          <ul class="case-bullets">
+            <li><span data-ko>수기 입력 90% 제거</span><span data-en>90% less manual entry</span></li>
+            <li><span data-ko>데이터 집계 속도 3.5배 향상</span><span data-en>3.5x faster data aggregation</span></li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- 6 삼화기계 -->
+      <article class="case-panel" data-case="6">
+        <div>
+          <span class="case-cat">MACHINERY</span>
+          <h3><span data-ko>기계 부품 생산<br>전 과정 디지털화</span><span data-en>Digitalizing the full<br>parts production cycle</span></h3>
+          <p class="case-desc"><span data-ko>가공·조립·검사 공정의 데이터를 실시간으로 연결했습니다. BOM 변경과 라인 전환에도 빠르게 대응합니다.</span><span data-en>Connected machining, assembly, and inspection data in real time — adapting quickly to BOM changes and line switches.</span></p>
+          <div class="case-links">
+            <a class="case-link" href="industry/electric.html"><span data-ko>전기 · 전자</span><span data-en>Electric</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg></a>
+            <a class="case-link" href="solutions/mes.html"><span data-ko>생산 계획 (MES)</span><span data-en>Production (MES)</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg></a>
+            <a class="case-link" href="customers/cases.html"><span data-ko>도입 사례 더보기</span><span data-en>More case studies</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg></a>
+            <a class="case-link" href="#contact"><span data-ko>상담 신청</span><span data-en>Contact us</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg></a>
+          </div>
+        </div>
+        <div class="case-visual-wrap">
+          <div class="case-visual">
+            <div class="case-mock">
+              <div class="case-mock-head"><span data-ko>공정 관리</span><span data-en>Process</span></div>
+              <div class="case-mock-body">
+                <div class="case-mock-stat"><div><b>5</b><small><span data-ko>공정</span><span data-en>Steps</span></small></div><div><b>88%</b><small><span data-ko>효율</span><span data-en>Efficiency</span></small></div></div>
+                <div class="case-mock-row m"></div><div class="case-mock-row"></div><div class="case-mock-row s"></div>
+              </div>
+            </div>
+          </div>
+          <ul class="case-bullets">
+            <li><span data-ko>라인 전환 시간 40% 단축</span><span data-en>40% faster line changeovers</span></li>
+            <li><span data-ko>부품 추적성 100% 확보</span><span data-en>100% part traceability</span></li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- 7 한국부품 -->
+      <article class="case-panel" data-case="7">
+        <div>
+          <span class="case-cat">AUTOMOTIVE</span>
+          <h3><span data-ko>자동차 부품<br>품질 기준 충족</span><span data-en>Meeting automotive<br>quality standards</span></h3>
+          <p class="case-desc"><span data-ko>부품 추적과 조립 이력을 체계적으로 관리합니다. OEM·Tier 협력사 요구사항에 맞는 리포트를 자동으로 제공합니다.</span><span data-en>Systematic part traceability and assembly history — with automated reports aligned to OEM and Tier supplier requirements.</span></p>
+          <div class="case-links">
+            <a class="case-link" href="industry/automotive.html"><span data-ko>자동차</span><span data-en>Automotive</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg></a>
+            <a class="case-link" href="solutions/qms.html"><span data-ko>품질 관리 (QMS)</span><span data-en>Quality (QMS)</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg></a>
+            <a class="case-link" href="customers/cases.html"><span data-ko>도입 사례 더보기</span><span data-en>More case studies</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg></a>
+            <a class="case-link" href="#contact"><span data-ko>상담 신청</span><span data-en>Contact us</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg></a>
+          </div>
+        </div>
+        <div class="case-visual-wrap">
+          <div class="case-visual">
+            <div class="case-mock">
+              <div class="case-mock-head"><span data-ko>부품 추적</span><span data-en>Traceability</span></div>
+              <div class="case-mock-body">
+                <div class="case-mock-stat"><div><b>ISO</b><small><span data-ko>인증</span><span data-en>Cert</span></small></div><div><b>0</b><small><span data-ko>리콜</span><span data-en>Recall</span></small></div></div>
+                <div class="case-mock-row"></div><div class="case-mock-row m"></div><div class="case-mock-row s"></div>
+              </div>
+            </div>
+          </div>
+          <ul class="case-bullets">
+            <li><span data-ko>OEM 감사 대응 시간 60% 단축</span><span data-en>60% faster OEM audit prep</span></li>
+            <li><span data-ko>조립 이력 100% 디지털화</span><span data-en>100% digital assembly history</span></li>
+          </ul>
+        </div>
+      </article>
     </div>
   </div>
 </section>
@@ -584,21 +913,20 @@
   }, { threshold:.15 });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-  // ---- count up ----
-  const cio = new IntersectionObserver((es) => {
-    es.forEach(e => {
-      if(!e.isIntersecting) return;
-      const el = e.target, target = parseFloat(el.dataset.count), suffix = el.dataset.suffix||'';
-      const isF = !Number.isInteger(target), dur = 1500, start = performance.now();
-      (function tick(now){
-        const p = Math.min((now-start)/dur,1), eased = 1-Math.pow(1-p,3), v = target*eased;
-        el.textContent = (isF ? v.toFixed(1) : Math.round(v)) + suffix;
-        if(p<1) requestAnimationFrame(tick);
-      })(performance.now());
-      cio.unobserve(el);
+  // ---- case tabs (Saltlux-style showcase) ----
+  document.querySelectorAll('.case-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      const id = tab.dataset.case;
+      document.querySelectorAll('.case-tab').forEach(t => {
+        const on = t.dataset.case === id;
+        t.classList.toggle('on', on);
+        t.setAttribute('aria-selected', on ? 'true' : 'false');
+      });
+      document.querySelectorAll('.case-panel').forEach(p => {
+        p.classList.toggle('on', p.dataset.case === id);
+      });
     });
-  }, { threshold:.5 });
-  document.querySelectorAll('[data-count]').forEach(c => cio.observe(c));
+  });
 </script>
 <script src="assets/nav.js"></script>
 </body>
