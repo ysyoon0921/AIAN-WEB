@@ -3,6 +3,7 @@
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+BUILD = "20250629-menu-v2"
 
 NAV = [
     {
@@ -353,13 +354,18 @@ def render(rel_path, page):
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+<meta name="aian-build" content="{BUILD}" />
 <title>{page["title"]} — AIAN</title>
 <link rel="preconnect" href="https://cdn.jsdelivr.net" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
-<link rel="stylesheet" href="../assets/nav.css" />
-<link rel="stylesheet" href="../assets/subpage.css" />
+<link rel="stylesheet" href="../assets/nav.css?v={BUILD}" />
+<link rel="stylesheet" href="../assets/subpage.css?v={BUILD}" />
 </head>
 <body>
+<div id="build-badge" style="position:fixed;bottom:10px;right:10px;z-index:9999;background:#0a1020;color:#fff;font-size:11px;font-weight:700;padding:6px 10px;border-radius:6px;opacity:.85;pointer-events:none;">ABOUT {BUILD}</div>
 <nav id="nav" data-theme="light">
   <div class="nav-inner">
     <a class="logo" href="../index.html" aria-label="AIAN">
@@ -390,7 +396,7 @@ def render(rel_path, page):
   </div>
 </main>
 {footer_html()}
-<script src="../assets/subpage.js"></script>
+<script src="../assets/subpage.js?v={BUILD}"></script>
 </body>
 </html>
 '''
