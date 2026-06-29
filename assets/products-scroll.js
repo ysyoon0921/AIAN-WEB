@@ -1,7 +1,6 @@
 /**
- * PRODUCTS — Axiom Observed Systems stack
- * Start: card 1 left + card 2 overlapping on top from right
- * Scroll: deck slides left, each next card stacks over the previous
+ * PRODUCTS — Axiom Observed Systems
+ * Cards spaced with gaps (no overlap), horizontal slide on scroll
  */
 (function () {
   var section = document.getElementById('products');
@@ -47,7 +46,6 @@
   function resetCards() {
     track.style.transform = '';
     cards.forEach(function (card) {
-      card.style.transform = '';
       card.classList.remove('is-active');
     });
     section.style.height = '';
