@@ -262,20 +262,17 @@ PAGES = {
         "section": "about",
         "title": "Location",
         "label": "LOCATION",
-        "h1_ko": "오시는<br>길",
-        "h1_en": "Visit<br>AIAN",
-        "lead_ko": "AIAN 본사로 방문·미팅을 원하시면 아래 정보를 참고해 주세요.",
-        "lead_en": "Use the details below to visit or meet with us at AIAN headquarters.",
-        "extra": '''<div class="location-grid">
-          <div class="location-info">
-            <div class="loc-row"><span class="loc-label"><span data-ko>주소</span><span data-en>Address</span></span><p><span data-ko>전북특별자치도 전주시 덕진구 백제대로 567<br>전북대학교 전주캠퍼스 공과대학 5호관</span><span data-en>Engineering Bldg. 5, Jeonju Campus<br>Jeonbuk National University, 567 Baekje-daero, Deokjin-gu, Jeonju</span></p></div>
-            <div class="loc-row"><span class="loc-label"><span data-ko>대표전화</span><span data-en>Phone</span></span><p><a href="tel:0212345678">02-1234-5678</a></p></div>
-            <div class="loc-row"><span class="loc-label"><span data-ko>이메일</span><span data-en>Email</span></span><p><a href="mailto:hello@aian.kr">hello@aian.kr</a></p></div>
-            <div class="loc-row"><span class="loc-label"><span data-ko>교통</span><span data-en>Transit</span></span><p><span data-ko>전주역에서 택시 약 15분 · 전북대학교 정문·덕진성당앞 버스 이용 · 캠퍼스 내 주차 가능</span><span data-en>~15 min taxi from Jeonju Station · Bus to JBNU main gate · Campus parking available</span></p></div>
-          </div>
-          <div class="location-map">
-            <iframe class="naver-map-embed" title="전북대학교 공과대학 5호관" src="https://map.naver.com/p/embed/place/17473457" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-          </div>
+        "h1_ko": "오시는 길",
+        "h1_en": "Visit AIAN",
+        "hide_lead": True,
+        "extra": '''<div class="location-meta">
+          <div class="loc-item"><span class="loc-label"><span data-ko>주소</span><span data-en>Address</span></span><p><span data-ko>전북특별자치도 전주시 덕진구 백제대로 567, 전북대학교 전주캠퍼스 공과대학 5호관</span><span data-en>Engineering Bldg. 5, Jeonju Campus, JBNU, 567 Baekje-daero, Deokjin-gu, Jeonju</span></p></div>
+          <div class="loc-item"><span class="loc-label"><span data-ko>대표전화</span><span data-en>Phone</span></span><p><a href="tel:0212345678">02-1234-5678</a></p></div>
+          <div class="loc-item"><span class="loc-label"><span data-ko>이메일</span><span data-en>Email</span></span><p><a href="mailto:hello@aian.kr">hello@aian.kr</a></p></div>
+          <div class="loc-item"><span class="loc-label"><span data-ko>교통</span><span data-en>Transit</span></span><p><span data-ko>전주역에서 택시 약 15분 · 전북대학교 정문·덕진성당앞 버스 이용 · 캠퍼스 내 주차 가능</span><span data-en>~15 min taxi from Jeonju Station · Bus to JBNU main gate · Campus parking available</span></p></div>
+        </div>
+        <div class="location-map">
+          <iframe class="naver-map-embed" title="전북대학교 공과대학 5호관" src="https://map.naver.com/p/embed/place/17473457" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
         <a class="map-open-link" href="https://map.naver.com/p/entry/place/17473457" target="_blank" rel="noopener noreferrer"><span data-ko>네이버 지도에서 크게 보기</span><span data-en>Open in Naver Map</span></a>''',
     },
@@ -353,6 +350,10 @@ def render(rel_path, page):
     sec = next(s for s in NAV if s["id"] == section)
     folder = section
 
+    lead_block = ""
+    if not page.get("hide_lead"):
+        lead_block = f'      <p class="lead"><span data-ko>{page["lead_ko"]}</span><span data-en>{page["lead_en"]}</span></p>\n'
+
     html = f'''<!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -390,8 +391,7 @@ def render(rel_path, page):
     <div class="content">
       <div class="label">{page["label"]}</div>
       <h1><span data-ko>{page["h1_ko"]}</span><span data-en>{page["h1_en"]}</span></h1>
-      <p class="lead"><span data-ko>{page["lead_ko"]}</span><span data-en>{page["lead_en"]}</span></p>
-{body_html(page)}
+{lead_block}{body_html(page)}
     </div>
   </div>
 </main>
