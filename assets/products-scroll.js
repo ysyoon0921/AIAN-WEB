@@ -15,12 +15,18 @@
 
   if (!pin || !track || count < 2) return;
 
-  /* Scroll length per product step — higher = slower (0.7~1.2) */
-  var STEP_RATIO = 0.92;
+  /* Scroll length per product step — higher = slower */
+  var STEP_RATIO = 1.0;
 
-  /* Within each step: hold → exit → enter (no overlap) */
-  var HOLD_END = 0.78;
-  var EXIT_END = 0.9;
+  /* hold → exit (완료) → 90%에서 다음 제품 enter */
+  var HOLD_END = 0.82;
+  var EXIT_END = 0.89;
+  var ENTER_START = 0.9;
+
+  /* 패널 간격 — 클수록 화면 밖에서 더 멀리 대기 */
+  var OFF_RIGHT = 58;
+  var OFF_LEFT = -24;
+  var EXIT_SHIFT = 22;
 
   if (counterWrap) {
     counterWrap.innerHTML = '<span class="cur">01</span> / ' + String(count).padStart(2, '0');
