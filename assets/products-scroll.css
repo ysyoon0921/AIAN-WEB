@@ -3,6 +3,9 @@
   --nav-h: 80px;
   --card-w: clamp(400px, 50vw, 580px);
   --card-gap: clamp(32px, 4vw, 56px);
+  --products-pad-top: clamp(20px, 3.5vh, 44px);
+  --products-pad-bottom: clamp(20px, 3vh, 36px);
+  --card-h: min(640px, calc(100svh - var(--nav-h) - var(--products-pad-top) - var(--products-pad-bottom)));
   position: relative;
   background: var(--bg-soft, #f5f7fa);
 }
@@ -21,7 +24,7 @@
   flex: 0 0 clamp(200px, 22vw, 300px);
   display: flex;
   align-items: flex-start;
-  padding: clamp(36px, 9vh, 96px) clamp(20px, 3vw, 36px) 0;
+  padding: var(--products-pad-top) clamp(20px, 3vw, 36px) var(--products-pad-bottom);
   background: var(--bg-soft, #f5f7fa);
   z-index: 10;
 }
@@ -90,10 +93,10 @@
 /* Cards — stacked, centered; next card slides in from right and covers */
 .product-card{
   position: absolute;
-  top: clamp(36px, 9vh, 96px);
+  top: var(--products-pad-top);
   left: 50%;
   width: var(--card-w);
-  height: min(62svh, 580px);
+  height: var(--card-h);
   display: flex;
   flex-direction: column;
   background: #fff;
@@ -107,9 +110,6 @@
 }
 .product-card.is-active{
   box-shadow: 0 50px 90px -34px rgba(10, 16, 32, .34);
-}
-.product-card.is-active{
-  box-shadow: 0 40px 80px -36px rgba(10, 16, 32, .28);
 }
 .p-card-id{
   position: absolute;
