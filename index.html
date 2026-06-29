@@ -6,12 +6,13 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
 <meta http-equiv="Pragma" content="no-cache" />
 <meta http-equiv="Expires" content="0" />
-<meta name="aian-version" content="2025-06-showcase" />
+<meta name="aian-version" content="2025-06-products-scroll" />
 <title>AIAN — 제조 현장을 잇는 가장 쉬운 방법</title>
 <meta name="description" content="복잡한 제조 현장을, 누구나 쓸 수 있는 소프트웨어로. IT와 제조를 연결하는 맞춤형 솔루션." />
 <link rel="preconnect" href="https://cdn.jsdelivr.net" />
 <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
 <link rel="stylesheet" href="assets/nav.css" />
+<link rel="stylesheet" href="assets/products-scroll.css" />
 <style>
   :root{
     --bg:#ffffff; --bg-soft:#f5f7fa; --bg-blue:#eef4ff;
@@ -119,32 +120,6 @@
   .mini-chart{ position:absolute; right:24px; bottom:24px; display:flex; gap:5px; align-items:flex-end; height:60px; }
   .mini-chart i{ width:12px; border-radius:3px; background:rgba(255,255,255,.35); display:block; }
   @media(max-width:860px){ .bento{ grid-template-columns:1fr; grid-auto-rows:auto; } .bento .cell{ min-height:180px; } .cell.wide,.cell.tall{ grid-column:auto; grid-row:auto; } }
-
-  /* PRODUCTS (makinarocks-style alternating) */
-  .products{ background:var(--bg-soft); }
-  .product{ display:grid; grid-template-columns:1fr 1.1fr; gap:64px; align-items:center; padding:70px 0; }
-  .product.reverse .p-media{ order:-1; }
-  .p-badge{ display:inline-flex; align-items:center; gap:8px; font-size:13px; font-weight:800; color:var(--brand); background:var(--bg-blue); padding:7px 14px; border-radius:999px; margin-bottom:18px; letter-spacing:.02em; }
-  .product h3{ font-size:clamp(28px,3.6vw,42px); font-weight:800; letter-spacing:-.04em; line-height:1.15; }
-  .product .p-name{ background:linear-gradient(100deg,var(--brand),var(--brand-2)); -webkit-background-clip:text; background-clip:text; color:transparent; }
-  .product .p-desc{ color:var(--ink-soft); font-size:18px; line-height:1.65; margin-top:18px; max-width:460px; }
-  .p-tags{ display:flex; flex-wrap:wrap; gap:8px; margin-top:24px; }
-  .p-tags span{ font-size:13px; font-weight:600; color:var(--ink-soft); background:#fff; border:1px solid var(--line); padding:7px 13px; border-radius:999px; }
-  .p-link{ display:inline-flex; align-items:center; gap:8px; margin-top:28px; font-size:16px; font-weight:700; color:var(--ink); text-decoration:none; transition:gap .2s var(--ease), color .2s; }
-  .p-link:hover{ gap:13px; color:var(--brand); }
-  /* media: swap the inner content with <img> to use a real photo */
-  .p-media{ position:relative; aspect-ratio:4/3; border-radius:var(--radius-lg); overflow:hidden; border:1px solid var(--line); box-shadow:0 30px 60px -30px rgba(10,16,32,.25); background:linear-gradient(150deg,#0d1426,#16203b); }
-  .p-media img{ width:100%; height:100%; object-fit:cover; display:block; }
-  .p-shot{ position:absolute; inset:0; padding:26px; display:flex; flex-direction:column; }
-  .ps-bar{ display:flex; gap:6px; margin-bottom:18px; } .ps-bar i{ width:11px; height:11px; border-radius:50%; background:rgba(255,255,255,.25); }
-  .ps-panel{ flex:1; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.12); border-radius:16px; padding:18px; backdrop-filter:blur(4px); }
-  .ps-row{ height:13px; border-radius:7px; background:rgba(120,165,255,.45); margin:10px 0; } .ps-row.s{ width:50%; } .ps-row.m{ width:78%; }
-  .ps-stats{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px; margin-bottom:14px; }
-  .ps-stat{ background:rgba(255,255,255,.07); border-radius:10px; padding:10px; } .ps-stat b{ display:block; color:#fff; font-size:18px; font-weight:800; } .ps-stat small{ color:#8a95a5; font-size:10px; }
-  .ps-chart{ display:flex; align-items:flex-end; gap:7px; height:80px; margin-top:6px; }
-  .ps-chart i{ flex:1; border-radius:5px 5px 0 0; background:linear-gradient(180deg,#2f6bff,#18c5ff); }
-  .ps-tag{ display:inline-block; font-size:11px; font-weight:700; color:#bcd2ff; background:rgba(47,107,255,.25); padding:5px 10px; border-radius:999px; margin:4px 4px 0 0; }
-  @media(max-width:860px){ .product{ grid-template-columns:1fr; gap:32px; padding:48px 0; } .product.reverse .p-media{ order:0; } }
 
   /* SHOWCASE (Saltlux-style case studies) */
   .showcase{ background:#fff; padding:100px 0 110px; }
@@ -303,7 +278,7 @@
 </head>
 <body>
 
-<div id="build-badge" style="position:fixed;bottom:10px;right:10px;z-index:9999;background:#0a1020;color:#fff;font-size:11px;font-weight:700;padding:6px 10px;border-radius:6px;opacity:.85;pointer-events:none;">SHOWCASE v2</div>
+<div id="build-badge" style="position:fixed;bottom:10px;right:10px;z-index:9999;background:#0a1020;color:#fff;font-size:11px;font-weight:700;padding:6px 10px;border-radius:6px;opacity:.85;pointer-events:none;">PRODUCTS SCROLL</div>
 
 <!-- NAV -->
 <nav id="nav">
@@ -414,85 +389,92 @@
   </div>
 </section>
 
-<!-- PRODUCTS -->
-<section class="block products" id="products">
-  <div class="wrap">
-    <div class="center" style="max-width:680px; margin:0 auto;">
-      <div class="label reveal">PRODUCTS</div>
-      <h2 class="h2 reveal d1"><span data-ko>3가지 핵심 제품</span><span data-en>Three core products</span></h2>
-      <p class="lead reveal d2"><span data-ko>현장에 바로 적용하는 AIAN의 대표 솔루션입니다.</span><span data-en>AIAN's flagship solutions, ready for your factory floor.</span></p>
-    </div>
-
-    <!-- Product 1 -->
-    <div class="product reveal">
-      <div>
-        <span class="p-badge"><span data-ko>실시간 모니터링</span><span data-en>Live Monitoring</span></span>
-        <h3><span class="p-name">FactoryLens</span><br><span data-ko>흩어진 데이터를<br>한 화면으로</span><span data-en>All your data,<br>on one screen</span></h3>
-        <p class="p-desc"><span data-ko>설비·센서·생산 데이터를 실시간으로 모아 보여주는 모니터링 OS. 이상이 생기기 전에 먼저 알려드립니다.</span><span data-en>A monitoring OS that gathers equipment, sensor, and production data in real time — and alerts you before problems happen.</span></p>
-        <div class="p-tags"><span data-ko># 실시간 대시보드</span><span data-en># Live dashboard</span><span data-ko># 이상 알림</span><span data-en># Alerts</span><span data-ko># 모바일 지원</span><span data-en># Mobile</span></div>
-        <a class="p-link" href="#contact"><span data-ko>자세히 보기</span><span data-en>Learn more</span> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+<!-- PRODUCTS (Axiom-style horizontal scroll) -->
+<section class="products-scroll" id="products">
+  <div class="products-pin">
+    <div class="products-head wrap">
+      <div class="label">PRODUCTS</div>
+      <h2 class="h2"><span data-ko>3가지 핵심 제품</span><span data-en>Three core products</span></h2>
+      <p class="lead"><span data-ko>현장에 바로 적용하는 AIAN의 대표 솔루션입니다.</span><span data-en>AIAN's flagship solutions, ready for your factory floor.</span></p>
+      <div class="products-meta">
+        <div class="products-counter"><span class="cur">01</span> / 03</div>
+        <div class="products-dots" aria-hidden="true"></div>
       </div>
-      <!-- 사진 교체: 아래 .p-shot 전체를 <img src="제품사진.jpg" alt="FactoryLens"> 로 바꾸면 됩니다 -->
-      <div class="p-media">
-        <div class="p-shot">
-          <div class="ps-bar"><i></i><i></i><i></i></div>
-          <div class="ps-panel">
-            <div class="ps-stats">
-              <div class="ps-stat"><b>94%</b><small>가동률</small></div>
-              <div class="ps-stat"><b>1,284</b><small>생산량</small></div>
-              <div class="ps-stat"><b>0.8%</b><small>불량률</small></div>
+    </div>
+    <div class="products-viewport">
+      <div class="products-track">
+
+        <!-- Panel 1: FactoryLens -->
+        <article class="product-panel">
+          <div>
+            <span class="p-badge"><span data-ko>실시간 모니터링</span><span data-en>Live Monitoring</span></span>
+            <h3><span class="p-name">FactoryLens</span><br><span data-ko>흩어진 데이터를<br>한 화면으로</span><span data-en>All your data,<br>on one screen</span></h3>
+            <p class="p-desc"><span data-ko>설비·센서·생산 데이터를 실시간으로 모아 보여주는 모니터링 OS. 이상이 생기기 전에 먼저 알려드립니다.</span><span data-en>A monitoring OS that gathers equipment, sensor, and production data in real time — and alerts you before problems happen.</span></p>
+            <div class="p-tags"><span data-ko># 실시간 대시보드</span><span data-en># Live dashboard</span><span data-ko># 이상 알림</span><span data-en># Alerts</span><span data-ko># 모바일 지원</span><span data-en># Mobile</span></div>
+            <a class="p-link" href="solutions/monitoring.html"><span data-ko>자세히 보기</span><span data-en>Learn more</span> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          </div>
+          <div class="p-media">
+            <div class="p-shot">
+              <div class="ps-bar"><i></i><i></i><i></i></div>
+              <div class="ps-panel">
+                <div class="ps-stats">
+                  <div class="ps-stat"><b>94%</b><small><span data-ko>가동률</span><span data-en>Uptime</span></small></div>
+                  <div class="ps-stat"><b>1,284</b><small><span data-ko>생산량</span><span data-en>Output</span></small></div>
+                  <div class="ps-stat"><b>0.8%</b><small><span data-ko>불량률</span><span data-en>Defects</span></small></div>
+                </div>
+                <div class="ps-chart"><i style="height:50%"></i><i style="height:72%"></i><i style="height:45%"></i><i style="height:88%"></i><i style="height:63%"></i><i style="height:95%"></i><i style="height:70%"></i></div>
+                <div style="margin-top:12px;"><span class="ps-tag"><span data-ko>A라인 정상</span><span data-en>Line A OK</span></span><span class="ps-tag"><span data-ko>B라인 정상</span><span data-en>Line B OK</span></span><span class="ps-tag"><span data-ko>C라인 점검</span><span data-en>Line C check</span></span></div>
+              </div>
             </div>
-            <div class="ps-chart"><i style="height:50%"></i><i style="height:72%"></i><i style="height:45%"></i><i style="height:88%"></i><i style="height:63%"></i><i style="height:95%"></i><i style="height:70%"></i></div>
-            <div style="margin-top:12px;"><span class="ps-tag">A라인 정상</span><span class="ps-tag">B라인 정상</span><span class="ps-tag">C라인 점검</span></div>
           </div>
-        </div>
-      </div>
-    </div>
+        </article>
 
-    <!-- Product 2 -->
-    <div class="product reverse reveal">
-      <div>
-        <span class="p-badge"><span data-ko>AI 품질 분석</span><span data-en>AI Quality</span></span>
-        <h3><span class="p-name">QualityAI</span><br><span data-ko>불량 원인을<br>스스로 찾아냅니다</span><span data-en>It finds the<br>defect cause itself</span></h3>
-        <p class="p-desc"><span data-ko>언제·어디서·왜 불량이 났는지 AI가 자동으로 분석하는 품질 에이전트. 사람이 놓치는 패턴까지 잡아냅니다.</span><span data-en>A quality agent where AI automatically analyzes when, where, and why defects occur — catching patterns people miss.</span></p>
-        <div class="p-tags"><span data-ko># 원인 자동분석</span><span data-en># Root-cause AI</span><span data-ko># 공정별 리포트</span><span data-en># Reports</span><span data-ko># 예측 경보</span><span data-en># Prediction</span></div>
-        <a class="p-link" href="#contact"><span data-ko>자세히 보기</span><span data-en>Learn more</span> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-      </div>
-      <!-- 사진 교체: 아래 .p-shot 전체를 <img src="제품사진.jpg" alt="QualityAI"> 로 바꾸면 됩니다 -->
-      <div class="p-media" style="background:linear-gradient(150deg,#101a33,#1f1640);">
-        <div class="p-shot">
-          <div class="ps-bar"><i></i><i></i><i></i></div>
-          <div class="ps-panel" style="display:flex; flex-direction:column; align-items:center; justify-content:center;">
-            <div style="width:128px; height:128px; border-radius:50%; background:conic-gradient(#18c5ff 0 78%, rgba(255,255,255,.12) 78% 100%); display:flex; align-items:center; justify-content:center;">
-              <div style="width:92px; height:92px; border-radius:50%; background:#16203b; display:flex; align-items:center; justify-content:center; color:#fff; font-size:26px; font-weight:800;">78%</div>
+        <!-- Panel 2: QualityAI -->
+        <article class="product-panel">
+          <div>
+            <span class="p-badge"><span data-ko>AI 품질 분석</span><span data-en>AI Quality</span></span>
+            <h3><span class="p-name">QualityAI</span><br><span data-ko>불량 원인을<br>스스로 찾아냅니다</span><span data-en>It finds the<br>defect cause itself</span></h3>
+            <p class="p-desc"><span data-ko>언제·어디서·왜 불량이 났는지 AI가 자동으로 분석하는 품질 에이전트. 사람이 놓치는 패턴까지 잡아냅니다.</span><span data-en>A quality agent where AI automatically analyzes when, where, and why defects occur — catching patterns people miss.</span></p>
+            <div class="p-tags"><span data-ko># 원인 자동분석</span><span data-en># Root-cause AI</span><span data-ko># 공정별 리포트</span><span data-en># Reports</span><span data-ko># 예측 경보</span><span data-en># Prediction</span></div>
+            <a class="p-link" href="solutions/qms.html"><span data-ko>자세히 보기</span><span data-en>Learn more</span> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          </div>
+          <div class="p-media" style="background:linear-gradient(150deg,#101a33,#1f1640);">
+            <div class="p-shot">
+              <div class="ps-bar"><i></i><i></i><i></i></div>
+              <div class="ps-panel" style="display:flex;flex-direction:column;align-items:center;justify-content:center;">
+                <div style="width:128px;height:128px;border-radius:50%;background:conic-gradient(#18c5ff 0 78%,rgba(255,255,255,.12) 78% 100%);display:flex;align-items:center;justify-content:center;">
+                  <div style="width:92px;height:92px;border-radius:50%;background:#16203b;display:flex;align-items:center;justify-content:center;color:#fff;font-size:26px;font-weight:800;">78%</div>
+                </div>
+                <div style="margin-top:18px;text-align:center;"><span class="ps-tag"><span data-ko>원인: 온도편차</span><span data-en>Cause: temp</span></span><span class="ps-tag"><span data-ko>신뢰도 92%</span><span data-en>92% confidence</span></span></div>
+              </div>
             </div>
-            <div style="margin-top:18px; text-align:center;"><span class="ps-tag">원인: 온도편차</span><span class="ps-tag">신뢰도 92%</span></div>
           </div>
-        </div>
-      </div>
-    </div>
+        </article>
 
-    <!-- Product 3 -->
-    <div class="product reveal">
-      <div>
-        <span class="p-badge"><span data-ko>생산계획 자동화</span><span data-en>Planning</span></span>
-        <h3><span class="p-name">PlanFlow</span><br><span data-ko>주문부터 실적까지<br>자동으로 흐릅니다</span><span data-en>Order to output,<br>flows automatically</span></h3>
-        <p class="p-desc"><span data-ko>주문이 들어오면 생산계획이 자동으로 서고, 현장 실적이 실시간으로 반영되는 생산관리(MES) 솔루션.</span><span data-en>An MES solution where orders auto-generate plans and floor results sync back in real time.</span></p>
-        <div class="p-tags"><span data-ko># 계획 자동생성</span><span data-en># Auto-planning</span><span data-ko># 실적 연동</span><span data-en># Live sync</span><span data-ko># 재고 관리</span><span data-en># Inventory</span></div>
-        <a class="p-link" href="#contact"><span data-ko>자세히 보기</span><span data-en>Learn more</span> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-      </div>
-      <!-- 사진 교체: 아래 .p-shot 전체를 <img src="제품사진.jpg" alt="PlanFlow"> 로 바꾸면 됩니다 -->
-      <div class="p-media">
-        <div class="p-shot">
-          <div class="ps-bar"><i></i><i></i><i></i></div>
-          <div class="ps-panel">
-            <div class="ps-row m"></div><div class="ps-row"></div><div class="ps-row s"></div>
-            <div class="ps-row m" style="margin-top:18px;"></div><div class="ps-row"></div>
-            <div style="margin-top:14px;"><span class="ps-tag">주문 #2481</span><span class="ps-tag">납기 D-3</span><span class="ps-tag">진행 72%</span></div>
+        <!-- Panel 3: PlanFlow -->
+        <article class="product-panel">
+          <div>
+            <span class="p-badge"><span data-ko>생산계획 자동화</span><span data-en>Planning</span></span>
+            <h3><span class="p-name">PlanFlow</span><br><span data-ko>주문부터 실적까지<br>자동으로 흐릅니다</span><span data-en>Order to output,<br>flows automatically</span></h3>
+            <p class="p-desc"><span data-ko>주문이 들어오면 생산계획이 자동으로 서고, 현장 실적이 실시간으로 반영되는 생산관리(MES) 솔루션.</span><span data-en>An MES solution where orders auto-generate plans and floor results sync back in real time.</span></p>
+            <div class="p-tags"><span data-ko># 계획 자동생성</span><span data-en># Auto-planning</span><span data-ko># 실적 연동</span><span data-en># Live sync</span><span data-ko># 재고 관리</span><span data-en># Inventory</span></div>
+            <a class="p-link" href="solutions/mes.html"><span data-ko>자세히 보기</span><span data-en>Learn more</span> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
           </div>
-        </div>
+          <div class="p-media">
+            <div class="p-shot">
+              <div class="ps-bar"><i></i><i></i><i></i></div>
+              <div class="ps-panel">
+                <div class="ps-row m"></div><div class="ps-row"></div><div class="ps-row s"></div>
+                <div class="ps-row m" style="margin-top:18px;"></div><div class="ps-row"></div>
+                <div style="margin-top:14px;"><span class="ps-tag"><span data-ko>주문 #2481</span><span data-en>Order #2481</span></span><span class="ps-tag"><span data-ko>납기 D-3</span><span data-en>Due D-3</span></span><span class="ps-tag"><span data-ko>진행 72%</span><span data-en>72% done</span></span></div>
+              </div>
+            </div>
+          </div>
+        </article>
+
       </div>
     </div>
+    <div class="products-hint"><span data-ko>스크롤하여 더 보기</span><span data-en>Scroll to explore</span></div>
   </div>
 </section>
 
@@ -936,5 +918,6 @@
   });
 </script>
 <script src="assets/nav.js"></script>
+<script src="assets/products-scroll.js"></script>
 </body>
 </html>
