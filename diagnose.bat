@@ -15,9 +15,9 @@ findstr /C:"20250629-menu-v2" about\history.html >nul && (
 )
 
 findstr /C:"aian-about-menu-v2" about\history.html >nul && (
-  echo   OK  history.html new About menu (intro/ceo/history/location)
+  echo   OK  history.html new About menu - intro ceo history location
 ) || (
-  echo   FAIL  old About menu — run force-sync.bat
+  echo   FAIL  old About menu - run force-sync.bat
 )
 
 findstr /C:"vision.html" about\history.html >nul && (
