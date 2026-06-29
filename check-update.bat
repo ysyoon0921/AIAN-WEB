@@ -7,39 +7,32 @@ echo === AIAN update check ===
 echo Folder: %CD%
 echo.
 
-findstr /C:"aian-version" /C:"2025-06-showcase" index.html >nul 2>&1
-if errorlevel 1 (
-  echo [FAIL] index.html is OLD - missing showcase version marker.
-  echo        Run: git pull origin main
-  goto done
-)
+powershell -NoProfile -Command ^
+  "$t = Get-Content index.html -Raw -Encoding UTF8; " ^
+  "if ($t -match '숫자로 증명합니다') { Write-Host '[FAIL] OLD stats section found in index.html'; exit 1 }; " ^
+  "if ($t -notmatch 'case-tabs') { Write-Host '[FAIL] New showcase section missing'; exit 2 }; " ^
+  "if ($t -notmatch '2025-06-showcase') { Write-Host '[FAIL] Version marker missing — run: git pull origin main'; exit 3 }; " ^
+  "Write-Host '[OK] Latest index.html confirmed.'; exit 0"
 
-findstr /C:"showcase" index.html >nul 2>&1
-if errorlevel 1 (
-  echo [FAIL] index.html has no showcase section.
-  goto done
-)
+if errorlevel 1 goto fail
+if errorlevel 2 goto fail
+if errorlevel 3 goto fail
 
-findstr /C:"숫자로 증명합니다" index.html >nul 2>&1
-if not errorlevel 1 (
-  echo [FAIL] index.html still has old stats section.
-  goto done
-)
-
-echo [OK] Latest index.html detected.
 echo.
-echo === Open this URL directly ===
+echo === Use serve.bat (NOT python -m http.server) ===
+echo   serve.bat
+echo.
+echo Then open:
 echo   http://127.0.0.1:8080/#results
 echo.
-echo You should see:
-echo   - Title: AIAN의 솔루션으로 이뤄낸 성과를 보여드립니다
-echo   - 8 client tabs (한성전자, 대양정밀, ...)
-echo   - NOT the old dark "숫자로 증명합니다" section
+echo You should see WHITE background + 8 client tabs.
+echo NOT dark "숫자로 증명합니다".
 echo.
-echo Server must be running in another window:
-echo   python -m http.server 8080 --bind 127.0.0.1
+goto done
+
+:fail
 echo.
-echo Browser: Ctrl+Shift+R to hard refresh.
+echo Run: force-sync.bat
 echo.
 
 :done
