@@ -68,8 +68,13 @@
   will-change: transform, opacity;
   transform-origin: center center;
   pointer-events: none;
+  visibility: hidden;
+  opacity: 0;
 }
-.product-panel.is-active{ pointer-events: auto; }
+.product-panel.is-active{
+  pointer-events: auto;
+  visibility: visible;
+}
 
 .product-panel h3{
   font-size: clamp(30px, 4vw, 48px);

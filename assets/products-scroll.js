@@ -1,7 +1,6 @@
 /**
  * PRODUCTS — Axiom-style stacked reveal
- * Scroll down: next product slides in from the right, current fades back.
- * Section height is set in JS so the last panel ends without extra dead scroll.
+ * Hold each product fully visible, then swap (no overlapping text).
  */
 (function () {
   var section = document.getElementById('products');
@@ -16,8 +15,12 @@
 
   if (!pin || !track || count < 2) return;
 
-  /* Shorter scroll per product — tweak 0.45~0.65 (lower = faster handoff) */
-  var STEP_RATIO = 0.52;
+  /* Scroll length per product step — higher = slower (0.7~1.2) */
+  var STEP_RATIO = 0.92;
+
+  /* Within each step: hold → exit → enter (no overlap) */
+  var HOLD_END = 0.78;
+  var EXIT_END = 0.9;
 
   if (counterWrap) {
     counterWrap.innerHTML = '<span class="cur">01</span> / ' + String(count).padStart(2, '0');
@@ -38,6 +41,10 @@
     return window.matchMedia('(max-width: 900px)').matches;
   }
 
+  function clamp(v, min, max) {
+    return Math.min(max, Math.max(min, v));
+  }
+
   function setSectionHeight() {
     if (mobile()) {
       section.style.height = '';
@@ -47,6 +54,22 @@
     var scrollRange = pinH * STEP_RATIO * (count - 1);
     section.style.height = Math.round(pinH + scrollRange) + 'px';
     return scrollRange;
+  }
+
+  function hidePanel(panel, offRight) {
+    panel.style.opacity = '0';
+    panel.style.visibility = 'hidden';
+    panel.style.transform = offRight
+      ? 'translate3d(32%, 0, 0) scale(0.98)'
+      : 'translate3d(-12%, 0, 0) scale(0.98)';
+    panel.style.zIndex = '1';
+  }
+
+  function showPanel(panel, x, opacity, scale, z) {
+    panel.style.opacity = String(opacity);
+    panel.style.visibility = opacity > 0.01 ? 'visible' : 'hidden';
+    panel.style.transform = 'translate3d(' + x + '%, 0, 0) scale(' + scale + ')';
+    panel.style.zIndex = String(z);
   }
 
   function setActive(index) {
@@ -64,6 +87,7 @@
       panels.forEach(function (p) {
         p.style.transform = '';
         p.style.opacity = '';
+        p.style.visibility = '';
         p.style.zIndex = '';
       });
       section.classList.remove('is-done');
@@ -74,35 +98,46 @@
     if (scrollRange <= 0) return;
 
     var rect = section.getBoundingClientRect();
-    var progress = Math.min(1, Math.max(0, -rect.top / scrollRange));
+    var progress = clamp(-rect.top / scrollRange, 0, 1);
     var pos = progress * (count - 1);
+    var base = Math.min(count - 1, Math.floor(pos));
+    var frac = pos - base;
 
     panels.forEach(function (panel, i) {
-      var delta = i - pos;
+      if (i < base) {
+        hidePanel(panel, false);
+        return;
+      }
 
-      if (delta >= 0) {
-        /* Upcoming panels — enter from the right (behind) */
-        var enter = Math.min(delta, 1);
-        var x = enter * 55;
-        var scale = 1 - enter * 0.05;
-        var opacity = 1 - enter * 0.55;
-        panel.style.transform = 'translate3d(' + x + '%, 0, 0) scale(' + scale + ')';
-        panel.style.opacity = String(Math.max(0.12, opacity));
-        panel.style.zIndex = String(count - i);
-      } else {
-        /* Passed panels — drift left and fade */
-        var leave = Math.min(-delta, 1);
-        var x = delta * 18;
-        var scale = 1 - leave * 0.04;
-        var opacity = 1 - leave * 0.9;
-        panel.style.transform = 'translate3d(' + x + '%, 0, 0) scale(' + scale + ')';
-        panel.style.opacity = String(Math.max(0, opacity));
-        panel.style.zIndex = String(count + i);
+      if (i > base + 1) {
+        hidePanel(panel, true);
+        return;
+      }
+
+      if (i === base) {
+        if (frac <= HOLD_END || base === count - 1) {
+          showPanel(panel, 0, 1, 1, 10);
+        } else if (frac <= EXIT_END) {
+          var t = (frac - HOLD_END) / (EXIT_END - HOLD_END);
+          showPanel(panel, -t * 14, 1 - t, 1 - t * 0.02, 10);
+        } else {
+          hidePanel(panel, false);
+        }
+        return;
+      }
+
+      if (i === base + 1) {
+        if (frac <= EXIT_END) {
+          hidePanel(panel, true);
+        } else {
+          var t2 = (frac - EXIT_END) / (1 - EXIT_END);
+          showPanel(panel, (1 - t2) * 36, t2, 0.98 + t2 * 0.02, 11);
+        }
       }
     });
 
-    var index = Math.min(count - 1, Math.max(0, Math.round(pos)));
-    setActive(index);
+    var activeIndex = frac >= EXIT_END && base < count - 1 ? base + 1 : base;
+    setActive(activeIndex);
     section.classList.toggle('is-done', progress >= 0.995);
   }
 
