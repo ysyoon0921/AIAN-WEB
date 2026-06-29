@@ -1,9 +1,11 @@
 /* PRODUCTS — Axiom Observed Systems style horizontal scroll */
 .products-scroll{
   --nav-h: 80px;
+  --pin-h: calc(100svh - var(--nav-h));
+  --card-w: min(880px, 60vw);
+  --card-h: calc(var(--pin-h) * 0.6);
   --products-pad-top: clamp(8px, 1.5vh, 18px);
   --products-pad-bottom: clamp(8px, 1.2vh, 14px);
-  --card-h: calc(100svh - var(--nav-h) - var(--products-pad-top) - var(--products-pad-bottom));
   position: relative;
   background: var(--bg-soft, #f5f7fa);
 }
@@ -91,9 +93,9 @@
 /* Cards — stacked flush left, same spot; cover on scroll */
 .product-card{
   position: absolute;
-  top: var(--products-pad-top);
+  top: calc((var(--pin-h) - var(--card-h)) / 2);
   left: 0;
-  width: calc(100% - 4px);
+  width: var(--card-w);
   height: var(--card-h);
   display: flex;
   flex-direction: column;
