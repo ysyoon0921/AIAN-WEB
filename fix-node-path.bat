@@ -1,5 +1,5 @@
 @echo off
-echo === Node.js PATH 수동 연결 ===
+echo === Fix Node.js PATH ===
 echo.
 
 set "NODE_DIR="
@@ -9,31 +9,27 @@ if not defined NODE_DIR if exist "%ProgramFiles(x86)%\nodejs\node.exe" set "NODE
 if not defined NODE_DIR if exist "%LOCALAPPDATA%\Programs\node\node.exe" set "NODE_DIR=%LOCALAPPDATA%\Programs\node"
 
 if not defined NODE_DIR (
-  echo node.exe를 찾지 못했습니다.
-  echo Node.js LTS를 https://nodejs.org/ 에서 설치한 뒤 PC를 재부팅하세요.
+  echo node.exe NOT found on disk.
+  echo Install Node.js LTS from https://nodejs.org/ then reboot.
   pause
   exit /b 1
 )
 
-echo 발견: %NODE_DIR%
-echo.
-
-REM 현재 세션 PATH에 추가
+echo Found: %NODE_DIR%
 set "PATH=%NODE_DIR%;%PATH%"
 
-echo 이 CMD 창에서 테스트:
-node -v
-npm -v
+echo.
+echo Test in this window:
+"%NODE_DIR%\node.exe" -v
+"%NODE_DIR%\npm.cmd" -v
 echo.
 
-echo --- 영구 PATH 등록 (관리자 CMD 권장) ---
-echo 아래 명령을 **관리자 권한 CMD**에 붙여넣기:
-echo.
+echo --- permanent PATH (run in Admin CMD) ---
 echo setx PATH "%NODE_DIR%;%%PATH%%"
 echo.
-echo setx 후 **모든 CMD 창을 닫고** 새로 연 다음 start-cms.bat 실행
+echo After setx: close ALL CMD windows, open NEW one, run start-cms.bat
 echo.
-echo 또는: Windows 설정 ^> 시스템 ^> 정보 ^> 고급 시스템 설정
-echo       ^> 환경 변수 ^> Path ^> %NODE_DIR% 추가
+echo Or: Windows Settings - System - About - Advanced system settings
+echo      Environment Variables - Path - add: %NODE_DIR%
 echo.
 pause

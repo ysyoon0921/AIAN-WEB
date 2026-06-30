@@ -1,43 +1,53 @@
 @echo off
-echo === AIAN CMS 환경 진단 ===
+cd /d "%~dp0"
+echo === AIAN CMS environment check ===
 echo.
 
 call "%~dp0_ensure-node.bat"
+set "FOUND=0"
 
 where node >nul 2>&1
-if errorlevel 1 (
-  echo [FAIL] node — PATH에서 찾을 수 없음
+if not errorlevel 1 (
+  set "FOUND=1"
+  for /f "delims=" %%v in ('node -v 2^>nul') do echo [OK] node %%v
 ) else (
-  for /f "delims=" %%v in ('node -v 2^>nul') do echo [OK]   node  %%v
+  echo [FAIL] node not in PATH
 )
 
 where npm >nul 2>&1
-if errorlevel 1 (
-  echo [FAIL] npm
+if not errorlevel 1 (
+  for /f "delims=" %%v in ('npm -v 2^>nul') do echo [OK] npm  %%v
 ) else (
-  for /f "delims=" %%v in ('npm -v 2^>nul') do echo [OK]   npm   %%v
+  echo [FAIL] npm not in PATH
 )
 
 echo.
-echo --- 설치 경로 확인 ---
+echo --- install paths ---
 if exist "%ProgramFiles%\nodejs\node.exe" (
   echo [FOUND] %ProgramFiles%\nodejs\node.exe
+  set "FOUND=1"
 ) else (
-  echo [----]  %ProgramFiles%\nodejs\node.exe  ^(없음^)
+  echo [MISS]  %ProgramFiles%\nodejs\node.exe
 )
 
 if exist "%LOCALAPPDATA%\Programs\node\node.exe" (
   echo [FOUND] %LOCALAPPDATA%\Programs\node\node.exe
+  set "FOUND=1"
 )
 
+if defined NODEJS_DIR echo [SESSION PATH] NODEJS_DIR=%NODEJS_DIR%
+
 echo.
-if exist cms\package.json (echo [OK] cms\) else (echo [FAIL] cms\ — 브랜치 확인)
+if exist cms\package.json (echo [OK] cms\) else (echo [FAIL] cms\ - wrong git branch?)
 if exist web\package.json (echo [OK] web\) else (echo [FAIL] web\)
 
 echo.
-if errorlevel 0 where node >nul 2>&1 && goto :ok
-echo node.exe 파일은 있는데 PATH만 안 잡힌 경우: fix-node-path.bat
-echo node.exe 자체가 없으면: https://nodejs.org LTS 재설치
+if "%FOUND%"=="0" (
+  echo Node.js is NOT installed or not found.
+  echo Install LTS: https://nodejs.org/
+  echo Then reboot and run this again.
+) else (
+  echo OK - run start-cms.bat
+)
 echo.
-:ok
 pause

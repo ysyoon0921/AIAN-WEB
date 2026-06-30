@@ -4,7 +4,7 @@ cd /d "%~dp0"
 
 call "%~dp0_ensure-node.bat"
 if errorlevel 1 (
-  echo [ERROR] Node.js 없음 — fix-node-path.bat 또는 check-cms-env.bat 참고
+  echo [ERROR] Node.js not found. Run check-cms-env.bat
   pause
   exit /b 1
 )
@@ -13,16 +13,16 @@ cd web
 if not exist .env.local copy .env.local.example .env.local
 
 if not exist node_modules (
-  echo [1/2] web 의존성 설치 중... ^(최초 1회^)
-  call npm install
+  echo [1/2] npm install in web/ ...
+  call "%NODEJS_DIR%npm.cmd" install
   if errorlevel 1 (
-    echo [ERROR] npm install 실패
+    echo [ERROR] npm install failed
     pause
     exit /b 1
   )
 )
 
-echo [2/2] Next.js 시작 — http://localhost:3000/ko
-echo ^(Strapi 먼저: start-cms.bat^)
+echo [2/2] Next.js -> http://localhost:3000/ko
+echo Start Strapi first: start-cms.bat
 echo.
-call npm run dev
+call "%NODEJS_DIR%npm.cmd" run dev
