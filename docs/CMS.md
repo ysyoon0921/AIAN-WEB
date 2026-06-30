@@ -12,14 +12,32 @@
 
 ## 빠른 시작 (Windows)
 
+### 0. Node.js 설치 (필수)
+
+CMS는 **Node.js 20+** 가 필요합니다. 설치되어 있지 않으면:
+
+1. https://nodejs.org/ → **LTS** 다운로드·설치
+2. 설치 시 **Add to PATH** 체크
+3. **CMD 창을 닫고 새로 연** 다음 확인:
+
+```bat
+node -v
+npm -v
+```
+
+환경 확인:
+
+```bat
+check-cms-env.bat
+```
+
+### 1. 실행
+
 ```bat
 REM 터미널 1
 start-cms.bat
 
-REM 터미널 2 (최초 1회)
-cd web
-copy .env.local.example .env.local
-npm install
+REM 터미널 2 (최초 1회 npm install는 bat 안에서 자동)
 start-web.bat
 ```
 
