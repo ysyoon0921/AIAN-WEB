@@ -1,0 +1,14 @@
+# Node / Next.js / Strapi
+cms/node_modules/
+cms/.tmp/
+cms/dist/
+cms/build/
+cms/.strapi/
+cms/.env
+web/node_modules/
+web/.next/
+web/.env.local
+
+# OS
+.DS_Store
+Thumbs.db

@@ -1,0 +1,18 @@
+{
+  "kind": "singleType",
+  "collectionName": "about_intros",
+  "info": {
+    "singularName": "about-intro",
+    "pluralName": "about-intros",
+    "displayName": "About Intro",
+    "description": "About AIAN intro page"
+  },
+  "options": { "draftAndPublish": true },
+  "pluginOptions": { "i18n": { "localized": true } },
+  "attributes": {
+    "label": { "type": "string", "pluginOptions": { "i18n": { "localized": true } } },
+    "title": { "type": "text", "pluginOptions": { "i18n": { "localized": true } } },
+    "lead": { "type": "text", "pluginOptions": { "i18n": { "localized": true } } },
+    "cards": { "type": "json", "pluginOptions": { "i18n": { "localized": true } } }
+  }
+}

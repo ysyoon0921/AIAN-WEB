@@ -1,0 +1,19 @@
+{
+  "kind": "singleType",
+  "collectionName": "about_locations",
+  "info": {
+    "singularName": "about-location",
+    "pluralName": "about-locations",
+    "displayName": "About Location",
+    "description": "Location page with map embed"
+  },
+  "options": { "draftAndPublish": true },
+  "pluginOptions": { "i18n": { "localized": true } },
+  "attributes": {
+    "label": { "type": "string", "pluginOptions": { "i18n": { "localized": true } } },
+    "title": { "type": "string", "pluginOptions": { "i18n": { "localized": true } } },
+    "mapEmbedUrl": { "type": "string" },
+    "mapLinkUrl": { "type": "string" },
+    "mapLinkLabel": { "type": "string", "pluginOptions": { "i18n": { "localized": true } } }
+  }
+}

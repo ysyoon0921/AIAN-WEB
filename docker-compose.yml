@@ -1,0 +1,36 @@
+services:
+  cms:
+    build: ./cms
+    ports:
+      - "1337:1337"
+    environment:
+      HOST: 0.0.0.0
+      PORT: 1337
+      APP_KEYS: ${APP_KEYS:-devkey1,devkey2,devkey3,devkey4}
+      API_TOKEN_SALT: ${API_TOKEN_SALT:-devsalt}
+      ADMIN_JWT_SECRET: ${ADMIN_JWT_SECRET:-devadmin}
+      TRANSFER_TOKEN_SALT: ${TRANSFER_TOKEN_SALT:-devtransfer}
+      JWT_SECRET: ${JWT_SECRET:-devjwt}
+      ENCRYPTION_KEY: ${ENCRYPTION_KEY:-devenckeydevenckeydevenckey12}
+      DATABASE_CLIENT: sqlite
+      DATABASE_FILENAME: .tmp/data.db
+      STRAPI_PLUGIN_I18N_INIT_LOCALE_CODE: ko
+      WEB_URL: http://localhost:3000
+    volumes:
+      - cms-data:/app/.tmp
+      - cms-uploads:/app/public/uploads
+
+  web:
+    build:
+      context: ./web
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      STRAPI_URL: http://cms:1337
+    depends_on:
+      - cms
+
+volumes:
+  cms-data:
+  cms-uploads:
