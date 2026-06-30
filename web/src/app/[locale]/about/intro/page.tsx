@@ -1,6 +1,6 @@
 import { AboutLayout } from "@/components/AboutLayout";
 import { formatMultiline } from "@/lib/format";
-import { getAboutIntro, LOCALES, type Locale } from "@/lib/strapi";
+import { getAboutIntro, getSiteSettings, LOCALES, type Locale } from "@/lib/strapi";
 
 export const dynamic = "force-dynamic";
 
@@ -11,10 +11,10 @@ export default async function IntroPage({
 }) {
   const { locale } = await params;
   const lang = (LOCALES.includes(locale as Locale) ? locale : "ko") as Locale;
-  const intro = await getAboutIntro(lang);
+  const [intro, settings] = await Promise.all([getAboutIntro(lang), getSiteSettings(lang)]);
 
   return (
-    <AboutLayout locale={lang} active="/about/intro" pagePath="/about/intro">
+    <AboutLayout locale={lang} active="/about/intro" settings={settings}>
       <div className="label">{intro.label}</div>
       <h1>
         {formatMultiline(intro.title).map((line, i, arr) => (

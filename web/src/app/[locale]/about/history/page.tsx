@@ -2,6 +2,7 @@ import { AboutLayout } from "@/components/AboutLayout";
 import { formatMultiline } from "@/lib/format";
 import {
   getAboutHistory,
+  getSiteSettings,
   getTimelineItems,
   LOCALES,
   type Locale,
@@ -16,13 +17,14 @@ export default async function HistoryPage({
 }) {
   const { locale } = await params;
   const lang = (LOCALES.includes(locale as Locale) ? locale : "ko") as Locale;
-  const [history, items] = await Promise.all([
+  const [history, items, settings] = await Promise.all([
     getAboutHistory(lang),
     getTimelineItems(lang),
+    getSiteSettings(lang),
   ]);
 
   return (
-    <AboutLayout locale={lang} active="/about/history" pagePath="/about/history">
+    <AboutLayout locale={lang} active="/about/history" settings={settings}>
       <div className="label">{history.label}</div>
       <h1>
         {formatMultiline(history.title).map((line, i, arr) => (

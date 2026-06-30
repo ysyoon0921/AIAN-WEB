@@ -1,5 +1,7 @@
 import Link from "next/link";
-import type { Locale } from "@/lib/strapi";
+import { SiteFooter } from "@/components/SiteFooter";
+import { SiteNav } from "@/components/SiteNav";
+import type { Locale, SiteSettings } from "@/lib/strapi";
 
 const SIDEBAR = [
   { href: "/about/intro", ko: "AIAN 소개", en: "About AIAN" },
@@ -11,33 +13,19 @@ const SIDEBAR = [
 type Props = {
   locale: Locale;
   active: (typeof SIDEBAR)[number]["href"];
-  pagePath: string;
+  settings: SiteSettings;
   children: React.ReactNode;
 };
 
-export function AboutLayout({ locale, active, pagePath, children }: Props) {
+export function AboutLayout({ locale, active, settings, children }: Props) {
   return (
     <>
-      <nav id="nav" data-theme="light">
-        <div className="nav-inner">
-          <Link className="logo" href={`/${locale}`} aria-label="AIAN">
-            <img className="logo-mark" src="/assets/aian-mark.png" alt="" />
-            <img className="logo-wordmark" src="/assets/aian-wordmark.png" alt="AIAN" />
-          </Link>
-          <div className="nav-right">
-            <div className="lang">
-              <Link href={`/ko${pagePath}`} className={locale === "ko" ? "on" : ""}>
-                KO
-              </Link>
-              <Link href={`/en${pagePath}`} className={locale === "en" ? "on" : ""}>
-                EN
-              </Link>
-            </div>
-            <span className="nav-cta cms-badge">CMS POC</span>
-          </div>
-        </div>
-      </nav>
-
+      <SiteNav
+        locale={locale}
+        theme="light"
+        ctaLabel={settings.navCtaLabel}
+        ctaHref={`/${locale}#contact`}
+      />
       <main className="page">
         <div className="page-inner">
           <aside className="side">
@@ -57,6 +45,7 @@ export function AboutLayout({ locale, active, pagePath, children }: Props) {
           <div className="content">{children}</div>
         </div>
       </main>
+      <SiteFooter locale={locale} settings={settings} contactHref={`/${locale}#contact`} />
     </>
   );
 }

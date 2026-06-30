@@ -10,7 +10,19 @@
 | `web/` | Next.js 16 — Strapi API 연동 프론트 |
 | `index.html`, `about/` 등 | 기존 정적 사이트 (그대로 유지) |
 
-## 빠른 시작 (Windows)
+## Next.js = official site (in progress)
+
+The Next.js app at `web/` is being aligned with the original `index.html` design:
+
+- Full nav (Solutions · Industry · Customers · About)
+- Full footer, contact form, reveal animations
+- Hero video when `web/public/assets/hero-bg.mp4` is present
+- About pages match original sidebar layout
+- Solutions/Industry/Customers subpages served from `web/public/` (static HTML, links work)
+
+**Still static (not Strapi yet):** solutions, industry, customers subpages.
+
+Run: `start-cms.bat` + `start-web.bat` → http://localhost:3000/ko
 
 ### 0. Node.js 설치 (필수)
 

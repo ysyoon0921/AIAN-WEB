@@ -1,5 +1,5 @@
 import { AboutLayout } from "@/components/AboutLayout";
-import { getAboutLocation, LOCALES, type Locale } from "@/lib/strapi";
+import { getAboutLocation, getSiteSettings, LOCALES, type Locale } from "@/lib/strapi";
 
 export const dynamic = "force-dynamic";
 
@@ -10,10 +10,13 @@ export default async function LocationPage({
 }) {
   const { locale } = await params;
   const lang = (LOCALES.includes(locale as Locale) ? locale : "ko") as Locale;
-  const location = await getAboutLocation(lang);
+  const [location, settings] = await Promise.all([
+    getAboutLocation(lang),
+    getSiteSettings(lang),
+  ]);
 
   return (
-    <AboutLayout locale={lang} active="/about/location" pagePath="/about/location">
+    <AboutLayout locale={lang} active="/about/location" settings={settings}>
       <div className="label">{location.label}</div>
       <h1>{location.title}</h1>
       <div className="location-map">

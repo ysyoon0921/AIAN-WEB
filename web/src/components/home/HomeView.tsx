@@ -1,7 +1,9 @@
-import { ContactFormPlaceholder } from "@/components/home/ContactFormPlaceholder";
-import { SiteNav } from "@/components/SiteNav";
+import { ContactForm, HeroCta } from "@/components/home/ContactForm";
 import { ProductsSection } from "@/components/home/ProductsSection";
 import { ShowcaseTabs } from "@/components/home/ShowcaseTabs";
+import { SiteFooter } from "@/components/SiteFooter";
+import { SiteNav } from "@/components/SiteNav";
+import { SiteScripts } from "@/components/SiteScripts";
 import { formatMultiline } from "@/lib/format";
 import type {
   CaseStudy,
@@ -59,13 +61,18 @@ function FeatureVisual({ visual }: { visual: string }) {
 
 export function HomeView({ locale, home, products, cases, settings }: Props) {
   const marquee = [...home.marqueeItems, ...home.marqueeItems];
+  const t = (ko: string, en: string) => (locale === "ko" ? ko : en);
 
   return (
     <>
       <SiteNav locale={locale} ctaLabel={settings.navCtaLabel} />
+      <SiteScripts heroVideo reveal />
 
-      <header className="hero no-video">
+      <header className="hero">
         <div className="hero-bg" aria-hidden="true">
+          <video className="hero-video" autoPlay muted loop playsInline preload="auto">
+            <source src="/assets/hero-bg.mp4" type="video/mp4" />
+          </video>
           <div className="hero-overlay" />
         </div>
         <div className="wrap">
@@ -74,16 +81,23 @@ export function HomeView({ locale, home, products, cases, settings }: Props) {
               <span className="pulse" />
               {home.eyebrow}
             </span>
-            <h1 className="reveal d1">{formatMultiline(home.heroTitle).map((line, i, arr) => (
-              <span key={i}>{line}{i < arr.length - 1 ? <br /> : null}</span>
-            ))}</h1>
-            <p className="sub reveal d2">{formatMultiline(home.heroSubtitle).map((line, i, arr) => (
-              <span key={i}>{line}{i < arr.length - 1 ? <br /> : null}</span>
-            ))}</p>
-            <div className="cta-row reveal d3">
-              <a className="btn btn-primary" href="#contact">{home.ctaPrimary}</a>
-              <a className="btn btn-ghost" href="#how">{home.ctaSecondary}</a>
-            </div>
+            <h1 className="reveal d1">
+              {formatMultiline(home.heroTitle).map((line, i, arr) => (
+                <span key={i}>
+                  {line}
+                  {i < arr.length - 1 ? <br /> : null}
+                </span>
+              ))}
+            </h1>
+            <p className="sub reveal d2">
+              {formatMultiline(home.heroSubtitle).map((line, i, arr) => (
+                <span key={i}>
+                  {line}
+                  {i < arr.length - 1 ? <br /> : null}
+                </span>
+              ))}
+            </p>
+            <HeroCta locale={locale} primary={home.ctaPrimary} secondary={home.ctaSecondary} />
             <div className="hero-trust reveal d4">{home.heroTrust}</div>
           </div>
         </div>
@@ -109,9 +123,14 @@ export function HomeView({ locale, home, products, cases, settings }: Props) {
         <div className="wrap">
           <div className="center" style={{ maxWidth: 680, margin: "0 auto" }}>
             <div className="label reveal">{home.howLabel}</div>
-            <h2 className="h2 reveal d1">{formatMultiline(home.howTitle).map((line, i, arr) => (
-              <span key={i}>{line}{i < arr.length - 1 ? <br /> : null}</span>
-            ))}</h2>
+            <h2 className="h2 reveal d1">
+              {formatMultiline(home.howTitle).map((line, i, arr) => (
+                <span key={i}>
+                  {line}
+                  {i < arr.length - 1 ? <br /> : null}
+                </span>
+              ))}
+            </h2>
             <p className="lead reveal d2">{home.howLead}</p>
           </div>
         </div>
@@ -122,15 +141,18 @@ export function HomeView({ locale, home, products, cases, settings }: Props) {
         label={home.productsLabel}
         title={home.productsTitle}
         lead={home.productsLead}
-        scrollHint={locale === "ko" ? "스크롤하여 더 보기" : "Scroll to explore"}
-        linkLabel={locale === "ko" ? "자세히 보기" : "Learn more"}
+        scrollHint={t("스크롤하여 더 보기", "Scroll to explore")}
+        linkLabel={t("자세히 보기", "Learn more")}
       />
 
       <section className="showcase" id="results">
         <div className="wrap">
           <h2 className="showcase-title">
             {formatMultiline(home.showcaseTitle).map((line, i, arr) => (
-              <span key={i}>{line}{i < arr.length - 1 ? <br /> : null}</span>
+              <span key={i}>
+                {line}
+                {i < arr.length - 1 ? <br /> : null}
+              </span>
             ))}
           </h2>
           <ShowcaseTabs items={cases} />
@@ -143,9 +165,14 @@ export function HomeView({ locale, home, products, cases, settings }: Props) {
             <div className={`feature-row${index % 2 === 1 ? " reverse" : ""}`} key={feature.tag}>
               <div>
                 <span className="feature-tag reveal">{feature.tag}</span>
-                <h3 className="reveal d1">{formatMultiline(feature.title).map((line, i, arr) => (
-                  <span key={i}>{line}{i < arr.length - 1 ? <br /> : null}</span>
-                ))}</h3>
+                <h3 className="reveal d1">
+                  {formatMultiline(feature.title).map((line, i, arr) => (
+                    <span key={i}>
+                      {line}
+                      {i < arr.length - 1 ? <br /> : null}
+                    </span>
+                  ))}
+                </h3>
                 <p className="reveal d2">{feature.description}</p>
                 <div className="flist reveal d3">
                   {feature.bullets.map((bullet) => (
@@ -175,70 +202,67 @@ export function HomeView({ locale, home, products, cases, settings }: Props) {
               <div className="label reveal" style={{ background: "rgba(255,255,255,.1)", color: "#fff" }}>
                 CONTACT
               </div>
-              <h2 className="h2 reveal d1">{formatMultiline(home.contactTitle).map((line, i, arr) => (
-                <span key={i}>{line}{i < arr.length - 1 ? <br /> : null}</span>
-              ))}</h2>
+              <h2 className="h2 reveal d1">
+                {formatMultiline(home.contactTitle).map((line, i, arr) => (
+                  <span key={i}>
+                    {line}
+                    {i < arr.length - 1 ? <br /> : null}
+                  </span>
+                ))}
+              </h2>
               <p className="lead reveal d2">{home.contactLead}</p>
               <div className="info-list reveal d3">
                 {settings.phone ? (
                   <div className="row">
-                    <div className="ic">☎</div>
+                    <div className="ic">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2">
+                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z" />
+                      </svg>
+                    </div>
                     <div>
-                      <div className="k">{locale === "ko" ? "전화" : "Phone"}</div>
-                      <div className="val"><a href={`tel:${settings.phone}`}>{settings.phone}</a></div>
+                      <div className="k">{t("전화", "Phone")}</div>
+                      <div className="val">
+                        <a href={`tel:${settings.phone}`}>{settings.phone}</a>
+                      </div>
                     </div>
                   </div>
                 ) : null}
                 <div className="row">
-                  <div className="ic">✉</div>
+                  <div className="ic">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2">
+                      <rect x="2" y="4" width="20" height="16" rx="2" />
+                      <path d="m22 7-10 5L2 7" />
+                    </svg>
+                  </div>
                   <div>
-                    <div className="k">{locale === "ko" ? "이메일" : "Email"}</div>
-                    <div className="val"><a href={`mailto:${settings.email}`}>{settings.email}</a></div>
+                    <div className="k">{t("이메일", "Email")}</div>
+                    <div className="val">
+                      <a href={`mailto:${settings.email}`}>{settings.email}</a>
+                    </div>
                   </div>
                 </div>
                 {settings.address ? (
                   <div className="row">
-                    <div className="ic">📍</div>
+                    <div className="ic">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2">
+                        <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z" />
+                        <circle cx="12" cy="10" r="3" />
+                      </svg>
+                    </div>
                     <div>
-                      <div className="k">{locale === "ko" ? "오시는 길" : "Office"}</div>
+                      <div className="k">{t("오시는 길", "Office")}</div>
                       <div className="val">{settings.address}</div>
                     </div>
                   </div>
                 ) : null}
               </div>
             </div>
-            <ContactFormPlaceholder
-              locale={locale}
-              label={locale === "ko" ? "문의 보내기" : "Send message"}
-            />
+            <ContactForm locale={locale} />
           </div>
         </div>
       </section>
 
-      <footer>
-        <div className="wrap">
-          <div className="foot-grid">
-            <div>
-              <div className="logo" aria-label="AIAN">
-                <img className="logo-mark" src="/assets/aian-mark.png" alt="" />
-                <img className="logo-wordmark" src="/assets/aian-wordmark.png" alt="AIAN" />
-              </div>
-              <p>{settings.footerTagline}</p>
-            </div>
-            <div className="foot-col">
-              <h5>{locale === "ko" ? "회사" : "Company"}</h5>
-              <a href={`/${locale}/about/intro`}>{locale === "ko" ? "AIAN 소개" : "About AIAN"}</a>
-              <a href={`/${locale}/about/ceo`}>CEO</a>
-              <a href={`/${locale}/about/history`}>{locale === "ko" ? "회사 연혁" : "History"}</a>
-              <a href={`/${locale}/about/location`}>Location</a>
-            </div>
-          </div>
-          <div className="foot-bottom">
-            <span>© 2026 AIAN Inc.</span>
-            <span>CMS · Strapi + Next.js</span>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter locale={locale} settings={settings} />
     </>
   );
 }
