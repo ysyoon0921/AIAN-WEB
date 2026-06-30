@@ -14,7 +14,7 @@ if not exist .env.local copy .env.local.example .env.local
 
 if not exist node_modules (
   echo [1/2] npm install in web/ ...
-  call "%NODEJS_DIR%npm.cmd" install
+  call "%NODEJS_DIR%\npm.cmd" install
   if errorlevel 1 (
     echo [ERROR] npm install failed
     pause
@@ -25,4 +25,4 @@ if not exist node_modules (
 echo [2/2] Next.js -> http://localhost:3000/ko
 echo Start Strapi first: start-cms.bat
 echo.
-call "%NODEJS_DIR%npm.cmd" run dev
+call "%NODEJS_DIR%\npm.cmd" run dev

@@ -10,21 +10,21 @@ if not defined NODEJS_DIR (
   goto :no_node
 )
 
-if not exist "%NODEJS_DIR%npm.cmd" (
+if not exist "%NODEJS_DIR%\npm.cmd" (
   echo [ERROR] npm.cmd not found in %NODEJS_DIR%
   goto :no_node
 )
 
 echo Node:
-"%NODEJS_DIR%node.exe" -v
+"%NODEJS_DIR%\node.exe" -v
 echo npm:
-"%NODEJS_DIR%npm.cmd" -v
+"%NODEJS_DIR%\npm.cmd" -v
 echo.
 
 cd cms
 if not exist node_modules (
   echo [1/2] npm install in cms/ ... first run may take several minutes
-  call "%NODEJS_DIR%npm.cmd" install
+  call "%NODEJS_DIR%\npm.cmd" install
   if errorlevel 1 (
     echo [ERROR] npm install failed
     pause
@@ -35,7 +35,7 @@ if not exist node_modules (
 echo [2/2] Strapi CMS -> http://localhost:1337/admin
 echo Stop: Ctrl+C
 echo.
-call "%NODEJS_DIR%npm.cmd" run develop
+call "%NODEJS_DIR%\npm.cmd" run develop
 exit /b 0
 
 :no_node
