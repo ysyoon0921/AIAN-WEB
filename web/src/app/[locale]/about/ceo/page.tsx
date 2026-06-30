@@ -1,6 +1,6 @@
 import { AboutLayout } from "@/components/AboutLayout";
 import { formatMultiline } from "@/lib/format";
-import { getAboutCeo, LOCALES, type Locale } from "@/lib/strapi";
+import { getAboutCeo, LOCALES, mediaUrl, type Locale } from "@/lib/strapi";
 
 export const dynamic = "force-dynamic";
 
@@ -12,6 +12,7 @@ export default async function CeoPage({
   const { locale } = await params;
   const lang = (LOCALES.includes(locale as Locale) ? locale : "ko") as Locale;
   const ceo = await getAboutCeo(lang);
+  const photoSrc = mediaUrl(ceo.photo, "/assets/ceo-photo.png");
 
   return (
     <AboutLayout locale={lang} active="/about/ceo" pagePath="/about/ceo">
@@ -27,7 +28,7 @@ export default async function CeoPage({
       <p className="lead">{ceo.lead}</p>
       <div className="ceo-grid">
         <div className="ceo-photo">
-          <img src="/assets/aian-mark.png" alt={ceo.name} />
+          {photoSrc ? <img src={photoSrc} alt={ceo.name} /> : null}
         </div>
         <div>
           <div className="ceo-name">{ceo.name}</div>

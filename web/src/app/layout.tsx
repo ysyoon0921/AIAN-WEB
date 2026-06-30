@@ -2,15 +2,13 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "AIAN — CMS Preview",
-  description: "Strapi + Next.js CMS proof of concept",
+  title: "AIAN — CMS",
+  description: "Strapi + Next.js powered AIAN website",
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="ko">
       <head>
@@ -21,6 +19,8 @@ export default function RootLayout({
         />
         <link rel="stylesheet" href="/assets/nav.css" />
         <link rel="stylesheet" href="/assets/subpage.css" />
+        <link rel="stylesheet" href="/assets/home.css" />
+        <link rel="stylesheet" href="/assets/products-scroll.css" />
       </head>
       <body>{children}</body>
     </html>

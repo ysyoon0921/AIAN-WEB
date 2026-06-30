@@ -1,71 +1,98 @@
-# AIAN CMS (Strapi + Next.js) — POC
+# AIAN CMS (Strapi + Next.js)
 
-비개발자가 Strapi 관리자에서 About 콘텐츠(CEO, 연혁)를 수정하면 Next.js 페이지에 반영되는 POC입니다.
+비개발자가 Strapi 관리자에서 웹사이트 콘텐츠를 수정하면 Next.js 페이지에 반영됩니다.
 
 ## 구조
 
 | 폴더 | 역할 |
 |------|------|
-| `cms/` | Strapi 5 CMS (콘텐츠 입력·관리) |
-| `web/` | Next.js 16 프론트 (Strapi API 연동) |
-| `about/`, `index.html` 등 | 기존 정적 사이트 (그대로 유지) |
+| `cms/` | Strapi 5 CMS — 콘텐츠 입력·관리 |
+| `web/` | Next.js 16 — Strapi API 연동 프론트 |
+| `index.html`, `about/` 등 | 기존 정적 사이트 (그대로 유지) |
 
-## 사전 요구
+## 빠른 시작 (Windows)
 
-- Node.js 20+
-- npm
+```bat
+REM 터미널 1
+start-cms.bat
 
-## 1. Strapi 실행
-
-```bash
-cd cms
-npm install
-npm run develop
-```
-
-- 관리자: http://localhost:1337/admin (최초 1회 관리자 계정 생성)
-- API: http://localhost:1337/api
-
-최초 실행 시 `cms/src/index.ts` bootstrap이 다음을 자동 설정합니다.
-
-- ko/en 로케일
-- Public API 읽기 권한
-- CEO·연혁·타임라인·사이트 설정 시드 데이터
-
-## 2. Next.js 실행
-
-```bash
+REM 터미널 2 (최초 1회)
 cd web
-cp .env.local.example .env.local   # STRAPI_URL=http://localhost:1337
+copy .env.local.example .env.local
 npm install
-npm run dev
+start-web.bat
 ```
 
-- http://localhost:3000/ko/about/ceo
-- http://localhost:3000/ko/about/history
+- Strapi Admin: http://localhost:1337/admin
+- Next.js 사이트: http://localhost:3000/ko
 
-## 3. 콘텐츠 수정 테스트
+## 콘텐츠 타입
 
-1. Strapi Admin → **About CEO** 또는 **About History** 편집
-2. 저장·Publish
-3. Next.js 페이지 새로고침 → 변경 반영 확인
-
-## 콘텐츠 타입 (POC)
-
-| 타입 | 종류 | 용도 |
-|------|------|------|
-| About CEO | Single | CEO 페이지 |
-| About History | Single | 연혁 페이지 헤더 |
+| 타입 | 종류 | 페이지 |
+|------|------|--------|
+| Home Page | Single | 메인 `/ko` |
+| Product | Collection | 메인 Products 섹션 |
+| Case Study | Collection | 메인 Showcase 탭 |
+| About CEO | Single | `/ko/about/ceo` |
+| About History | Single | `/ko/about/history` |
+| About Intro | Single | `/ko/about/intro` |
+| About Location | Single | `/ko/about/location` |
 | Timeline Item | Collection | 연혁 타임라인 |
-| Site Settings | Single | 로고·푸터 등 (다음 단계) |
+| Site Settings | Single | 푸터·연락처 |
 
-## 다음 단계
+모든 타입은 **ko / en** 다국어 지원.
 
-- `home-page`, `product`, `case-study` 타입 추가
-- 메인 페이지 Next.js 마이그레이션
-- Strapi 미디어(CEO 사진) 업로드 연동
-- 배포: Strapi(서버) + Next.js(Vercel 등)
+## 콘텐츠 수정 방법
 
-## Windows 참고
+1. Strapi Admin 로그인
+2. Content Manager에서 해당 타입 선택
+3. 수정 후 **Publish**
+4. Next.js 페이지 새로고침 → 반영 확인
 
-기존 정적 사이트는 `serve.bat`로 계속 사용 가능합니다. CMS POC는 별도 터미널에서 `cms`와 `web`을 각각 실행하세요.
+CEO 사진은 About CEO → **photo** 필드에서 Strapi 미디어로 업로드·교체 가능.
+
+## 환경 변수
+
+### cms/.env
+
+```
+STRAPI_PLUGIN_I18N_INIT_LOCALE_CODE=ko
+WEB_URL=http://localhost:3000
+```
+
+### web/.env.local
+
+```
+STRAPI_URL=http://localhost:1337
+```
+
+## Docker 배포
+
+```bash
+docker compose up --build
+```
+
+- CMS: http://localhost:1337
+- Web: http://localhost:3000
+
+프로덕션에서는 `APP_KEYS`, `ADMIN_JWT_SECRET` 등 시크릿을 반드시 교체하세요.
+
+## Vercel + Strapi 서버
+
+1. Strapi를 VPS/Railway/Render 등에 배포 (`cms/Dockerfile` 참고)
+2. Vercel에 `web/` 프로젝트 연결
+3. Vercel 환경변수: `STRAPI_URL=https://your-strapi.example.com`
+4. Strapi CORS: `cms/config/middlewares.ts`에 Vercel 도메인 추가
+
+## Bootstrap 시드
+
+최초 실행 시 `cms/src/seed/bootstrap.ts`가 자동으로:
+
+- ko/en 로케일 설정
+- Public API 읽기 권한
+- 기존 HTML 콘텐츠 시드 (CEO, 연혁, 메인, Products, Case Studies 등)
+- CEO 사진 시드 (`cms/seed/ceo-photo.png`)
+
+## 기존 정적 사이트
+
+`serve.bat`로 기존 HTML 사이트는 계속 사용 가능합니다. CMS 버전은 `start-cms.bat` + `start-web.bat`로 별도 실행하세요.

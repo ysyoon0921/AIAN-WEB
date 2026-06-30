@@ -23,6 +23,10 @@
     "phone": {
       "type": "string"
     },
+    "address": {
+      "type": "text",
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
     "email": {
       "type": "email"
     },

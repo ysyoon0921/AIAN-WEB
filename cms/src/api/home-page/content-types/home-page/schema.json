@@ -1,0 +1,33 @@
+{
+  "kind": "singleType",
+  "collectionName": "home_pages",
+  "info": {
+    "singularName": "home-page",
+    "pluralName": "home-pages",
+    "displayName": "Home Page",
+    "description": "Main landing page content"
+  },
+  "options": { "draftAndPublish": true },
+  "pluginOptions": { "i18n": { "localized": true } },
+  "attributes": {
+    "eyebrow": { "type": "string", "pluginOptions": { "i18n": { "localized": true } } },
+    "heroTitle": { "type": "text", "pluginOptions": { "i18n": { "localized": true } } },
+    "heroSubtitle": { "type": "text", "pluginOptions": { "i18n": { "localized": true } } },
+    "heroTrust": { "type": "string", "pluginOptions": { "i18n": { "localized": true } } },
+    "ctaPrimary": { "type": "string", "pluginOptions": { "i18n": { "localized": true } } },
+    "ctaSecondary": { "type": "string", "pluginOptions": { "i18n": { "localized": true } } },
+    "statementLine1": { "type": "text", "pluginOptions": { "i18n": { "localized": true } } },
+    "statementMuted": { "type": "text", "pluginOptions": { "i18n": { "localized": true } } },
+    "howLabel": { "type": "string", "pluginOptions": { "i18n": { "localized": true } } },
+    "howTitle": { "type": "text", "pluginOptions": { "i18n": { "localized": true } } },
+    "howLead": { "type": "text", "pluginOptions": { "i18n": { "localized": true } } },
+    "productsLabel": { "type": "string", "pluginOptions": { "i18n": { "localized": true } } },
+    "productsTitle": { "type": "text", "pluginOptions": { "i18n": { "localized": true } } },
+    "productsLead": { "type": "text", "pluginOptions": { "i18n": { "localized": true } } },
+    "showcaseTitle": { "type": "text", "pluginOptions": { "i18n": { "localized": true } } },
+    "contactTitle": { "type": "text", "pluginOptions": { "i18n": { "localized": true } } },
+    "contactLead": { "type": "text", "pluginOptions": { "i18n": { "localized": true } } },
+    "marqueeItems": { "type": "json" },
+    "features": { "type": "json", "pluginOptions": { "i18n": { "localized": true } } }
+  }
+}
