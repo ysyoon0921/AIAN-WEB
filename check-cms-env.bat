@@ -1,36 +1,43 @@
 @echo off
-echo === AIAN CMS 환경 확인 ===
+echo === AIAN CMS 환경 진단 ===
 echo.
+
+call "%~dp0_ensure-node.bat"
 
 where node >nul 2>&1
 if errorlevel 1 (
-  echo [FAIL] node  — 미설치 또는 PATH 없음
-  echo        ^> https://nodejs.org/ LTS 설치 필요
+  echo [FAIL] node — PATH에서 찾을 수 없음
 ) else (
-  for /f "delims=" %%v in ('node -v') do echo [OK]   node  %%v
+  for /f "delims=" %%v in ('node -v 2^>nul') do echo [OK]   node  %%v
 )
 
 where npm >nul 2>&1
 if errorlevel 1 (
-  echo [FAIL] npm   — 미설치
+  echo [FAIL] npm
 ) else (
-  for /f "delims=" %%v in ('npm -v') do echo [OK]   npm   %%v
+  for /f "delims=" %%v in ('npm -v 2^>nul') do echo [OK]   npm   %%v
 )
 
 echo.
-if exist cms\package.json (
-  if exist cms\node_modules (echo [OK]   cms\node_modules) else (echo [--]   cms\node_modules ^(start-cms.bat 실행 시 자동 설치^))
+echo --- 설치 경로 확인 ---
+if exist "%ProgramFiles%\nodejs\node.exe" (
+  echo [FOUND] %ProgramFiles%\nodejs\node.exe
 ) else (
-  echo [FAIL] cms 폴더 없음 — git checkout cursor/strapi-nextjs-poc-bf00
+  echo [----]  %ProgramFiles%\nodejs\node.exe  ^(없음^)
 )
 
-if exist web\package.json (
-  if exist web\node_modules (echo [OK]   web\node_modules) else (echo [--]   web\node_modules ^(start-web.bat 실행 시 자동 설치^))
-) else (
-  echo [FAIL] web 폴더 없음
+if exist "%LOCALAPPDATA%\Programs\node\node.exe" (
+  echo [FOUND] %LOCALAPPDATA%\Programs\node\node.exe
 )
 
 echo.
-echo Node.js 설치 후 CMD를 **새로** 열고 start-cms.bat 실행
+if exist cms\package.json (echo [OK] cms\) else (echo [FAIL] cms\ — 브랜치 확인)
+if exist web\package.json (echo [OK] web\) else (echo [FAIL] web\)
+
 echo.
+if errorlevel 0 where node >nul 2>&1 && goto :ok
+echo node.exe 파일은 있는데 PATH만 안 잡힌 경우: fix-node-path.bat
+echo node.exe 자체가 없으면: https://nodejs.org LTS 재설치
+echo.
+:ok
 pause
