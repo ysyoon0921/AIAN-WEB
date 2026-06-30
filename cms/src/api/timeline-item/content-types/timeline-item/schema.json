@@ -1,0 +1,37 @@
+{
+  "kind": "collectionType",
+  "collectionName": "timeline_items",
+  "info": {
+    "singularName": "timeline-item",
+    "pluralName": "timeline-items",
+    "displayName": "Timeline Item",
+    "description": "Company history timeline entry"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "year": {
+      "type": "string",
+      "required": true
+    },
+    "title": {
+      "type": "string",
+      "required": true,
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
+    "description": {
+      "type": "text",
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
+    "sortOrder": {
+      "type": "integer",
+      "default": 0
+    }
+  }
+}

@@ -1,0 +1,17 @@
+.cms-badge {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: #0a1020;
+  color: #fff;
+}
+
+nav .lang a {
+  text-decoration: none;
+  color: inherit;
+}
+
+nav .lang a.on {
+  font-weight: 700;
+}

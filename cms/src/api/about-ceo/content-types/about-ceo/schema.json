@@ -1,0 +1,49 @@
+{
+  "kind": "singleType",
+  "collectionName": "about_ceos",
+  "info": {
+    "singularName": "about-ceo",
+    "pluralName": "about-ceos",
+    "displayName": "About CEO",
+    "description": "CEO page content"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "label": {
+      "type": "string",
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
+    "title": {
+      "type": "text",
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
+    "lead": {
+      "type": "text",
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
+    "name": {
+      "type": "string",
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
+    "role": {
+      "type": "string",
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
+    "body": {
+      "type": "richtext",
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
+    "photo": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": ["images"]
+    }
+  }
+}
