@@ -23,6 +23,8 @@ export const PUBLIC_ACTIONS = [
   'api::product.product.findOne',
   'api::case-study.case-study.find',
   'api::case-study.case-study.findOne',
+  'api::intro-card.intro-card.find',
+  'api::intro-card.intro-card.findOne',
 ];
 
 export async function enablePublicPermissions(strapi: Core.Strapi) {
@@ -202,70 +204,56 @@ async function seedAboutHistory(strapi: Core.Strapi) {
   });
 }
 
-function aboutIntroData(locale: 'ko' | 'en') {
+function aboutIntroHeader(locale: 'ko' | 'en') {
   const base = ABOUT_INTRO[locale];
-  const [c1, c2, c3, c4] = base.cards;
-  return {
-    label: base.label,
-    title: base.title,
-    lead: base.lead,
-    card1Title: c1.title,
-    card1Body: c1.body,
-    card2Title: c2.title,
-    card2Body: c2.body,
-    card3Title: c3.title,
-    card3Body: c3.body,
-    card4Title: c4.title,
-    card4Body: c4.body,
-  };
+  return { label: base.label, title: base.title, lead: base.lead };
 }
 
-async function reseedAboutIntro(strapi: Core.Strapi) {
+const INTRO_CARD_SLUGS = ['what-we-do', 'mission', 'core-values', 'on-the-floor'];
+
+async function seedAboutIntro(strapi: Core.Strapi) {
   const existing = await strapi.documents('api::about-intro.about-intro').findFirst({ locale: 'ko' });
-  if (existing?.documentId) {
-    await strapi.documents('api::about-intro.about-intro').delete({
-      documentId: existing.documentId,
-    });
-    strapi.log.info('Deleted About Intro document for reseed');
-  }
+  if (existing) return;
 
   await strapi.documents('api::about-intro.about-intro').create({
-    data: aboutIntroData('ko'),
+    data: aboutIntroHeader('ko'),
     locale: 'ko',
     status: 'published',
   });
   await strapi.documents('api::about-intro.about-intro').create({
-    data: aboutIntroData('en'),
+    data: aboutIntroHeader('en'),
     locale: 'en',
     status: 'published',
   });
-  strapi.log.info('Reseeded About Intro (ko + en)');
 }
 
-async function seedAboutIntro(strapi: Core.Strapi) {
-  const marker = path.join(process.cwd(), '.tmp', 'about-intro-flat-fields-v1');
-  const existing = await strapi.documents('api::about-intro.about-intro').findFirst({ locale: 'ko' });
+async function seedIntroCards(strapi: Core.Strapi) {
+  const existing = await strapi.documents('api::intro-card.intro-card').findFirst({ locale: 'ko' });
+  if (existing) return;
 
-  if (!existing) {
-    await strapi.documents('api::about-intro.about-intro').create({
-      data: aboutIntroData('ko'),
+  for (let i = 0; i < INTRO_CARD_SLUGS.length; i += 1) {
+    const slug = INTRO_CARD_SLUGS[i];
+    const ko = ABOUT_INTRO.ko.cards[i];
+    const en = ABOUT_INTRO.en.cards[i];
+    const doc = await strapi.documents('api::intro-card.intro-card').create({
+      data: {
+        slug,
+        sortOrder: i + 1,
+        title: ko.title,
+        body: ko.body,
+      },
       locale: 'ko',
       status: 'published',
     });
-    await strapi.documents('api::about-intro.about-intro').create({
-      data: aboutIntroData('en'),
+    await strapi.documents('api::intro-card.intro-card').update({
+      documentId: doc.documentId,
       locale: 'en',
+      data: {
+        title: en.title,
+        body: en.body,
+      },
       status: 'published',
     });
-    fs.mkdirSync(path.dirname(marker), { recursive: true });
-    fs.writeFileSync(marker, '1');
-    return;
-  }
-
-  if (!fs.existsSync(marker)) {
-    await reseedAboutIntro(strapi);
-    fs.mkdirSync(path.dirname(marker), { recursive: true });
-    fs.writeFileSync(marker, '1');
   }
 }
 
@@ -389,6 +377,7 @@ export async function seedContent(strapi: Core.Strapi) {
   await seedTimeline(strapi);
   await seedSiteSettings(strapi);
   await seedAboutIntro(strapi);
+  await seedIntroCards(strapi);
   await seedAboutLocation(strapi);
   await seedHomePage(strapi);
   await seedProducts(strapi);

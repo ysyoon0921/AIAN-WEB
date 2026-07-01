@@ -68,7 +68,8 @@ start-web.bat
 | Case Study | Collection | 메인 Showcase 탭 |
 | About CEO | Single | `/ko/about/ceo` |
 | About History | Single | `/ko/about/history` |
-| About Intro | Single | `/ko/about/intro` |
+| About Intro | Single | `/ko/about/intro` 상단 제목·설명 |
+| Intro Card | Collection | `/ko/about/intro` 카드 4개 |
 | About Location | Single | `/ko/about/location` |
 | Timeline Item | Collection | 연혁 타임라인 |
 | Site Settings | Single | 푸터·연락처 |
@@ -94,20 +95,16 @@ start-web.bat
 
 CEO 사진은 About CEO → **photo** 필드에서 Strapi 미디어로 업로드·교체 가능.
 
-### About Intro 카드 수정
+### About Intro 카드 수정 (Case Study와 동일 방식)
 
-`AIAN 소개` 페이지 카드 4개는 **개별 필드**로 수정합니다 (Strapi 재시작 후):
+1. **About Intro** — 페이지 상단 `label`, `title`, `lead`
+2. **Intro Card** — 카드 4개 (Collection, Case Study처럼 항목별로 열기)
+   - Content Manager → **Intro Card** → 항목 선택
+   - `title`, `body` 수정 → **Save**
+   - Locale: **Korean (ko)** / **English (en)**
+3. http://localhost:3000/ko/about/intro 새로고침
 
-| 필드 | 카드 |
-|------|------|
-| card1Title / card1Body | 1번 카드 |
-| card2Title / card2Body | 2번 카드 |
-| card3Title / card3Body | 3번 카드 |
-| card4Title / card4Body | 4번 카드 |
-
-수정 후 **Save** → http://localhost:3000/ko/about/intro 새로고침
-
-카드 저장 오류 시: Strapi 종료 → `reset-about-intro.bat` → `start-cms.bat`
+카드가 꼬였을 때: Strapi 종료 → `reset-about-intro.bat` → `start-cms.bat`
 
 ## 환경 변수
 

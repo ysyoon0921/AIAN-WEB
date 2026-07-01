@@ -5,21 +5,13 @@
     "singularName": "about-intro",
     "pluralName": "about-intros",
     "displayName": "About Intro",
-    "description": "About AIAN intro page"
+    "description": "About AIAN intro page header (cards are in Intro Card collection)"
   },
   "options": { "draftAndPublish": false },
   "pluginOptions": { "i18n": { "localized": true } },
   "attributes": {
     "label": { "type": "string", "pluginOptions": { "i18n": { "localized": true } } },
     "title": { "type": "text", "pluginOptions": { "i18n": { "localized": true } } },
-    "lead": { "type": "text", "pluginOptions": { "i18n": { "localized": true } } },
-    "card1Title": { "type": "string", "pluginOptions": { "i18n": { "localized": true } } },
-    "card1Body": { "type": "text", "pluginOptions": { "i18n": { "localized": true } } },
-    "card2Title": { "type": "string", "pluginOptions": { "i18n": { "localized": true } } },
-    "card2Body": { "type": "text", "pluginOptions": { "i18n": { "localized": true } } },
-    "card3Title": { "type": "string", "pluginOptions": { "i18n": { "localized": true } } },
-    "card3Body": { "type": "text", "pluginOptions": { "i18n": { "localized": true } } },
-    "card4Title": { "type": "string", "pluginOptions": { "i18n": { "localized": true } } },
-    "card4Body": { "type": "text", "pluginOptions": { "i18n": { "localized": true } } }
+    "lead": { "type": "text", "pluginOptions": { "i18n": { "localized": true } } }
   }
 }
