@@ -40,7 +40,17 @@ if "%CMS_UP%"=="0" (
   echo.
 ) else (
   echo [OK] Strapi detected on port 1337
-  echo.
+  REM Port open does not mean API is ready — hit a real endpoint.
+  powershell -NoProfile -Command "try { $r = Invoke-WebRequest -Uri 'http://127.0.0.1:1337/api/home-page?locale=ko' -UseBasicParsing -TimeoutSec 8; if ($r.StatusCode -eq 200) { exit 0 } else { exit 1 } } catch { exit 1 }" >nul 2>&1
+  if errorlevel 1 (
+    echo [WARN] Port 1337 is open but Strapi API did not respond yet.
+    echo Wait for "Strapi started successfully" in the CMS window, then refresh.
+    echo If this persists, run:  reset-about-intro.bat   then   start-cms.bat
+    echo.
+  ) else (
+    echo [OK] Strapi API responding
+    echo.
+  )
 )
 
 cd web

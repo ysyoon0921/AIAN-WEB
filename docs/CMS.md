@@ -118,7 +118,7 @@ WEB_URL=http://localhost:3000
 ### web/.env.local
 
 ```
-STRAPI_URL=http://localhost:1337
+STRAPI_URL=http://127.0.0.1:1337
 ```
 
 ## Docker 배포
@@ -151,3 +151,13 @@ docker compose up --build
 ## 기존 정적 사이트
 
 `serve.bat`로 기존 HTML 사이트는 계속 사용 가능합니다. CMS 버전은 `start-cms.bat` + `start-web.bat`로 별도 실행하세요.
+
+## 문제 해결
+
+### 브라우저에 `fetch failed` / `/ko`가 비어 있음
+
+1. **Strapi가 완전히 떴는지 확인** — CMS 창에 `Strapi started successfully` 가 보일 때까지 기다린 뒤 새로고침
+2. **API 직접 확인** — 브라우저에서 http://127.0.0.1:1337/api/home-page?locale=ko 열어 JSON이 보이면 CMS 정상
+3. **`web/.env.local`** — `STRAPI_URL=http://127.0.0.1:1337` 권장 (Windows에서 `localhost`는 IPv6 문제로 실패할 수 있음). 코드가 `localhost`를 자동으로 `127.0.0.1`로 바꿉니다.
+4. **스키마 변경 후** — `reset-about-intro.bat` → `start-cms.bat` → `start-web.bat` 순서로 재시작
+5. **진단** — `check-cms-env.bat` 실행 (포트 + API 응답 확인)

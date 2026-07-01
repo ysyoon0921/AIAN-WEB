@@ -1,4 +1,36 @@
-const STRAPI_URL = process.env.STRAPI_URL ?? "http://localhost:1337";
+function normalizeStrapiUrl(url?: string) {
+  const base = url?.trim() || "http://127.0.0.1:1337";
+  try {
+    const parsed = new URL(base);
+    // Windows Node fetch often fails on localhost (IPv6 ::1 vs IPv4 127.0.0.1).
+    if (parsed.hostname === "localhost") {
+      parsed.hostname = "127.0.0.1";
+    }
+    return parsed.origin;
+  } catch {
+    return "http://127.0.0.1:1337";
+  }
+}
+
+const STRAPI_URL = normalizeStrapiUrl(process.env.STRAPI_URL);
+
+async function fetchWithRetry(url: string, init?: RequestInit, retries = 2): Promise<Response> {
+  let lastError: unknown;
+  for (let attempt = 0; attempt <= retries; attempt++) {
+    try {
+      return await fetch(url, init);
+    } catch (error) {
+      lastError = error;
+      if (attempt < retries) {
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+      }
+    }
+  }
+  const cause = lastError instanceof Error ? lastError.message : String(lastError);
+  throw new Error(`Strapi connection failed (${url}): ${cause}`, {
+    cause: lastError instanceof Error ? lastError : undefined,
+  });
+}
 
 export type Locale = "ko" | "en";
 
@@ -24,9 +56,9 @@ async function fetchStrapi<T>(path: string, locale: Locale, query?: Record<strin
   }
   // Draft & Publish is disabled on all content types — omit status filter.
 
-  const res = await fetch(url.toString(), { cache: "no-store" });
+  const res = await fetchWithRetry(url.toString(), { cache: "no-store" });
   if (!res.ok) {
-    throw new Error(`Strapi request failed: ${res.status} ${path}`);
+    throw new Error(`Strapi request failed: ${res.status} ${url.pathname}`);
   }
   return res.json() as Promise<T>;
 }

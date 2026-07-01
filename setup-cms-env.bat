@@ -25,7 +25,7 @@ if errorlevel 1 (
 )
 
 if not exist "web\.env.local" (
-  echo STRAPI_URL=http://localhost:1337> "web\.env.local"
+  echo STRAPI_URL=http://127.0.0.1:1337> "web\.env.local"
   echo [OK] Created web\.env.local
 ) else (
   echo [OK] web\.env.local already exists
