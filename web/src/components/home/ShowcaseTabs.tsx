@@ -1,13 +1,15 @@
 "use client";
 
 import { useState } from "react";
-import type { CaseStudy } from "@/lib/strapi";
+import type { CaseStudy, Locale } from "@/lib/strapi";
+import { localePath } from "@/lib/nav-config";
 
 type Props = {
+  locale: Locale;
   items: CaseStudy[];
 };
 
-export function ShowcaseTabs({ items }: Props) {
+export function ShowcaseTabs({ locale, items }: Props) {
   const [active, setActive] = useState(0);
 
   return (
@@ -46,7 +48,7 @@ export function ShowcaseTabs({ items }: Props) {
               <p className="case-desc">{item.description}</p>
               <div className="case-links">
                 {item.links.map((link) => (
-                  <a key={link.url + link.label} className="case-link" href={link.url}>
+                  <a key={link.url + link.label} className="case-link" href={localePath(locale, link.url)}>
                     {link.label}
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                       <path d="M9 6l6 6-6 6" />

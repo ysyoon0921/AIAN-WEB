@@ -1,0 +1,58 @@
+{
+  "heads": {
+    "solutions": { "ko": "솔루션", "en": "Solutions", "label": "SOLUTIONS" },
+    "industry": { "ko": "산업분야", "en": "Industry", "label": "INDUSTRY" },
+    "customers": { "ko": "고객사례", "en": "Customers", "label": "CUSTOMERS" }
+  },
+  "solutions": [
+    {
+      "slug": "monitoring", "navKo": "실시간 모니터링", "navEn": "Live Monitoring",
+      "ko": { "h1": "설비 상태를\n한눈에 봅니다", "lead": "흩어진 센서 데이터를 하나의 화면으로. 이상이 생기기 전에 먼저 알려드립니다.", "body": ["라인별 가동률, 설비 상태, 알람 이력을 실시간으로 집계합니다.", "현장·사무실·모바일에서 동일한 화면으로 확인할 수 있습니다."] },
+      "en": { "h1": "See every machine\nat a glance", "lead": "Scattered sensor data on a single screen. We notify you before problems arise.", "body": ["Aggregate uptime, machine status, and alerts in real time.", "Same view on the floor, in the office, and on mobile."] }
+    },
+    {
+      "slug": "qms", "navKo": "품질 관리 (QMS)", "navEn": "Quality (QMS)",
+      "ko": { "h1": "불량을 줄이는\n품질 관리", "lead": "검사·불량·시정조치 데이터를 한곳에서 관리합니다.", "body": ["공정별 품질 지표를 자동으로 수집하고 추적합니다.", "반복 불량 패턴을 분석해 근본 원인을 찾습니다."] },
+      "en": { "h1": "Quality management\nthat cuts defects", "lead": "Manage inspection, defect, and corrective action data in one place.", "body": ["Automatically collect and track quality metrics by process.", "Analyze recurring defect patterns to find root causes."] }
+    },
+    {
+      "slug": "mes", "navKo": "생산 계획 (MES)", "navEn": "Production (MES)",
+      "ko": { "h1": "생산 계획과\n실적을 연결", "lead": "계획·지시·실적·재고를 하나의 흐름으로 이어줍니다.", "body": ["작업 지시부터 완료 보고까지 디지털로 처리합니다.", "납기·수율·병목을 한 화면에서 확인합니다."] },
+      "en": { "h1": "Connect production\nplans to results", "lead": "Link planning, orders, output, and inventory in one flow.", "body": ["Handle work orders through completion digitally.", "See delivery, yield, and bottlenecks on one screen."] }
+    },
+    {
+      "slug": "predictive", "navKo": "설비 예지보전", "navEn": "Predictive Care",
+      "ko": { "h1": "고장 전에\n미리 대응", "lead": "설비 데이터로 고장 징후를 감지하고 보전 일정을 최적화합니다.", "body": ["진동·온도·전류 패턴을 분석해 이상을 조기에 탐지합니다.", "계획 정비와 긴급 수리 비용을 동시에 줄입니다."] },
+      "en": { "h1": "Act before\nbreakdowns", "lead": "Detect failure signs from machine data and optimize maintenance.", "body": ["Analyze vibration, temperature, and current to catch anomalies early.", "Reduce both planned maintenance and emergency repair costs."] }
+    }
+  ],
+  "industry": [
+    {
+      "slug": "electric", "navKo": "전기 · 전자", "navEn": "Electric · Electronic",
+      "ko": { "h1": "전기 · 전자\n제조 현장", "lead": "다품종 소량 생산에 맞춘 유연한 현장 관리.", "body": ["조립·검사·출하 공정의 데이터를 실시간으로 연결합니다.", "BOM 변경과 라인 전환에도 빠르게 대응합니다."] },
+      "en": { "h1": "Electric &\nelectronic manufacturing", "lead": "Flexible shop-floor management for high-mix production.", "body": ["Connect assembly, inspection, and shipping data in real time.", "Adapt quickly to BOM changes and line switches."] }
+    },
+    {
+      "slug": "semiconductor", "navKo": "반도체", "navEn": "Semiconductor",
+      "ko": { "h1": "반도체\n제조 솔루션", "lead": "정밀 공정에 필요한 추적성과 품질 관리.", "body": ["Lot·장비·공정 이력을 완전하게 추적합니다.", "수율 분석과 이상 공정 탐지를 자동화합니다."] },
+      "en": { "h1": "Semiconductor\nmanufacturing", "lead": "Traceability and quality control for precision processes.", "body": ["Full traceability across lots, equipment, and processes.", "Automate yield analysis and anomaly detection."] }
+    },
+    {
+      "slug": "automotive", "navKo": "자동차", "navEn": "Automotive",
+      "ko": { "h1": "자동차\n부품 · 완성차", "lead": "엄격한 품질 기준을 충족하는 생산 관리.", "body": ["부품 추적과 조립 이력을 체계적으로 관리합니다.", "OEM·Tier 협력사 요구사항에 맞는 리포트를 제공합니다."] },
+      "en": { "h1": "Automotive\nparts & assembly", "lead": "Production management that meets strict quality standards.", "body": ["Systematically manage part traceability and assembly history.", "Reports aligned with OEM and Tier supplier requirements."] }
+    }
+  ],
+  "customers": [
+    {
+      "slug": "clients", "navKo": "고객사", "navEn": "Clients",
+      "ko": { "h1": "함께하는\n제조 기업", "lead": "120개 이상의 제조 현장이 AIAN과 함께합니다.", "body": ["전기·전자, 반도체, 자동차, 기계 부품 등 다양한 산업군의 고객사가 있습니다.", "중소·중견 제조사부터 글로벌 기업까지 폭넓게 지원합니다."] },
+      "en": { "h1": "Manufacturers\nwe work with", "lead": "120+ manufacturing sites trust AIAN.", "body": ["Clients span electronics, semiconductors, automotive, and machinery.", "From SMB manufacturers to global enterprises."] }
+    },
+    {
+      "slug": "cases", "navKo": "도입 사례", "navEn": "Case Studies",
+      "ko": { "h1": "현장에서 검증된\n도입 사례", "lead": "실제 제조 현장에서 달성한 성과를 소개합니다.", "body": ["가동률 향상, 불량률 감소, 데이터 집계 시간 단축 등 구체적 성과가 있습니다.", "도입 과정과 현장 피드백을 함께 공유합니다."] },
+      "en": { "h1": "Proven results\non the floor", "lead": "Results achieved on real factory floors.", "body": ["Concrete gains in uptime, defect reduction, and data aggregation speed.", "We share the rollout process and on-site feedback."] }
+    }
+  ]
+}

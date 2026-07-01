@@ -120,6 +120,7 @@ export function HomeView({ locale, home, products, cases, settings }: Props) {
       <SystemFlowSection locale={locale} home={home} />
 
       <ProductsSection
+        locale={locale}
         products={products}
         label={home.productsLabel}
         title={home.productsTitle}
@@ -138,7 +139,7 @@ export function HomeView({ locale, home, products, cases, settings }: Props) {
               </span>
             ))}
           </h2>
-          <ShowcaseTabs items={cases} />
+          <ShowcaseTabs locale={locale} items={cases} />
         </div>
       </section>
 

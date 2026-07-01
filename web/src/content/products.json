@@ -1,0 +1,67 @@
+{
+  "items": [
+    {
+      "slug": "factorylens",
+      "cardId": "FL-01",
+      "sortOrder": 1,
+      "theme": "default",
+      "linkUrl": "/solutions/monitoring",
+      "ko": {
+        "badge": "실시간 모니터링",
+        "name": "FactoryLens",
+        "headline": "흩어진 데이터를 한 화면으로",
+        "description": "설비·센서·생산 데이터를 실시간으로 모아 보여주는 모니터링 OS. 이상이 생기기 전에 먼저 알려드립니다.",
+        "tags": ["# 실시간 대시보드", "# 이상 알림"]
+      },
+      "en": {
+        "badge": "Live Monitoring",
+        "name": "FactoryLens",
+        "headline": "All your data, on one screen",
+        "description": "A monitoring OS that gathers equipment, sensor, and production data in real time — and alerts you before problems happen.",
+        "tags": ["# Live dashboard", "# Alerts"]
+      }
+    },
+    {
+      "slug": "qualityai",
+      "cardId": "QA-02",
+      "sortOrder": 2,
+      "theme": "dark",
+      "linkUrl": "/solutions/qms",
+      "ko": {
+        "badge": "AI 품질 분석",
+        "name": "QualityAI",
+        "headline": "불량 원인을 스스로 찾아냅니다",
+        "description": "언제·어디서·왜 불량이 났는지 AI가 자동으로 분석하는 품질 에이전트. 사람이 놓치는 패턴까지 잡아냅니다.",
+        "tags": ["# 원인 자동분석", "# 예측 경보"]
+      },
+      "en": {
+        "badge": "AI Quality",
+        "name": "QualityAI",
+        "headline": "It finds the defect cause itself",
+        "description": "A quality agent where AI automatically analyzes when, where, and why defects occur — catching patterns people miss.",
+        "tags": ["# Root-cause AI", "# Prediction"]
+      }
+    },
+    {
+      "slug": "planflow",
+      "cardId": "PF-03",
+      "sortOrder": 3,
+      "theme": "default",
+      "linkUrl": "/solutions/mes",
+      "ko": {
+        "badge": "생산계획 자동화",
+        "name": "PlanFlow",
+        "headline": "주문부터 실적까지 자동으로 흐릅니다",
+        "description": "주문이 들어오면 생산계획이 자동으로 서고, 현장 실적이 실시간으로 반영되는 생산관리(MES) 솔루션.",
+        "tags": ["# 계획 자동생성", "# 실적 연동"]
+      },
+      "en": {
+        "badge": "Planning",
+        "name": "PlanFlow",
+        "headline": "Order to output, flows automatically",
+        "description": "An MES solution where orders auto-generate plans and floor results sync back in real time.",
+        "tags": ["# Auto-planning", "# Live sync"]
+      }
+    }
+  ]
+}

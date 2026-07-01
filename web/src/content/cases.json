@@ -1,0 +1,252 @@
+{
+  "items": [
+    {
+      "slug": "hansung", "sortOrder": 1,
+      "ko": {
+        "tabLabel": "한성전자", "category": "MES",
+        "title": "생산 계획과 실적을\n하나의 흐름으로 연결",
+        "description": "다품종 조립 라인의 작업 지시·실적·재고를 디지털로 통합했습니다. 엑셀 기반 수기 관리를 줄이고 납기 준수율을 높였습니다.",
+        "bullets": ["납기 준수율 18%p 향상", "실적 집계 시간 70% 단축"],
+        "mockTitle": "생산 현황",
+        "mockStats": [{ "value": "94%", "label": "가동률" }, { "value": "1,284", "label": "생산량" }],
+        "links": [
+          { "label": "생산 계획 (MES)", "url": "/solutions/mes" },
+          { "label": "실시간 모니터링", "url": "/solutions/monitoring" },
+          { "label": "도입 사례 더보기", "url": "/customers/cases" },
+          { "label": "상담 신청", "url": "#contact" }
+        ]
+      },
+      "en": {
+        "tabLabel": "Hansung", "category": "MES",
+        "title": "Production plans and results\nin one connected flow",
+        "description": "Digitally integrated work orders, output, and inventory on a high-mix assembly line — reducing spreadsheets and improving on-time delivery.",
+        "bullets": ["On-time delivery up 18 points", "70% faster output reporting"],
+        "mockTitle": "Production",
+        "mockStats": [{ "value": "94%", "label": "Uptime" }, { "value": "1,284", "label": "Output" }],
+        "links": [
+          { "label": "Production (MES)", "url": "/solutions/mes" },
+          { "label": "Live Monitoring", "url": "/solutions/monitoring" },
+          { "label": "More case studies", "url": "/customers/cases" },
+          { "label": "Contact us", "url": "#contact" }
+        ]
+      }
+    },
+    {
+      "slug": "daeyang", "sortOrder": 2,
+      "ko": {
+        "tabLabel": "대양정밀", "category": "QMS",
+        "title": "불량 데이터를\n추적 가능한 품질 관리로",
+        "description": "검사·불량·시정조치 이력을 공정별로 연결했습니다. 반복 불량 패턴을 분석해 근본 원인을 빠르게 찾습니다.",
+        "bullets": ["불량률 42% 감소", "품질 리포트 작성 시간 80% 단축"],
+        "mockTitle": "품질 분석",
+        "mockStats": [{ "value": "0.8%", "label": "불량률" }, { "value": "78%", "label": "수율" }],
+        "links": [
+          { "label": "품질 관리 (QMS)", "url": "/solutions/qms" },
+          { "label": "전기 · 전자", "url": "/industry/electric" },
+          { "label": "도입 사례 더보기", "url": "/customers/cases" },
+          { "label": "상담 신청", "url": "#contact" }
+        ]
+      },
+      "en": {
+        "tabLabel": "Daeyang", "category": "QMS",
+        "title": "Traceable quality management\nfor every defect",
+        "description": "Linked inspection, defect, and corrective action history by process — analyzing recurring patterns to find root causes faster.",
+        "bullets": ["42% defect reduction", "80% faster quality reporting"],
+        "mockTitle": "Quality",
+        "mockStats": [{ "value": "0.8%", "label": "Defects" }, { "value": "78%", "label": "Yield" }],
+        "links": [
+          { "label": "Quality (QMS)", "url": "/solutions/qms" },
+          { "label": "Electric", "url": "/industry/electric" },
+          { "label": "More case studies", "url": "/customers/cases" },
+          { "label": "Contact us", "url": "#contact" }
+        ]
+      }
+    },
+    {
+      "slug": "jinwoo", "sortOrder": 3,
+      "ko": {
+        "tabLabel": "진우테크", "category": "MONITORING",
+        "title": "설비 상태를\n실시간으로 한 화면에",
+        "description": "흩어진 PLC·센서 데이터를 통합 대시보드로 모았습니다. 이상 발생 전 알람으로 다운타임을 줄였습니다.",
+        "bullets": ["비계획 정지 35% 감소", "현장·사무실 동일 화면 제공"],
+        "mockTitle": "설비 모니터링",
+        "mockStats": [{ "value": "LIVE", "label": "실시간" }, { "value": "12", "label": "라인" }],
+        "links": [
+          { "label": "실시간 모니터링", "url": "/solutions/monitoring" },
+          { "label": "설비 예지보전", "url": "/solutions/predictive" },
+          { "label": "도입 사례 더보기", "url": "/customers/cases" },
+          { "label": "상담 신청", "url": "#contact" }
+        ]
+      },
+      "en": {
+        "tabLabel": "Jinwoo", "category": "MONITORING",
+        "title": "Every machine status\non one live screen",
+        "description": "Unified scattered PLC and sensor data into one dashboard — reducing downtime with pre-failure alerts.",
+        "bullets": ["35% fewer unplanned stops", "Same view on floor and office"],
+        "mockTitle": "Monitoring",
+        "mockStats": [{ "value": "LIVE", "label": "Live" }, { "value": "12", "label": "Lines" }],
+        "links": [
+          { "label": "Live Monitoring", "url": "/solutions/monitoring" },
+          { "label": "Predictive Care", "url": "/solutions/predictive" },
+          { "label": "More case studies", "url": "/customers/cases" },
+          { "label": "Contact us", "url": "#contact" }
+        ]
+      }
+    },
+    {
+      "slug": "kmetal", "sortOrder": 4,
+      "ko": {
+        "tabLabel": "K-METAL", "category": "PREDICTIVE",
+        "title": "고장 전에\n미리 대응하는 예지보전",
+        "description": "진동·온도·전류 패턴을 분석해 설비 이상을 조기에 탐지합니다. 긴급 수리와 계획 정비 비용을 동시에 줄였습니다.",
+        "bullets": ["긴급 수리 건수 50% 감소", "설비 가동률 12%p 향상"],
+        "mockTitle": "예지보전",
+        "mockStats": [{ "value": "3", "label": "경보" }, { "value": "96%", "label": "정확도" }],
+        "links": [
+          { "label": "설비 예지보전", "url": "/solutions/predictive" },
+          { "label": "자동차", "url": "/industry/automotive" },
+          { "label": "도입 사례 더보기", "url": "/customers/cases" },
+          { "label": "상담 신청", "url": "#contact" }
+        ]
+      },
+      "en": {
+        "tabLabel": "K-METAL", "category": "PREDICTIVE",
+        "title": "Predictive maintenance\nbefore breakdowns",
+        "description": "Early anomaly detection from vibration, temperature, and current patterns — cutting both emergency and planned maintenance costs.",
+        "bullets": ["50% fewer emergency repairs", "Uptime up 12 points"],
+        "mockTitle": "Predictive",
+        "mockStats": [{ "value": "3", "label": "Alerts" }, { "value": "96%", "label": "Accuracy" }],
+        "links": [
+          { "label": "Predictive Care", "url": "/solutions/predictive" },
+          { "label": "Automotive", "url": "/industry/automotive" },
+          { "label": "More case studies", "url": "/customers/cases" },
+          { "label": "Contact us", "url": "#contact" }
+        ]
+      }
+    },
+    {
+      "slug": "seojin", "sortOrder": 5,
+      "ko": {
+        "tabLabel": "서진산업", "category": "SEMICONDUCTOR",
+        "title": "정밀 공정의\n추적성과 품질 관리",
+        "description": "Lot·장비·공정 이력을 완전하게 추적하고 수율 분석을 자동화했습니다. 이상 공정 탐지 시간을 크게 줄였습니다.",
+        "bullets": ["이상 공정 탐지 3.5배 빨라짐", "감사 대응 문서 자동 생성"],
+        "mockTitle": "Lot 추적",
+        "mockStats": [{ "value": "100%", "label": "추적" }, { "value": "92%", "label": "수율" }],
+        "links": [
+          { "label": "반도체", "url": "/industry/semiconductor" },
+          { "label": "품질 관리 (QMS)", "url": "/solutions/qms" },
+          { "label": "도입 사례 더보기", "url": "/customers/cases" },
+          { "label": "상담 신청", "url": "#contact" }
+        ]
+      },
+      "en": {
+        "tabLabel": "Seojin", "category": "SEMICONDUCTOR",
+        "title": "Traceability and quality\nfor precision processes",
+        "description": "Full lot, equipment, and process traceability with automated yield analysis — dramatically faster anomaly detection.",
+        "bullets": ["3.5x faster anomaly detection", "Automated audit documentation"],
+        "mockTitle": "Traceability",
+        "mockStats": [{ "value": "100%", "label": "Track" }, { "value": "92%", "label": "Yield" }],
+        "links": [
+          { "label": "Semiconductor", "url": "/industry/semiconductor" },
+          { "label": "Quality (QMS)", "url": "/solutions/qms" },
+          { "label": "More case studies", "url": "/customers/cases" },
+          { "label": "Contact us", "url": "#contact" }
+        ]
+      }
+    },
+    {
+      "slug": "nexonm", "sortOrder": 6,
+      "ko": {
+        "tabLabel": "넥슨-M", "category": "INTEGRATION",
+        "title": "기존 ERP와\n현장 데이터 연결",
+        "description": "ERP·MES·설비 데이터를 API로 연결해 이중 입력을 없앴습니다. 경영진과 현장이 같은 숫자를 봅니다.",
+        "bullets": ["수기 입력 90% 제거", "데이터 집계 속도 3.5배 향상"],
+        "mockTitle": "데이터 통합",
+        "mockStats": [{ "value": "ERP", "label": "연동" }, { "value": "MES", "label": "연동" }],
+        "links": [
+          { "label": "생산 계획 (MES)", "url": "/solutions/mes" },
+          { "label": "실시간 모니터링", "url": "/solutions/monitoring" },
+          { "label": "도입 사례 더보기", "url": "/customers/cases" },
+          { "label": "상담 신청", "url": "#contact" }
+        ]
+      },
+      "en": {
+        "tabLabel": "Nexon-M", "category": "INTEGRATION",
+        "title": "Connecting legacy ERP\nwith shop-floor data",
+        "description": "Connected ERP, MES, and machine data via API — eliminating double entry so management and the floor see the same numbers.",
+        "bullets": ["90% less manual entry", "3.5x faster data aggregation"],
+        "mockTitle": "Integration",
+        "mockStats": [{ "value": "ERP", "label": "Sync" }, { "value": "MES", "label": "Sync" }],
+        "links": [
+          { "label": "Production (MES)", "url": "/solutions/mes" },
+          { "label": "Live Monitoring", "url": "/solutions/monitoring" },
+          { "label": "More case studies", "url": "/customers/cases" },
+          { "label": "Contact us", "url": "#contact" }
+        ]
+      }
+    },
+    {
+      "slug": "samhwa", "sortOrder": 7,
+      "ko": {
+        "tabLabel": "삼화기계", "category": "MACHINERY",
+        "title": "기계 부품 생산\n전 과정 디지털화",
+        "description": "가공·조립·검사 공정의 데이터를 실시간으로 연결했습니다. BOM 변경과 라인 전환에도 빠르게 대응합니다.",
+        "bullets": ["라인 전환 시간 40% 단축", "부품 추적성 100% 확보"],
+        "mockTitle": "공정 관리",
+        "mockStats": [{ "value": "5", "label": "공정" }, { "value": "88%", "label": "효율" }],
+        "links": [
+          { "label": "전기 · 전자", "url": "/industry/electric" },
+          { "label": "생산 계획 (MES)", "url": "/solutions/mes" },
+          { "label": "도입 사례 더보기", "url": "/customers/cases" },
+          { "label": "상담 신청", "url": "#contact" }
+        ]
+      },
+      "en": {
+        "tabLabel": "Samhwa", "category": "MACHINERY",
+        "title": "Digitalizing the full\nparts production cycle",
+        "description": "Connected machining, assembly, and inspection data in real time — adapting quickly to BOM changes and line switches.",
+        "bullets": ["40% faster line changeovers", "100% part traceability"],
+        "mockTitle": "Process",
+        "mockStats": [{ "value": "5", "label": "Steps" }, { "value": "88%", "label": "Efficiency" }],
+        "links": [
+          { "label": "Electric", "url": "/industry/electric" },
+          { "label": "Production (MES)", "url": "/solutions/mes" },
+          { "label": "More case studies", "url": "/customers/cases" },
+          { "label": "Contact us", "url": "#contact" }
+        ]
+      }
+    },
+    {
+      "slug": "kparts", "sortOrder": 8,
+      "ko": {
+        "tabLabel": "한국부품", "category": "AUTOMOTIVE",
+        "title": "자동차 부품\n품질 기준 충족",
+        "description": "부품 추적과 조립 이력을 체계적으로 관리합니다. OEM·Tier 협력사 요구사항에 맞는 리포트를 자동으로 제공합니다.",
+        "bullets": ["OEM 감사 대응 시간 60% 단축", "조립 이력 100% 디지털화"],
+        "mockTitle": "부품 추적",
+        "mockStats": [{ "value": "ISO", "label": "인증" }, { "value": "0", "label": "리콜" }],
+        "links": [
+          { "label": "자동차", "url": "/industry/automotive" },
+          { "label": "품질 관리 (QMS)", "url": "/solutions/qms" },
+          { "label": "도입 사례 더보기", "url": "/customers/cases" },
+          { "label": "상담 신청", "url": "#contact" }
+        ]
+      },
+      "en": {
+        "tabLabel": "K-Parts", "category": "AUTOMOTIVE",
+        "title": "Meeting automotive\nquality standards",
+        "description": "Systematic part traceability and assembly history — with automated reports aligned to OEM and Tier supplier requirements.",
+        "bullets": ["60% faster OEM audit prep", "100% digital assembly history"],
+        "mockTitle": "Traceability",
+        "mockStats": [{ "value": "ISO", "label": "Cert" }, { "value": "0", "label": "Recall" }],
+        "links": [
+          { "label": "Automotive", "url": "/industry/automotive" },
+          { "label": "Quality (QMS)", "url": "/solutions/qms" },
+          { "label": "More case studies", "url": "/customers/cases" },
+          { "label": "Contact us", "url": "#contact" }
+        ]
+      }
+    }
+  ]
+}

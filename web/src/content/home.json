@@ -1,0 +1,82 @@
+{
+  "ko": {
+    "eyebrow": "IT × 제조 소프트웨어 파트너",
+    "heroTitle": "복잡한 제조 현장을,\n누구나 쓸 수 있게",
+    "heroSubtitle": "어려운 기술은 우리가 다룹니다.\n현장은 그저, 더 쉽게 일하면 됩니다.",
+    "heroTrust": "이미 120+ 제조 현장이 AIAN과 함께합니다",
+    "ctaPrimary": "무료로 시작하기",
+    "ctaSecondary": "어떻게 작동하나요?",
+    "howLabel": "WHAT WE BUILD",
+    "howTitle": "어려운 기술,\n쉬운 화면 하나로",
+    "howLead": "제조에 필요한 소프트웨어를 한 곳에서. 쓰지 않을 기능은 만들지 않습니다.",
+    "productsLabel": "PRODUCTS",
+    "productsTitle": "3가지 핵심 제품",
+    "productsLead": "현장에 바로 적용하는 AIAN의 대표 솔루션입니다.",
+    "showcaseTitle": "AIAN의 솔루션으로 이뤄낸\n성과를 보여드립니다",
+    "contactTitle": "현장의 문제,\n같이 풀어요",
+    "contactLead": "30분 무료 진단으로 시작하세요. 부담은 0, 인사이트는 가득.",
+    "features": [
+      {
+        "tag": "실시간 모니터링",
+        "title": "설비 상태를\n한눈에 봅니다",
+        "description": "흩어진 센서 데이터를 하나의 화면으로. 이상이 생기기 전에 먼저 알려드립니다.",
+        "bullets": ["설비별 가동률 실시간 집계", "이상 발생 시 즉시 알림", "모바일에서도 동일하게"],
+        "visual": "pills"
+      },
+      {
+        "tag": "품질 관리",
+        "title": "불량을\n데이터로 잡습니다",
+        "description": "언제, 어디서, 왜 불량이 났는지. 원인을 추적해 다음 불량을 막습니다.",
+        "bullets": ["불량 원인 자동 분석", "공정별 품질 리포트"],
+        "visual": "gauge"
+      },
+      {
+        "tag": "생산 계획",
+        "title": "계획부터 실적까지\n끊김 없이",
+        "description": "주문이 들어오면 자동으로 계획이 섭니다. 현장 실적은 실시간으로 반영됩니다.",
+        "bullets": ["주문 → 계획 자동 생성", "실적 실시간 반영"],
+        "visual": "bars"
+      }
+    ]
+  },
+  "en": {
+    "eyebrow": "IT × Manufacturing Software Partner",
+    "heroTitle": "Complex factories,\nmade simple for everyone",
+    "heroSubtitle": "We handle the hard technology.\nYour team just works, more easily.",
+    "heroTrust": "Already trusted by 120+ factories",
+    "ctaPrimary": "Start for free",
+    "ctaSecondary": "How it works",
+    "howLabel": "WHAT WE BUILD",
+    "howTitle": "Hard tech,\none simple screen",
+    "howLead": "Every tool your factory needs, in one place. We never build features you won't use.",
+    "productsLabel": "PRODUCTS",
+    "productsTitle": "Three core products",
+    "productsLead": "AIAN's flagship solutions, ready for your factory floor.",
+    "showcaseTitle": "Results achieved with\nAIAN solutions",
+    "contactTitle": "Let's solve it,\ntogether",
+    "contactLead": "Start with a free 30-minute diagnosis. Zero pressure, full insight.",
+    "features": [
+      {
+        "tag": "Live Monitoring",
+        "title": "See every machine\nat a glance",
+        "description": "Scattered sensor data on a single screen. We notify you before problems arise.",
+        "bullets": ["Real-time uptime per machine", "Instant anomaly alerts", "Same view on mobile"],
+        "visual": "pills"
+      },
+      {
+        "tag": "Quality",
+        "title": "Catch defects\nwith data",
+        "description": "When, where, and why defects happen. We trace the cause to prevent the next.",
+        "bullets": ["Automated root-cause analysis", "Per-process quality reports"],
+        "visual": "gauge"
+      },
+      {
+        "tag": "Planning",
+        "title": "From plan to output,\nwithout gaps",
+        "description": "Orders generate plans automatically. Floor results sync in real time.",
+        "bullets": ["Order → plan automation", "Live results sync"],
+        "visual": "bars"
+      }
+    ]
+  }
+}

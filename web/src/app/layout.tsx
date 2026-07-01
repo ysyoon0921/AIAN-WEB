@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "AIAN — CMS",
-  description: "Strapi + Next.js powered AIAN website",
+  title: "AIAN — 제조 현장을 잇는 가장 쉬운 방법",
+  description: "복잡한 제조 현장을, 누구나 쓸 수 있는 소프트웨어로. IT와 제조를 연결하는 맞춤형 솔루션.",
 };
 
 export default function RootLayout({

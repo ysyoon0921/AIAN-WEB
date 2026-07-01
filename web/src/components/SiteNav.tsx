@@ -50,13 +50,22 @@ export function SiteNav({ locale, theme = "dark", ctaLabel, ctaHref = "#contact"
                 <span className="en">{section.topEn}</span>
                 <span className="ko">{section.topKo}</span>
               </Link>
-              <div className="drop">
-                {section.links.map((link) => (
-                  <Link key={link.href} href={localePath(locale, link.href)}>
-                    {locale === "ko" ? link.ko : link.en}
-                  </Link>
-                ))}
-              </div>
+              {section.links.length > 1 ? (
+                <div className="drop mega">
+                  {section.links.map((link, i) => (
+                    <Link key={link.href} href={localePath(locale, link.href)} className="mega-card">
+                      <span className="mega-thumb" data-i={i % 4} aria-hidden="true" />
+                      <span className="mega-body">
+                        <span className="mega-title">
+                          {locale === "ko" ? link.ko : link.en}
+                          <span className="mega-arrow">→</span>
+                        </span>
+                        <span className="mega-desc">{locale === "ko" ? link.descKo : link.descEn}</span>
+                      </span>
+                    </Link>
+                  ))}
+                </div>
+              ) : null}
             </li>
           ))}
         </ul>
