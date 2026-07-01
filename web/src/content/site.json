@@ -1,0 +1,21 @@
+{
+  "marquee": ["NEXON-M", "HANSUNG", "DAEYANG", "JINWOO", "K-METAL", "SEOJIN"],
+  "settings": {
+    "ko": {
+      "siteName": "AIAN",
+      "phone": "02-1234-5678",
+      "email": "hello@aian.kr",
+      "address": "서울특별시 강남구 테헤란로 123",
+      "footerTagline": "IT와 제조를 잇는 소프트웨어 파트너.",
+      "navCtaLabel": "상담 신청"
+    },
+    "en": {
+      "siteName": "AIAN",
+      "phone": "02-1234-5678",
+      "email": "hello@aian.kr",
+      "address": "123 Teheran-ro, Gangnam-gu, Seoul",
+      "footerTagline": "The software partner connecting IT and manufacturing.",
+      "navCtaLabel": "CONTACT US"
+    }
+  }
+}

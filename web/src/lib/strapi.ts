@@ -196,7 +196,7 @@ export async function getProducts(locale: Locale): Promise<Product[]> {
       cardId: p.cardId,
       linkUrl: p.linkUrl,
       sortOrder: p.sortOrder,
-      theme: p.theme,
+      theme: p.theme as Product["theme"],
       badge: p[locale].badge,
       name: p[locale].name,
       headline: p[locale].headline,
