@@ -202,16 +202,22 @@ async function seedAboutHistory(strapi: Core.Strapi) {
   });
 }
 
-function introCardsNeedRestore(cards: unknown[] | null | undefined): boolean {
-  if (!cards || cards.length === 0) return true;
-  return cards.some((card) => {
-    const item = card as { title?: string; body?: string };
-    return !item.body?.trim();
-  });
-}
-
-function buildIntroCards(locale: 'ko' | 'en') {
-  return ABOUT_INTRO[locale].cards.map(({ title, body }) => ({ title, body }));
+function aboutIntroData(locale: 'ko' | 'en') {
+  const base = ABOUT_INTRO[locale];
+  const [c1, c2, c3, c4] = base.cards;
+  return {
+    label: base.label,
+    title: base.title,
+    lead: base.lead,
+    card1Title: c1.title,
+    card1Body: c1.body,
+    card2Title: c2.title,
+    card2Body: c2.body,
+    card3Title: c3.title,
+    card3Body: c3.body,
+    card4Title: c4.title,
+    card4Body: c4.body,
+  };
 }
 
 async function reseedAboutIntro(strapi: Core.Strapi) {
@@ -220,34 +226,34 @@ async function reseedAboutIntro(strapi: Core.Strapi) {
     await strapi.documents('api::about-intro.about-intro').delete({
       documentId: existing.documentId,
     });
-    strapi.log.info('Deleted About Intro document (cards will be recreated)');
+    strapi.log.info('Deleted About Intro document for reseed');
   }
 
   await strapi.documents('api::about-intro.about-intro').create({
-    data: { ...ABOUT_INTRO.ko, cards: buildIntroCards('ko') },
+    data: aboutIntroData('ko'),
     locale: 'ko',
     status: 'published',
   });
   await strapi.documents('api::about-intro.about-intro').create({
-    data: { ...ABOUT_INTRO.en, cards: buildIntroCards('en') },
+    data: aboutIntroData('en'),
     locale: 'en',
     status: 'published',
   });
-  strapi.log.info('Reseeded About Intro with clean card components');
+  strapi.log.info('Reseeded About Intro (ko + en)');
 }
 
 async function seedAboutIntro(strapi: Core.Strapi) {
-  const marker = path.join(process.cwd(), '.tmp', 'about-intro-components-v2');
+  const marker = path.join(process.cwd(), '.tmp', 'about-intro-flat-fields-v1');
   const existing = await strapi.documents('api::about-intro.about-intro').findFirst({ locale: 'ko' });
 
   if (!existing) {
     await strapi.documents('api::about-intro.about-intro').create({
-      data: { ...ABOUT_INTRO.ko, cards: buildIntroCards('ko') },
+      data: aboutIntroData('ko'),
       locale: 'ko',
       status: 'published',
     });
     await strapi.documents('api::about-intro.about-intro').create({
-      data: { ...ABOUT_INTRO.en, cards: buildIntroCards('en') },
+      data: aboutIntroData('en'),
       locale: 'en',
       status: 'published',
     });
@@ -256,11 +262,7 @@ async function seedAboutIntro(strapi: Core.Strapi) {
     return;
   }
 
-  const koDoc = await strapi.documents('api::about-intro.about-intro').findFirst({ locale: 'ko' });
-  const koCards = (koDoc as { cards?: unknown[] | null } | null)?.cards;
-  const needsReseed = !fs.existsSync(marker) || introCardsNeedRestore(koCards);
-
-  if (needsReseed) {
+  if (!fs.existsSync(marker)) {
     await reseedAboutIntro(strapi);
     fs.mkdirSync(path.dirname(marker), { recursive: true });
     fs.writeFileSync(marker, '1');

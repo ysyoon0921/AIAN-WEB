@@ -62,6 +62,14 @@ export type AboutIntro = {
   label: string;
   title: string;
   lead: string;
+  card1Title?: string;
+  card1Body?: string;
+  card2Title?: string;
+  card2Body?: string;
+  card3Title?: string;
+  card3Body?: string;
+  card4Title?: string;
+  card4Body?: string;
   cards: { title: string; body: string }[];
 };
 
@@ -169,9 +177,33 @@ export function normalizeIntroCards(cards: unknown): { title: string; body: stri
     .filter((card) => card.title || card.body);
 }
 
+export function introCardsFromFields(data: {
+  card1Title?: string;
+  card1Body?: string;
+  card2Title?: string;
+  card2Body?: string;
+  card3Title?: string;
+  card3Body?: string;
+  card4Title?: string;
+  card4Body?: string;
+  cards?: unknown;
+}): { title: string; body: string }[] {
+  const fromFields = [
+    { title: data.card1Title, body: data.card1Body },
+    { title: data.card2Title, body: data.card2Body },
+    { title: data.card3Title, body: data.card3Body },
+    { title: data.card4Title, body: data.card4Body },
+  ]
+    .map((card) => ({ title: String(card.title ?? ""), body: String(card.body ?? "") }))
+    .filter((card) => card.title || card.body);
+
+  if (fromFields.length > 0) return fromFields;
+  return normalizeIntroCards(data.cards);
+}
+
 export async function getAboutIntro(locale: Locale) {
   const json = await fetchStrapi<StrapiResponse<AboutIntro>>("/about-intro", locale);
-  return { ...json.data, cards: normalizeIntroCards(json.data.cards) };
+  return { ...json.data, cards: introCardsFromFields(json.data) };
 }
 
 export async function getAboutLocation(locale: Locale) {

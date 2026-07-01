@@ -13,11 +13,13 @@
     "label": { "type": "string", "pluginOptions": { "i18n": { "localized": true } } },
     "title": { "type": "text", "pluginOptions": { "i18n": { "localized": true } } },
     "lead": { "type": "text", "pluginOptions": { "i18n": { "localized": true } } },
-    "cards": {
-      "type": "component",
-      "repeatable": true,
-      "component": "shared.intro-card",
-      "pluginOptions": { "i18n": { "localized": true } }
-    }
+    "card1Title": { "type": "string", "pluginOptions": { "i18n": { "localized": true } } },
+    "card1Body": { "type": "text", "pluginOptions": { "i18n": { "localized": true } } },
+    "card2Title": { "type": "string", "pluginOptions": { "i18n": { "localized": true } } },
+    "card2Body": { "type": "text", "pluginOptions": { "i18n": { "localized": true } } },
+    "card3Title": { "type": "string", "pluginOptions": { "i18n": { "localized": true } } },
+    "card3Body": { "type": "text", "pluginOptions": { "i18n": { "localized": true } } },
+    "card4Title": { "type": "string", "pluginOptions": { "i18n": { "localized": true } } },
+    "card4Body": { "type": "text", "pluginOptions": { "i18n": { "localized": true } } }
   }
 }
