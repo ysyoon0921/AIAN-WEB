@@ -202,6 +202,14 @@ async function seedAboutHistory(strapi: Core.Strapi) {
   });
 }
 
+function introCardsNeedRestore(cards: unknown[] | null | undefined): boolean {
+  if (!cards || cards.length === 0) return true;
+  return cards.some((card) => {
+    const item = card as { title?: string; body?: string };
+    return !item.body?.trim();
+  });
+}
+
 async function seedAboutIntro(strapi: Core.Strapi) {
   const existing = await strapi.documents('api::about-intro.about-intro').findFirst({ locale: 'ko' });
 
@@ -219,12 +227,12 @@ async function seedAboutIntro(strapi: Core.Strapi) {
     return;
   }
 
-  // After JSON → component schema change, cards may be empty — restore seed once.
+  // After JSON → component migration, cards may exist with title only — restore full seed.
   for (const locale of ['ko', 'en'] as const) {
     const doc = await strapi.documents('api::about-intro.about-intro').findFirst({ locale });
     if (!doc) continue;
     const cards = (doc as { cards?: unknown[] | null }).cards;
-    if (!cards || cards.length === 0) {
+    if (introCardsNeedRestore(cards)) {
       await strapi.documents('api::about-intro.about-intro').update({
         documentId: doc.documentId,
         locale,
