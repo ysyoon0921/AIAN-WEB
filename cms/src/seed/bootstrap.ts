@@ -326,6 +326,7 @@ async function seedProducts(strapi: Core.Strapi) {
       documentId: doc.documentId,
       locale: 'en',
       data: {
+        name: product.en.name,
         badge: product.en.badge,
         headline: product.en.headline,
         description: product.en.description,
