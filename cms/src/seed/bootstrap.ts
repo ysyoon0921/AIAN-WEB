@@ -210,36 +210,60 @@ function introCardsNeedRestore(cards: unknown[] | null | undefined): boolean {
   });
 }
 
+function buildIntroCards(locale: 'ko' | 'en') {
+  return ABOUT_INTRO[locale].cards.map(({ title, body }) => ({ title, body }));
+}
+
+async function reseedAboutIntro(strapi: Core.Strapi) {
+  const existing = await strapi.documents('api::about-intro.about-intro').findFirst({ locale: 'ko' });
+  if (existing?.documentId) {
+    await strapi.documents('api::about-intro.about-intro').delete({
+      documentId: existing.documentId,
+    });
+    strapi.log.info('Deleted About Intro document (cards will be recreated)');
+  }
+
+  await strapi.documents('api::about-intro.about-intro').create({
+    data: { ...ABOUT_INTRO.ko, cards: buildIntroCards('ko') },
+    locale: 'ko',
+    status: 'published',
+  });
+  await strapi.documents('api::about-intro.about-intro').create({
+    data: { ...ABOUT_INTRO.en, cards: buildIntroCards('en') },
+    locale: 'en',
+    status: 'published',
+  });
+  strapi.log.info('Reseeded About Intro with clean card components');
+}
+
 async function seedAboutIntro(strapi: Core.Strapi) {
+  const marker = path.join(process.cwd(), '.tmp', 'about-intro-components-v2');
   const existing = await strapi.documents('api::about-intro.about-intro').findFirst({ locale: 'ko' });
 
   if (!existing) {
     await strapi.documents('api::about-intro.about-intro').create({
-      data: ABOUT_INTRO.ko,
+      data: { ...ABOUT_INTRO.ko, cards: buildIntroCards('ko') },
       locale: 'ko',
       status: 'published',
     });
     await strapi.documents('api::about-intro.about-intro').create({
-      data: ABOUT_INTRO.en,
+      data: { ...ABOUT_INTRO.en, cards: buildIntroCards('en') },
       locale: 'en',
       status: 'published',
     });
+    fs.mkdirSync(path.dirname(marker), { recursive: true });
+    fs.writeFileSync(marker, '1');
     return;
   }
 
-  // After JSON → component migration, cards may exist with title only — restore full seed.
-  for (const locale of ['ko', 'en'] as const) {
-    const doc = await strapi.documents('api::about-intro.about-intro').findFirst({ locale });
-    if (!doc) continue;
-    const cards = (doc as { cards?: unknown[] | null }).cards;
-    if (introCardsNeedRestore(cards)) {
-      await strapi.documents('api::about-intro.about-intro').update({
-        documentId: doc.documentId,
-        locale,
-        data: { cards: ABOUT_INTRO[locale].cards },
-      });
-      strapi.log.info(`Restored About Intro cards for locale: ${locale}`);
-    }
+  const koDoc = await strapi.documents('api::about-intro.about-intro').findFirst({ locale: 'ko' });
+  const koCards = (koDoc as { cards?: unknown[] | null } | null)?.cards;
+  const needsReseed = !fs.existsSync(marker) || introCardsNeedRestore(koCards);
+
+  if (needsReseed) {
+    await reseedAboutIntro(strapi);
+    fs.mkdirSync(path.dirname(marker), { recursive: true });
+    fs.writeFileSync(marker, '1');
   }
 }
 
