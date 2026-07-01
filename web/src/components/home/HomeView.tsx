@@ -1,9 +1,11 @@
 import { ContactForm, HeroCta } from "@/components/home/ContactForm";
 import { ProductsSection } from "@/components/home/ProductsSection";
 import { ShowcaseTabs } from "@/components/home/ShowcaseTabs";
+import { SystemFlowSection } from "@/components/home/SystemFlowSection";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteNav } from "@/components/SiteNav";
 import { SiteScripts } from "@/components/SiteScripts";
+import { TypewriterHeadline } from "@/components/TypewriterHeadline";
 import { formatMultiline } from "@/lib/format";
 import type {
   CaseStudy,
@@ -81,14 +83,18 @@ export function HomeView({ locale, home, products, cases, settings }: Props) {
               <span className="pulse" />
               {home.eyebrow}
             </span>
-            <h1 className="reveal d1">
+            <TypewriterHeadline as="h1" className="reveal d1">
               {formatMultiline(home.heroTitle).map((line, i, arr) => (
                 <span key={i}>
-                  {line}
+                  {i === arr.length - 1 && arr.length > 1 ? (
+                    <span className="grad-text">{line}</span>
+                  ) : (
+                    line
+                  )}
                   {i < arr.length - 1 ? <br /> : null}
                 </span>
               ))}
-            </h1>
+            </TypewriterHeadline>
             <p className="sub reveal d2">
               {formatMultiline(home.heroSubtitle).map((line, i, arr) => (
                 <span key={i}>
@@ -111,30 +117,7 @@ export function HomeView({ locale, home, products, cases, settings }: Props) {
         </div>
       </div>
 
-      <section className="statement wrap">
-        <h2 className="reveal">
-          {home.statementLine1}
-          <br />
-          <span className="muted">{home.statementMuted}</span>
-        </h2>
-      </section>
-
-      <section className="block" id="how">
-        <div className="wrap">
-          <div className="center" style={{ maxWidth: 680, margin: "0 auto" }}>
-            <div className="label reveal">{home.howLabel}</div>
-            <h2 className="h2 reveal d1">
-              {formatMultiline(home.howTitle).map((line, i, arr) => (
-                <span key={i}>
-                  {line}
-                  {i < arr.length - 1 ? <br /> : null}
-                </span>
-              ))}
-            </h2>
-            <p className="lead reveal d2">{home.howLead}</p>
-          </div>
-        </div>
-      </section>
+      <SystemFlowSection locale={locale} home={home} />
 
       <ProductsSection
         products={products}

@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import type { Product } from "@/lib/strapi";
+import { TypewriterHeadline } from "@/components/TypewriterHeadline";
 
 type Props = {
   products: Product[];
@@ -112,7 +113,9 @@ export function ProductsSection({ products, label, title, lead, scrollHint, link
         <aside className="products-left">
           <span className="products-side-label">{label}</span>
           <div className="products-left-inner">
-            <h2 className="h2">{title}</h2>
+            <TypewriterHeadline as="h2" className="h2" start="intersect" speed={50}>
+              {title}
+            </TypewriterHeadline>
             <p className="lead">{lead}</p>
             <div className="products-meta">
               <div className="products-counter">
