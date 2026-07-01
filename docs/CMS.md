@@ -41,7 +41,10 @@ npm -v
 
 ```bat
 check-cms-env.bat
+setup-cms-env.bat
 ```
+
+`cms/.env`는 Git에 포함되지 않습니다. 처음 clone/pull 후 **`setup-cms-env.bat`** 한 번 실행하거나, **`start-cms.bat`** 이 자동으로 생성합니다.
 
 ### 1. 실행
 

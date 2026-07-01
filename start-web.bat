@@ -42,7 +42,7 @@ if not exist node_modules (
   )
 )
 
-echo [2/2] Next.js -> http://localhost:3000/ko
+echo [2/2] Next.js at http://localhost:3000/ko
 echo Start Strapi first: start-cms.bat
 echo Stop later: stop-web.bat
 echo.

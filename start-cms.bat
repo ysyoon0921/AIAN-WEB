@@ -12,8 +12,23 @@ if errorlevel 1 goto :no_node
 echo.
 
 cd cms
+
+if not exist ".env" (
+  echo [1/3] Creating cms\.env ^(APP_KEYS^) ...
+  call "%NODEJS_DIR%\node.exe" "scripts\init-env.js"
+  if errorlevel 1 (
+    echo [ERROR] Could not create cms\.env — run setup-cms-env.bat
+    pause
+    exit /b 1
+  )
+)
+
+if not exist "..\web\.env.local" (
+  echo STRAPI_URL=http://localhost:1337> "..\web\.env.local"
+)
+
 if not exist node_modules (
-  echo [1/2] npm install in cms/ ... first run may take several minutes
+  echo [2/3] npm install in cms/ ... first run may take several minutes
   call "%NPM_CMD%" install
   if errorlevel 1 (
     echo [ERROR] npm install failed
@@ -22,8 +37,8 @@ if not exist node_modules (
   )
 )
 
-echo [2/2] Strapi CMS -> http://localhost:1337/admin
-echo Stop: Ctrl+C
+echo [3/3] Strapi CMS at http://localhost:1337/admin
+echo Stop with Ctrl+C
 echo.
 call "%NPM_CMD%" run develop
 exit /b 0

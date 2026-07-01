@@ -35,10 +35,14 @@ if defined NPM_CMD (
 echo.
 if exist cms\package.json (echo [OK] cms\) else (echo [FAIL] cms\)
 if exist web\package.json (echo [OK] web\) else (echo [FAIL] web\)
+if exist cms\.env (echo [OK] cms\.env) else (echo [FAIL] cms\.env — run setup-cms-env.bat)
+if exist web\.env.local (echo [OK] web\.env.local) else (echo [WARN] web\.env.local missing — start-cms.bat creates it)
 
 echo.
-if defined NPM_CMD (
+if defined NPM_CMD if exist cms\.env (
   echo Ready. Run: start-cms.bat
+) else if defined NPM_CMD (
+  echo Run: setup-cms-env.bat   then   start-cms.bat
 ) else (
   echo Run: fix-node-path.bat
 )
