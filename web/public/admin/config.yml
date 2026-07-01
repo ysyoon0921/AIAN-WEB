@@ -347,6 +347,7 @@ collections:
             name: "ceo"
             widget: "object"
             fields:
+              - { label: "사진", name: "photo", widget: "image", required: false }
               - label: "한국어"
                 name: "ko"
                 widget: "object"

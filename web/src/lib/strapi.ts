@@ -141,7 +141,8 @@ export async function getSiteSettings(locale: Locale): Promise<SiteSettings> {
 }
 
 export async function getAboutCeo(locale: Locale): Promise<AboutCeo> {
-  return { ...ABOUT_CEO[locale], photo: null };
+  const photo = (ABOUT_CEO as { photo?: string }).photo;
+  return { ...ABOUT_CEO[locale], photo: photo ? { url: photo } : null };
 }
 
 export async function getAboutHistory(locale: Locale): Promise<AboutHistory> {

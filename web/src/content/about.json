@@ -24,6 +24,7 @@
     }
   },
   "ceo": {
+    "photo": "/assets/ceo-photo.png",
     "ko": {
       "label": "CEO 메세지",
       "title": "현장에서 시작한\n기술의 힘",
