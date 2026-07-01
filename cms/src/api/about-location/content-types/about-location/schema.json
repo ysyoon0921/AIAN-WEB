@@ -7,7 +7,7 @@
     "displayName": "About Location",
     "description": "Location page with map embed"
   },
-  "options": { "draftAndPublish": true },
+  "options": { "draftAndPublish": false },
   "pluginOptions": { "i18n": { "localized": true } },
   "attributes": {
     "label": { "type": "string", "pluginOptions": { "i18n": { "localized": true } } },

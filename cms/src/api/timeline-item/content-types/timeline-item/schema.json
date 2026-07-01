@@ -8,7 +8,7 @@
     "description": "Company history timeline entry"
   },
   "options": {
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
   "pluginOptions": {
     "i18n": {

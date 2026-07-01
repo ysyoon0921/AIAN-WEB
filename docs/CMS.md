@@ -79,8 +79,18 @@ start-web.bat
 
 1. Strapi Admin 로그인
 2. Content Manager에서 해당 타입 선택
-3. 수정 후 **Publish**
-4. Next.js 페이지 새로고침 → 반영 확인
+3. **오른쪽 위 Locale**을 `Korean (ko)` 또는 `English (en)`으로 맞춘 뒤 수정
+4. **Save** 클릭 (Draft/Publish 없이 바로 반영)
+5. Next.js 페이지 **강력 새로고침** (`Ctrl+Shift+R`) → http://localhost:3000/ko 또는 `/en`
+
+### Publish 후 원래대로 돌아갈 때
+
+| 원인 | 해결 |
+|------|------|
+| **Locale이 다름** | 수정한 언어와 보는 URL이 같아야 함 (`ko` ↔ `/ko`, `en` ↔ `/en`) |
+| **웹 캐시** | `stop-web.bat` → `start-web.bat` 후 `Ctrl+Shift+R` |
+| **Strapi 재시작 필요** | 스키마 변경 후 Strapi CMD에서 `Ctrl+C` → `start-cms.bat` 다시 실행 |
+| **Save 안 함** | Publish 대신 **Save**만 누르면 됨 (Draft/Publish 비활성화됨) |
 
 CEO 사진은 About CEO → **photo** 필드에서 Strapi 미디어로 업로드·교체 가능.
 

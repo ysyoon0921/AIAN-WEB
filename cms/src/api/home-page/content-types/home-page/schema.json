@@ -7,7 +7,7 @@
     "displayName": "Home Page",
     "description": "Main landing page content"
   },
-  "options": { "draftAndPublish": true },
+  "options": { "draftAndPublish": false },
   "pluginOptions": { "i18n": { "localized": true } },
   "attributes": {
     "eyebrow": { "type": "string", "pluginOptions": { "i18n": { "localized": true } } },
@@ -27,7 +27,7 @@
     "showcaseTitle": { "type": "text", "pluginOptions": { "i18n": { "localized": true } } },
     "contactTitle": { "type": "text", "pluginOptions": { "i18n": { "localized": true } } },
     "contactLead": { "type": "text", "pluginOptions": { "i18n": { "localized": true } } },
-    "marqueeItems": { "type": "json" },
+    "marqueeItems": { "type": "json", "pluginOptions": { "i18n": { "localized": true } } },
     "features": { "type": "json", "pluginOptions": { "i18n": { "localized": true } } }
   }
 }

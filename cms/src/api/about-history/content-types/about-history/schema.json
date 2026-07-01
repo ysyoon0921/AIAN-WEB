@@ -8,7 +8,7 @@
     "description": "Company history page header"
   },
   "options": {
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
   "pluginOptions": {
     "i18n": {

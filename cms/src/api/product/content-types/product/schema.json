@@ -7,13 +7,13 @@
     "displayName": "Product",
     "description": "Core product cards"
   },
-  "options": { "draftAndPublish": true },
+  "options": { "draftAndPublish": false },
   "pluginOptions": { "i18n": { "localized": true } },
   "attributes": {
     "slug": { "type": "string", "required": true, "unique": true },
     "cardId": { "type": "string", "required": true },
     "badge": { "type": "string", "pluginOptions": { "i18n": { "localized": true } } },
-    "name": { "type": "string", "required": true },
+    "name": { "type": "string", "required": true, "pluginOptions": { "i18n": { "localized": true } } },
     "headline": { "type": "text", "pluginOptions": { "i18n": { "localized": true } } },
     "description": { "type": "text", "pluginOptions": { "i18n": { "localized": true } } },
     "tags": { "type": "json", "pluginOptions": { "i18n": { "localized": true } } },
