@@ -25,39 +25,27 @@ type FlowNode = {
   amp: number;
 };
 
-function flowProblemLead(locale: Locale) {
-  return locale === "ko"
-    ? "시스템도, 데이터도 이미 충분합니다. 다만 서로 이어져 있지 않을 뿐입니다."
-    : "You already have the systems and the data — they're just not connected.";
-}
-
 export function SystemFlowSection({ locale, home }: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const sceneRef = useRef<HTMLElement>(null);
-  const problemRef = useRef<HTMLDivElement>(null);
   const buildRef = useRef<HTMLDivElement>(null);
   const howLines = formatMultiline(home.howTitle);
 
   useEffect(() => {
     const cv = canvasRef.current;
     const scene = sceneRef.current;
-    const txtProblem = problemRef.current;
     const txtBuild = buildRef.current;
-    if (!cv || !scene || !txtProblem || !txtBuild) return;
+    if (!cv || !scene || !txtBuild) return;
 
     const ctx = cv.getContext("2d");
     if (!ctx) return;
 
     const reduce = prefersReducedMotion();
-    const pCaret = txtProblem.querySelector(".code-caret") as HTMLElement | null;
     const bCaret = txtBuild.querySelector(".code-caret") as HTMLElement | null;
-    const pH2 = txtProblem.querySelector("h2");
     const bH2 = txtBuild.querySelector("h2");
-    if (!pH2 || !bH2) return;
+    if (!bH2) return;
 
-    const pChars = twSplit(pH2);
     const bChars = twSplit(bH2);
-    let typedP = false;
     let typedB = false;
 
     let W = 0;
@@ -284,13 +272,8 @@ export function SystemFlowSection({ locale, home }: Props) {
       const rect = scene.getBoundingClientRect();
       const scrollable = scene.offsetHeight - window.innerHeight;
       progress = Math.min(1, Math.max(0, -rect.top / scrollable));
-      txtProblem.style.opacity = String(1 - smooth(progress, 0.3, 0.52));
-      txtBuild.style.opacity = String(smooth(progress, 0.54, 0.8));
-      if (!typedP && rect.top <= 5 && progress < 0.3) {
-        typedP = true;
-        twType(pChars, pCaret, 42);
-      }
-      if (!typedB && progress > 0.54) {
+      txtBuild.style.opacity = String(smooth(progress, 0.12, 0.42));
+      if (!typedB && progress > 0.15) {
         typedB = true;
         twType(bChars, bCaret, 42);
       }
@@ -308,22 +291,13 @@ export function SystemFlowSection({ locale, home }: Props) {
       cancelAnimationFrame(raf);
       document.body.classList.remove("flow-narrow");
     };
-  }, [home.howTitle, home.statementLine1, home.statementMuted, locale]);
+  }, [home.howTitle, locale]);
 
   return (
     <section className="flow-scene" id="flow" ref={sceneRef}>
       <div className="flow-stage">
         <canvas id="flow-canvas" ref={canvasRef} />
         <div className="flow-overlay">
-          <div className="flow-txt" id="flow-problem" ref={problemRef}>
-            <h2 className="flow-h2">
-              {home.statementLine1}
-              <br />
-              <span className="muted">{home.statementMuted}</span>
-              <span className="code-caret" aria-hidden="true" />
-            </h2>
-            <p className="flow-lead">{flowProblemLead(locale)}</p>
-          </div>
           <div className="flow-txt is-build" id="flow-build" ref={buildRef} style={{ opacity: 0 }}>
             <span className="flow-eyebrow">{home.howLabel}</span>
             <h2 className="flow-h2">

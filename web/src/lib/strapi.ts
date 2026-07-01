@@ -89,8 +89,6 @@ export type HomePage = {
   heroTrust: string;
   ctaPrimary: string;
   ctaSecondary: string;
-  statementLine1: string;
-  statementMuted: string;
   howLabel: string;
   howTitle: string;
   howLead: string;

@@ -28,8 +28,6 @@ collections:
               - { label: "신뢰 문구", name: "heroTrust", widget: "string" }
               - { label: "CTA 주 버튼", name: "ctaPrimary", widget: "string" }
               - { label: "CTA 보조 버튼", name: "ctaSecondary", widget: "string" }
-              - { label: "문제 문구 1", name: "statementLine1", widget: "string" }
-              - { label: "문제 문구 강조", name: "statementMuted", widget: "string" }
               - { label: "WHAT WE BUILD 라벨", name: "howLabel", widget: "string" }
               - { label: "WHAT WE BUILD 제목", name: "howTitle", widget: "text" }
               - { label: "WHAT WE BUILD 설명", name: "howLead", widget: "text" }
@@ -58,8 +56,6 @@ collections:
               - { label: "Trust line", name: "heroTrust", widget: "string" }
               - { label: "CTA primary", name: "ctaPrimary", widget: "string" }
               - { label: "CTA secondary", name: "ctaSecondary", widget: "string" }
-              - { label: "Statement line 1", name: "statementLine1", widget: "string" }
-              - { label: "Statement muted", name: "statementMuted", widget: "string" }
               - { label: "WHAT WE BUILD label", name: "howLabel", widget: "string" }
               - { label: "WHAT WE BUILD title", name: "howTitle", widget: "text" }
               - { label: "WHAT WE BUILD lead", name: "howLead", widget: "text" }
