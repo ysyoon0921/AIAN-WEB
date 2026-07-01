@@ -18,7 +18,7 @@
   if (!pin || !right || !track || count < 2) return;
 
   /* Scroll length per card step — higher = slower */
-  var STEP_RATIO = 0.9;
+  var STEP_RATIO = 0.6;
   /* How much a card shrinks per cover level */
   var SHRINK = 0.07;
   var MAX_DEPTH = 3;

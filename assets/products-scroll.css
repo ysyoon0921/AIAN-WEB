@@ -153,7 +153,7 @@
 .ps-chart i{ flex: 1; border-radius: 4px 4px 0 0; background: rgba(255,255,255,.45); }
 .ps-tag{
   display: inline-block; font-size: 10px; font-weight: 700; color: #e8ecf2;
-  background: rgba(255,255,255,.12); padding: 4px 9px; border-radius: 999px;
+  background: rgba(255,255,255,.12); padding: 4px 9px; border-radius: 6px;
   margin: 3px 3px 0 0;
 }
 
@@ -188,14 +188,14 @@
   color: var(--ink, #0a1020);
   background: var(--bg-soft, #f5f7fa);
   border: 1px solid var(--line, #ebedf1);
-  padding: 6px 12px; border-radius: 999px;
+  padding: 6px 12px; border-radius: 6px;
   align-self: flex-start;
 }
 .p-tags{ display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; padding-top: 16px; }
 .p-tags span{
   font-size: 13px; font-weight: 600; color: var(--ink-soft, #4b5565);
   background: var(--bg-soft, #f5f7fa); border: 1px solid var(--line, #ebedf1);
-  padding: 5px 11px; border-radius: 999px;
+  padding: 5px 11px; border-radius: 6px;
 }
 .p-link{
   display: inline-flex; align-items: center; gap: 8px; margin-top: 14px;

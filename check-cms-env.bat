@@ -4,50 +4,43 @@ echo === AIAN CMS environment check ===
 echo.
 
 call "%~dp0_ensure-node.bat"
-set "FOUND=0"
 
-where node >nul 2>&1
-if not errorlevel 1 (
-  set "FOUND=1"
-  for /f "delims=" %%v in ('node -v 2^>nul') do echo [OK] node %%v
+if defined NODEJS_DIR (
+  echo [OK] NODEJS_DIR=%NODEJS_DIR%
 ) else (
-  echo [FAIL] node not in PATH
+  echo [FAIL] NODEJS_DIR not set
 )
 
-where npm >nul 2>&1
-if not errorlevel 1 (
-  for /f "delims=" %%v in ('npm -v 2^>nul') do echo [OK] npm  %%v
+if defined NPM_CMD (
+  echo [OK] NPM_CMD=%NPM_CMD%
 ) else (
-  echo [FAIL] npm not in PATH
+  echo [FAIL] NPM_CMD not set
 )
 
 echo.
-echo --- install paths ---
-if exist "%ProgramFiles%\nodejs\node.exe" (
-  echo [FOUND] %ProgramFiles%\nodejs\node.exe
-  set "FOUND=1"
+if defined NODEJS_DIR if exist "%NODEJS_DIR%\node.exe" (
+  echo Node:
+  "%NODEJS_DIR%\node.exe" -v
 ) else (
-  echo [MISS]  %ProgramFiles%\nodejs\node.exe
+  echo [FAIL] node.exe
 )
 
-if exist "%LOCALAPPDATA%\Programs\node\node.exe" (
-  echo [FOUND] %LOCALAPPDATA%\Programs\node\node.exe
-  set "FOUND=1"
+if defined NPM_CMD (
+  echo npm:
+  call "%NPM_CMD%" -v
+) else (
+  echo [FAIL] npm
 )
-
-if defined NODEJS_DIR echo [SESSION PATH] NODEJS_DIR=%NODEJS_DIR%
 
 echo.
-if exist cms\package.json (echo [OK] cms\) else (echo [FAIL] cms\ - wrong git branch?)
+if exist cms\package.json (echo [OK] cms\) else (echo [FAIL] cms\)
 if exist web\package.json (echo [OK] web\) else (echo [FAIL] web\)
 
 echo.
-if "%FOUND%"=="0" (
-  echo Node.js is NOT installed or not found.
-  echo Install LTS: https://nodejs.org/
-  echo Then reboot and run this again.
+if defined NPM_CMD (
+  echo Ready. Run: start-cms.bat
 ) else (
-  echo OK - run start-cms.bat
+  echo Run: fix-node-path.bat
 )
 echo.
 pause

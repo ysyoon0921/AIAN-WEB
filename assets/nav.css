@@ -89,7 +89,7 @@
   padding:10px 0 14px;
   background:#fff;
   border:1px solid var(--line, #ebedf1);
-  border-radius:0 0 14px 14px;
+  border-radius:0 0 8px 8px;
   box-shadow:0 20px 48px -24px rgba(10,16,32,.28);
   opacity:0;
   visibility:hidden;
@@ -135,7 +135,7 @@
   display:flex;
   background:rgba(255,255,255,.12);
   border:1px solid rgba(255,255,255,.2);
-  border-radius:999px;
+  border-radius:6px;
   padding:3px;
   transition:background .3s, border-color .3s;
 }
@@ -147,7 +147,7 @@
 }
 #nav .lang button{
   border:none; background:transparent; cursor:pointer;
-  font-size:13px; font-weight:700; padding:6px 12px; border-radius:999px;
+  font-size:13px; font-weight:700; padding:6px 12px; border-radius:6px;
   color:rgba(255,255,255,.6); transition:.2s;
 }
 #nav.scrolled .lang button,
@@ -161,7 +161,7 @@
 #nav .nav-cta{
   font-weight:600; font-size:14px; letter-spacing:-.01em;
   color:#0a1020; background:#fff;
-  padding:11px 22px; border-radius:999px; border:1px solid rgba(255,255,255,.9);
+  padding:11px 22px; border-radius:6px; border:1px solid rgba(255,255,255,.9);
   cursor:pointer; text-decoration:none; white-space:nowrap;
   transition:transform .2s var(--ease, cubic-bezier(.16,.84,.27,1)), background .2s, box-shadow .2s;
   box-shadow:0 4px 18px -6px rgba(0,0,0,.25);
