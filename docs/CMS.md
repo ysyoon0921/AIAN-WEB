@@ -94,6 +94,14 @@ start-web.bat
 
 CEO 사진은 About CEO → **photo** 필드에서 Strapi 미디어로 업로드·교체 가능.
 
+### About Intro 카드 수정
+
+`AIAN 소개` 페이지의 카드 4개는 **cards** 필드에서 수정합니다.
+
+- **JSON 코드 편집기 대신** 카드별 `title` / `body` 입력란이 보입니다 (업데이트 후 Strapi 재시작 필요).
+- 카드 추가: **Add an entry to cards**
+- 수정 후 **Save** → http://localhost:3000/ko/about/intro 새로고침
+
 ## 환경 변수
 
 ### cms/.env

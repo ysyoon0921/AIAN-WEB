@@ -26,8 +26,8 @@ export default async function IntroPage({
       </h1>
       <p className="lead">{intro.lead}</p>
       <div className="intro-cards">
-        {intro.cards.map((card) => (
-          <div className="intro-card" key={card.title}>
+        {intro.cards.map((card, index) => (
+          <div className="intro-card" key={`${index}-${card.title}`}>
             <h3>{card.title}</h3>
             <p>{card.body}</p>
           </div>

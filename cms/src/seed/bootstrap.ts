@@ -204,18 +204,35 @@ async function seedAboutHistory(strapi: Core.Strapi) {
 
 async function seedAboutIntro(strapi: Core.Strapi) {
   const existing = await strapi.documents('api::about-intro.about-intro').findFirst({ locale: 'ko' });
-  if (existing) return;
 
-  await strapi.documents('api::about-intro.about-intro').create({
-    data: ABOUT_INTRO.ko,
-    locale: 'ko',
-    status: 'published',
-  });
-  await strapi.documents('api::about-intro.about-intro').create({
-    data: ABOUT_INTRO.en,
-    locale: 'en',
-    status: 'published',
-  });
+  if (!existing) {
+    await strapi.documents('api::about-intro.about-intro').create({
+      data: ABOUT_INTRO.ko,
+      locale: 'ko',
+      status: 'published',
+    });
+    await strapi.documents('api::about-intro.about-intro').create({
+      data: ABOUT_INTRO.en,
+      locale: 'en',
+      status: 'published',
+    });
+    return;
+  }
+
+  // After JSON → component schema change, cards may be empty — restore seed once.
+  for (const locale of ['ko', 'en'] as const) {
+    const doc = await strapi.documents('api::about-intro.about-intro').findFirst({ locale });
+    if (!doc) continue;
+    const cards = doc.cards as unknown[] | null | undefined;
+    if (!cards || cards.length === 0) {
+      await strapi.documents('api::about-intro.about-intro').update({
+        documentId: doc.documentId,
+        locale,
+        data: { cards: ABOUT_INTRO[locale].cards },
+      });
+      strapi.log.info(`Restored About Intro cards for locale: ${locale}`);
+    }
+  }
 }
 
 async function seedAboutLocation(strapi: Core.Strapi) {

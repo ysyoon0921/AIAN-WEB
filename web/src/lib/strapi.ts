@@ -151,9 +151,27 @@ export async function getAboutHistory(locale: Locale) {
   return json.data;
 }
 
+export function normalizeIntroCards(cards: unknown): { title: string; body: string }[] {
+  if (!cards) return [];
+  if (typeof cards === "string") {
+    try {
+      return normalizeIntroCards(JSON.parse(cards));
+    } catch {
+      return [];
+    }
+  }
+  if (!Array.isArray(cards)) return [];
+  return cards
+    .map((card) => {
+      const item = card as { title?: string; body?: string };
+      return { title: String(item.title ?? ""), body: String(item.body ?? "") };
+    })
+    .filter((card) => card.title || card.body);
+}
+
 export async function getAboutIntro(locale: Locale) {
   const json = await fetchStrapi<StrapiResponse<AboutIntro>>("/about-intro", locale);
-  return json.data;
+  return { ...json.data, cards: normalizeIntroCards(json.data.cards) };
 }
 
 export async function getAboutLocation(locale: Locale) {
