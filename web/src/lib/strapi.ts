@@ -22,13 +22,9 @@ async function fetchStrapi<T>(path: string, locale: Locale, query?: Record<strin
       url.searchParams.set(key, value);
     }
   }
-  url.searchParams.set("status", "published");
+  // Draft & Publish is disabled on all content types — omit status filter.
 
-  const isDev = process.env.NODE_ENV !== "production";
-  const res = await fetch(
-    url.toString(),
-    isDev ? { cache: "no-store" } : { next: { revalidate: 60 } },
-  );
+  const res = await fetch(url.toString(), { cache: "no-store" });
   if (!res.ok) {
     throw new Error(`Strapi request failed: ${res.status} ${path}`);
   }
