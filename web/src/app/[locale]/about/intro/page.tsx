@@ -2,7 +2,6 @@ import { AboutLayout } from "@/components/AboutLayout";
 import { formatMultiline } from "@/lib/format";
 import { getAboutIntro, getIntroCards, getSiteSettings, LOCALES, type Locale } from "@/lib/strapi";
 
-export const dynamic = "force-dynamic";
 
 export default async function IntroPage({
   params,

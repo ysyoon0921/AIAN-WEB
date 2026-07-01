@@ -8,7 +8,6 @@ import {
   type Locale,
 } from "@/lib/strapi";
 
-export const dynamic = "force-dynamic";
 
 export default async function HistoryPage({
   params,

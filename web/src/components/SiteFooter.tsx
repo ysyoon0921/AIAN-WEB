@@ -29,21 +29,21 @@ export function SiteFooter({ locale, settings, contactHref = "#contact" }: Props
           </div>
           <div className="foot-col">
             <h5>{t("솔루션", "Solutions")}</h5>
-            <a href="/solutions/monitoring.html">{t("실시간 모니터링", "Live Monitoring")}</a>
-            <a href="/solutions/qms.html">{t("품질 관리", "Quality")}</a>
-            <a href="/solutions/mes.html">{t("생산 계획", "Planning")}</a>
-            <a href="/solutions/predictive.html">{t("예지보전", "Predictive Care")}</a>
+            <Link href={localePath(locale, "/solutions/monitoring")}>{t("실시간 모니터링", "Live Monitoring")}</Link>
+            <Link href={localePath(locale, "/solutions/qms")}>{t("품질 관리", "Quality")}</Link>
+            <Link href={localePath(locale, "/solutions/mes")}>{t("생산 계획", "Planning")}</Link>
+            <Link href={localePath(locale, "/solutions/predictive")}>{t("예지보전", "Predictive Care")}</Link>
           </div>
           <div className="foot-col">
             <h5>{t("산업분야", "Industry")}</h5>
-            <a href="/industry/electric.html">{t("전기 · 전자", "Electric")}</a>
-            <a href="/industry/semiconductor.html">{t("반도체", "Semiconductor")}</a>
-            <a href="/industry/automotive.html">{t("자동차", "Automotive")}</a>
+            <Link href={localePath(locale, "/industry/electric")}>{t("전기 · 전자", "Electric")}</Link>
+            <Link href={localePath(locale, "/industry/semiconductor")}>{t("반도체", "Semiconductor")}</Link>
+            <Link href={localePath(locale, "/industry/automotive")}>{t("자동차", "Automotive")}</Link>
           </div>
           <div className="foot-col">
             <h5>{t("고객사례", "Customers")}</h5>
-            <a href="/customers/clients.html">{t("고객사", "Clients")}</a>
-            <a href="/customers/cases.html">{t("도입 사례", "Case Studies")}</a>
+            <Link href={localePath(locale, "/customers/clients")}>{t("고객사", "Clients")}</Link>
+            <Link href={localePath(locale, "/customers/cases")}>{t("도입 사례", "Case Studies")}</Link>
           </div>
           <div className="foot-col">
             <h5>{t("회사", "Company")}</h5>

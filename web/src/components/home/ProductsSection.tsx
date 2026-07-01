@@ -1,10 +1,12 @@
 "use client";
 
 import { useEffect } from "react";
-import type { Product } from "@/lib/strapi";
+import type { Locale, Product } from "@/lib/strapi";
+import { localePath } from "@/lib/nav-config";
 import { TypewriterHeadline } from "@/components/TypewriterHeadline";
 
 type Props = {
+  locale: Locale;
   products: Product[];
   label: string;
   title: string;
@@ -96,7 +98,7 @@ function ProductVisual({ theme }: { theme: Product["theme"] }) {
   );
 }
 
-export function ProductsSection({ products, label, title, lead, scrollHint, linkLabel }: Props) {
+export function ProductsSection({ locale, products, label, title, lead, scrollHint, linkLabel }: Props) {
   useEffect(() => {
     const existing = document.querySelector('script[data-products-scroll="1"]');
     if (existing) return;
@@ -144,7 +146,7 @@ export function ProductsSection({ products, label, title, lead, scrollHint, link
                       <span key={tag}>{tag}</span>
                     ))}
                   </div>
-                  <a className="p-link" href={product.linkUrl}>
+                  <a className="p-link" href={localePath(locale, product.linkUrl)}>
                     {linkLabel}
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                       <path d="M5 12h14M13 6l6 6-6 6" />
