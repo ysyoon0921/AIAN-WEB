@@ -40,7 +40,8 @@ if exist web\.env.local (echo [OK] web\.env.local) else (echo [WARN] web\.env.lo
 
 echo.
 if defined NPM_CMD if exist cms\.env (
-  echo Ready. Run: start-cms.bat
+  echo Testing Strapi API...
+  powershell -NoProfile -Command "try { $r = Invoke-WebRequest -Uri 'http://127.0.0.1:1337/api/home-page?locale=ko' -UseBasicParsing -TimeoutSec 8; if ($r.StatusCode -eq 200) { Write-Host '[OK] Strapi API at http://127.0.0.1:1337' } else { Write-Host '[FAIL] Strapi returned' $r.StatusCode } } catch { Write-Host '[FAIL] Strapi API not reachable — run start-cms.bat and wait for Strapi started' }"
 ) else if defined NPM_CMD (
   echo Run: setup-cms-env.bat   then   start-cms.bat
 ) else (

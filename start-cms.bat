@@ -24,7 +24,7 @@ if not exist ".env" (
 )
 
 if not exist "..\web\.env.local" (
-  echo STRAPI_URL=http://localhost:1337> "..\web\.env.local"
+  echo STRAPI_URL=http://127.0.0.1:1337> "..\web\.env.local"
 )
 
 if not exist node_modules (
