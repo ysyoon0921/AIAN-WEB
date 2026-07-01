@@ -223,7 +223,7 @@ async function seedAboutIntro(strapi: Core.Strapi) {
   for (const locale of ['ko', 'en'] as const) {
     const doc = await strapi.documents('api::about-intro.about-intro').findFirst({ locale });
     if (!doc) continue;
-    const cards = doc.cards as unknown[] | null | undefined;
+    const cards = (doc as { cards?: unknown[] | null }).cards;
     if (!cards || cards.length === 0) {
       await strapi.documents('api::about-intro.about-intro').update({
         documentId: doc.documentId,
