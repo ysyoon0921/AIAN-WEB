@@ -6,8 +6,8 @@ export const dynamic = "force-dynamic";
 // via the postMessage handshake it expects.
 export async function GET(request: Request) {
   const code = new URL(request.url).searchParams.get("code");
-  const clientId = process.env.GITHUB_CLIENT_ID;
-  const clientSecret = process.env.GITHUB_CLIENT_SECRET;
+  const clientId = process.env.GITHUB_CLIENT_ID?.trim();
+  const clientSecret = process.env.GITHUB_CLIENT_SECRET?.trim();
 
   if (!code || !clientId || !clientSecret) {
     return new NextResponse("Missing code or GitHub OAuth env vars", { status: 500 });
