@@ -61,8 +61,8 @@ export function ShowcaseTabs({ items }: Props) {
                   <div className="case-mock-head">{item.mockTitle}</div>
                   <div className="case-mock-body">
                     <div className="case-mock-stat">
-                      {item.mockStats.map((stat) => (
-                        <div key={stat.label}>
+                      {item.mockStats.map((stat, statIndex) => (
+                        <div key={`${stat.value}-${statIndex}`}>
                           <b>{stat.value}</b>
                           <small>{stat.label}</small>
                         </div>
@@ -75,8 +75,8 @@ export function ShowcaseTabs({ items }: Props) {
                 </div>
               </div>
               <ul className="case-bullets">
-                {item.bullets.map((bullet) => (
-                  <li key={bullet}>{bullet}</li>
+                {item.bullets.map((bullet, bulletIndex) => (
+                  <li key={`${bulletIndex}-${bullet}`}>{bullet}</li>
                 ))}
               </ul>
             </div>
