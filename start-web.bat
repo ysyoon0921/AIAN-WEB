@@ -29,6 +29,20 @@ if exist "web\.next\dev\lock" (
   del /f /q "web\.next\dev\lock" 2>nul
 )
 
+REM Is Strapi running on 1337?
+set "CMS_UP=0"
+for /f "tokens=5" %%p in ('netstat -ano 2^>nul ^| findstr ":1337" ^| findstr "LISTENING"') do set "CMS_UP=1"
+if "%CMS_UP%"=="0" (
+  echo.
+  echo [WARN] Strapi is NOT running on port 1337.
+  echo Open another CMD and run:  start-cms.bat
+  echo Wait until you see "Strapi started" / admin URL, then refresh the browser.
+  echo.
+) else (
+  echo [OK] Strapi detected on port 1337
+  echo.
+)
+
 cd web
 if not exist .env.local copy .env.local.example .env.local
 
